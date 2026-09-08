@@ -72,6 +72,110 @@
     .settings{margin-top:14px;background:#fff;border-radius:18px;padding:14px 16px;border:1px solid var(--line)}
     .settings summary{font-weight:800;cursor:pointer}
     .settings p{color:var(--muted);line-height:1.5}
+
+    .tile.correct-pos{
+      border:2px solid #28a06a;
+      background:#ecfbf3;
+      color:#126d49;
+      box-shadow:0 3px 10px rgba(22,138,91,.08);
+    }
+    .tile.wrong-pos{
+      border:2px solid #d45b5b;
+      background:#fff1f1;
+      color:#9f3434;
+      box-shadow:0 3px 10px rgba(201,71,71,.08);
+    }
+    .analysis{
+      margin-top:16px;
+      border-top:1px solid var(--line);
+      padding-top:16px;
+      display:none;
+    }
+    .analysis.show{display:block}
+    .analysis h3{margin:0 0 10px;font-size:18px}
+    .analysis-summary{
+      border-radius:16px;
+      padding:13px 15px;
+      margin-bottom:12px;
+      line-height:1.5;
+      background:#f6f7fb;
+    }
+    .analysis-summary.ok{background:#eaf8f1;color:#126d49}
+    .analysis-summary.bad{background:#fff3f3;color:#8f3333}
+    .word-feedback{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    .word-card{
+      border:1px solid var(--line);
+      border-radius:15px;
+      padding:12px 13px;
+      background:#fff;
+    }
+    .word-card.good{border-color:#a7dfc5;background:#f5fcf8}
+    .word-card.bad{border-color:#efb6b6;background:#fff8f8}
+    .word-head{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:8px;
+      margin-bottom:7px;
+    }
+    .word-hanzi{font-size:25px;font-weight:800}
+    .word-pinyin{font-size:14px;color:var(--muted)}
+    .word-meta{font-size:14px;line-height:1.5}
+    .grammar-chip{
+      display:inline-block;
+      background:var(--accent-soft);
+      color:var(--accent);
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:12px;
+      font-weight:800;
+      margin-top:6px;
+    }
+    .sentence-breakdown{
+      margin-top:12px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .breakdown-row{
+      display:grid;
+      grid-template-columns:110px 130px 120px 1fr 1.2fr;
+      gap:0;
+      border-top:1px solid var(--line);
+    }
+    .breakdown-row:first-child{border-top:0}
+    .breakdown-row > div{
+      padding:10px 11px;
+      border-left:1px solid var(--line);
+      line-height:1.35;
+      font-size:14px;
+    }
+    .breakdown-row > div:first-child{border-left:0}
+    .breakdown-head{background:#f7f7fb;font-weight:800}
+    .sentence-result{
+      font-size:25px;
+      line-height:1.5;
+      font-weight:800;
+      margin:6px 0;
+    }
+    .sentence-pinyin{
+      color:var(--muted);
+      margin-bottom:5px;
+      font-size:15px;
+    }
+    @media(max-width:700px){
+      .breakdown-row{
+        grid-template-columns:82px 105px 95px 1fr;
+      }
+      .breakdown-row > div:nth-child(5){grid-column:1/-1;border-left:0;border-top:1px dashed var(--line)}
+    }
+
     @media (max-width:520px){
       h1{font-size:23px}.prompt{font-size:21px}.prompt.cn{font-size:27px}.tile{font-size:22px}
       .choices{grid-template-columns:1fr 1fr}
@@ -83,7 +187,7 @@
   <header>
     <div>
       <h1>中文训练</h1>
-      <div class="sub">HSK 4 → HSK 5 · восстановление китайского · v2.0</div>
+      <div class="sub">HSK 4 → HSK 5 · восстановление китайского · v3.0</div>
     </div>
     <div class="score" id="score">0 / 0</div>
   </header>
@@ -113,6 +217,12 @@
     </div>
 
     <div class="feedback" id="feedback"></div>
+    <div class="analysis" id="analysis">
+      <h3 id="analysisTitle">Разбор</h3>
+      <div class="analysis-summary" id="analysisSummary"></div>
+      <div class="word-feedback" id="wordFeedback"></div>
+      <div class="sentence-breakdown" id="sentenceBreakdown" style="display:none"></div>
+    </div>
 
     <div class="actions">
       <button class="action ghost" id="resetBtn">Сбросить</button>
@@ -138,51 +248,106 @@
 <script>
 const DATA = {
   order: [
-    {prompt:"Собери предложение: Сейчас я изучаю биологию в университете.",
-     words:["在大学","我","学习","现在","生物学"],
-     answer:["我","现在","在大学","学习","生物学"]},
-    {prompt:"Собери предложение: Вчера я ел(а) с другом в ресторане.",
-     words:["昨天","跟朋友","我","在饭店","吃饭"],
-     answer:["我","昨天","跟朋友","在饭店","吃饭"]},
-    {prompt:"Собери предложение: Она каждый день учит китайский в библиотеке.",
-     words:["每天","她","在图书馆","学习","汉语"],
-     answer:["她","每天","在图书馆","学习","汉语"]},
-    {prompt:"Собери предложение: Раньше я два года жил(а) в Китае.",
-     words:["以前","在中国","我","住过","两年"],
-     answer:["我","以前","在中国","住过","两年"]},
-    {prompt:"Собери предложение: Завтра я буду работать в лаборатории.",
-     words:["明天","我","要","在实验室","工作"],
-     answer:["我","明天","要","在实验室","工作"]}
+    {
+      prompt:"Собери предложение: Сейчас я изучаю биологию в университете.",
+      translation:"Сейчас я изучаю биологию в университете.",
+      structure:"主语 + 时间 + 地点 + 动词 + 宾语 · подлежащее + время + место + глагол + объект",
+      words:["在大学","我","学习","现在","生物学"],
+      answer:["我","现在","在大学","学习","生物学"],
+      lex:{
+        "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Подлежащее обычно ставится в начале предложения."},
+        "现在":{pinyin:"xiànzài",pos:"наречие времени",meaning:"сейчас",role:"обстоятельство времени",hint:"Время обычно ставится после подлежащего и перед местом/глаголом."},
+        "在大学":{pinyin:"zài dàxué",pos:"предложная группа",meaning:"в университете",role:"обстоятельство места",hint:"Место с 在 обычно стоит перед основным глаголом."},
+        "学习":{pinyin:"xuéxí",pos:"глагол",meaning:"учиться; изучать",role:"сказуемое",hint:"Основной глагол идёт после времени и места."},
+        "生物学":{pinyin:"shēngwùxué",pos:"существительное",meaning:"биология",role:"дополнение",hint:"Объект глагола обычно идёт после глагола."}
+      }
+    },
+    {
+      prompt:"Собери предложение: Вчера я ел(а) с другом в ресторане.",
+      translation:"Вчера я ел(а) с другом в ресторане.",
+      structure:"主语 + 时间 + 同伴 + 地点 + 动词 · подлежащее + время + с кем + место + действие",
+      words:["昨天","跟朋友","我","在饭店","吃饭"],
+      answer:["我","昨天","跟朋友","在饭店","吃饭"],
+      lex:{
+        "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Подлежащее — в начале."},
+        "昨天":{pinyin:"zuótiān",pos:"существительное времени",meaning:"вчера",role:"обстоятельство времени",hint:"Время обычно идёт после подлежащего."},
+        "跟朋友":{pinyin:"gēn péngyou",pos:"предложная группа",meaning:"с другом",role:"сопутствующий участник",hint:"跟 + человек обычно ставится перед местом и основным глаголом."},
+        "在饭店":{pinyin:"zài fàndiàn",pos:"предложная группа",meaning:"в ресторане",role:"обстоятельство места",hint:"在 + место ставится перед действием."},
+        "吃饭":{pinyin:"chīfàn",pos:"глагольное сочетание",meaning:"есть; принимать пищу",role:"сказуемое",hint:"Основное действие завершает эту конструкцию."}
+      }
+    },
+    {
+      prompt:"Собери предложение: Она каждый день учит китайский в библиотеке.",
+      translation:"Она каждый день учит китайский в библиотеке.",
+      structure:"主语 + 时间 + 地点 + 动词 + 宾语",
+      words:["每天","她","在图书馆","学习","汉语"],
+      answer:["她","每天","在图书馆","学习","汉语"],
+      lex:{
+        "她":{pinyin:"tā",pos:"местоимение",meaning:"она",role:"подлежащее",hint:"Подлежащее обычно первое."},
+        "每天":{pinyin:"měitiān",pos:"обстоятельство времени",meaning:"каждый день",role:"частота/время",hint:"Частотность ставится перед местом и глаголом."},
+        "在图书馆":{pinyin:"zài túshūguǎn",pos:"предложная группа",meaning:"в библиотеке",role:"место действия",hint:"在 + место идёт перед основным глаголом."},
+        "学习":{pinyin:"xuéxí",pos:"глагол",meaning:"изучать; учиться",role:"сказуемое",hint:"Основной глагол после обстоятельств."},
+        "汉语":{pinyin:"Hànyǔ",pos:"существительное",meaning:"китайский язык",role:"дополнение",hint:"То, что изучают, идёт после 学习."}
+      }
+    },
+    {
+      prompt:"Собери предложение: Раньше я два года жил(а) в Китае.",
+      translation:"Раньше я жил(а) в Китае два года.",
+      structure:"主语 + 时间 + 地点 + 动词 + 时量补语 · подлежащее + время + место + глагол + длительность",
+      words:["以前","在中国","我","住过","两年"],
+      answer:["我","以前","在中国","住过","两年"],
+      lex:{
+        "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Подлежащее — в начале."},
+        "以前":{pinyin:"yǐqián",pos:"слово времени",meaning:"раньше; прежде",role:"обстоятельство времени",hint:"Время обычно ставится после подлежащего."},
+        "在中国":{pinyin:"zài Zhōngguó",pos:"предложная группа",meaning:"в Китае",role:"место",hint:"在 + место — перед глаголом."},
+        "住过":{pinyin:"zhùguo",pos:"глагол + 过",meaning:"жил(а); имел(а) опыт проживания",role:"сказуемое",hint:"过 показывает прошлый опыт."},
+        "两年":{pinyin:"liǎng nián",pos:"количественно-временная группа",meaning:"два года",role:"длительность",hint:"Длительность действия часто ставится после глагола."}
+      }
+    },
+    {
+      prompt:"Собери предложение: Завтра я буду работать в лаборатории.",
+      translation:"Завтра я буду работать в лаборатории.",
+      structure:"主语 + 时间 + 要 + 地点 + 动词",
+      words:["明天","我","要","在实验室","工作"],
+      answer:["我","明天","要","在实验室","工作"],
+      lex:{
+        "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Подлежащее обычно первое."},
+        "明天":{pinyin:"míngtiān",pos:"слово времени",meaning:"завтра",role:"обстоятельство времени",hint:"Время ставится после подлежащего или в начале предложения."},
+        "要":{pinyin:"yào",pos:"модальный глагол",meaning:"собираться; нужно; хотеть",role:"модальность/будущее намерение",hint:"Модальный глагол ставится перед местом и основным действием."},
+        "在实验室":{pinyin:"zài shíyànshì",pos:"предложная группа",meaning:"в лаборатории",role:"место",hint:"在 + место идёт перед основным глаголом."},
+        "工作":{pinyin:"gōngzuò",pos:"глагол",meaning:"работать",role:"сказуемое",hint:"Основное действие идёт в конце этой конструкции."}
+      }
+    }
   ],
   choice: [
     {prompt:"我只看了一遍___明白了。", choices:["才","就"], answer:"就",
-     hint:"Всего один раз — и уже понял(а)."},
+     hint:"Всего один раз — и уже понял(а).", explanation:"就 подчёркивает быстрый/ранний результат: «всего один раз — и уже понял(а)»."},
     {prompt:"我看了三遍___明白。", choices:["才","就"], answer:"才",
-     hint:"Только после трёх раз."},
+     hint:"Только после трёх раз.", explanation:"才 подчёркивает поздний результат: «только после трёх просмотров понял(а)»."},
     {prompt:"他早上六点___起床了。", choices:["才","就"], answer:"就",
-     hint:"Очень рано — уже в 6."},
+     hint:"Очень рано — уже в 6.", explanation:"就 = раньше ожидаемого / уже."},
     {prompt:"他下午一点___起床。", choices:["才","就"], answer:"才",
-     hint:"Только в час дня."},
+     hint:"Только в час дня.", explanation:"才 = позже ожидаемого / только тогда."},
     {prompt:"我找了两个小时___找到这个文件。", choices:["才","就"], answer:"才",
-     hint:"Долго искал(а) — и только потом нашёл(ла)."},
+     hint:"Долго искал(а) — и только потом нашёл(ла).", explanation:"才 показывает, что результат наступил лишь после долгого процесса."},
     {prompt:"老师解释了一次，我___懂了。", choices:["才","就"], answer:"就",
-     hint:"Одного объяснения оказалось достаточно."}
+     hint:"Одного объяснения оказалось достаточно.", explanation:"就 подчёркивает быстрый результат."}
   ],
   fill: [
     {prompt:"Чем больше я учу китайский, тем больше он мне нравится.",
      answer:"我越学越喜欢汉语", alt:["我越学习越喜欢汉语"],
-     hint:"Используй 越……越……"},
+     hint:"Используй 越……越……", explanation:"越A越B = чем больше/сильнее A, тем больше/сильнее B."},
     {prompt:"Китайский становится всё сложнее.",
      answer:"汉语越来越难", alt:["中文越来越难"],
-     hint:"Используй 越来越……"},
+     hint:"Используй 越来越……", explanation:"越来越 + прилагательное = становиться всё более..." },
     {prompt:"Я хочу постепенно восстановить свой китайский.",
      answer:"我想逐渐恢复我的汉语水平", alt:["我想逐渐恢复汉语水平"],
-     hint:"逐渐 + 恢复"},
+     hint:"逐渐 + 恢复", explanation:"逐渐 = постепенно; 恢复 = восстанавливать."},
     {prompt:"Мне нужно увеличить словарный запас.",
      answer:"我需要增加词汇量", alt:["我需要提高词汇量"],
-     hint:"词汇量 = объём словарного запаса"}
+     hint:"词汇量 = объём словарного запаса", explanation:"增加词汇量 = увеличить словарный запас."}
   ]
-};
+}
 
 let mode = "order";
 let idx = {order:0, choice:0, fill:0};
@@ -203,6 +368,13 @@ function render(){
   const ex = current();
   $("feedback").className = "feedback";
   $("feedback").textContent = "";
+  $("analysis").classList.remove("show");
+  $("analysisSummary").className = "analysis-summary";
+  $("analysisSummary").innerHTML = "";
+  $("wordFeedback").innerHTML = "";
+  $("sentenceBreakdown").innerHTML = "";
+  $("sentenceBreakdown").style.display = "none";
+  document.querySelectorAll(".tile").forEach(t=>t.classList.remove("correct-pos","wrong-pos"));
   selectedChoice = null;
 
   $("orderUI").style.display = mode==="order" ? "block":"none";
@@ -419,18 +591,126 @@ function normalize(s){
   return (s||"").replace(/[，。！？\s]/g,"").toLowerCase();
 }
 
+
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+function markOrderTiles(ex, ans){
+  const tiles = [...$("answerZone").querySelectorAll(".tile")];
+  tiles.forEach((tile,i)=>{
+    tile.classList.remove("correct-pos","wrong-pos");
+    if(ex.answer[i] === tile.textContent) tile.classList.add("correct-pos");
+    else tile.classList.add("wrong-pos");
+  });
+}
+
+function showOrderAnalysis(ex, ans, ok){
+  const analysis = $("analysis");
+  const summary = $("analysisSummary");
+  const cards = $("wordFeedback");
+  const breakdown = $("sentenceBreakdown");
+
+  analysis.classList.add("show");
+  $("analysisTitle").textContent = ok ? "✅ Полный разбор" : "🧩 Подсказки по порядку слов";
+
+  if(ok){
+    summary.className = "analysis-summary ok";
+    summary.innerHTML = `
+      <div class="sentence-result">${esc(ex.answer.join(""))}</div>
+      <div><b>Перевод:</b> ${esc(ex.translation)}</div>
+      <div><b>Схема:</b> ${esc(ex.structure)}</div>
+    `;
+  } else {
+    summary.className = "analysis-summary bad";
+    const correctCount = ans.filter((w,i)=>w===ex.answer[i]).length;
+    const missing = ex.answer.length - ans.length;
+    summary.innerHTML = `
+      <b>${correctCount} из ${ex.answer.length}</b> блоков стоят на правильной позиции.
+      ${missing>0 ? `<br>Ещё не использовано: <b>${missing}</b>.` : ""}
+      <br><span class="grammar-chip">${esc(ex.structure)}</span>
+    `;
+  }
+
+  cards.innerHTML = "";
+  ans.forEach((word,i)=>{
+    const info = ex.lex[word] || {};
+    const good = ex.answer[i] === word;
+    const expected = ex.answer[i];
+    const card = document.createElement("div");
+    card.className = "word-card " + (good ? "good" : "bad");
+    card.innerHTML = `
+      <div class="word-head">
+        <span class="word-hanzi">${esc(word)}</span>
+        <span class="word-pinyin">${esc(info.pinyin || "")}</span>
+      </div>
+      <div class="word-meta">
+        <b>${good ? "✓ На месте" : "✗ Не на месте"}</b><br>
+        ${esc(info.pos || "")}${info.meaning ? ` · ${esc(info.meaning)}` : ""}<br>
+        ${info.role ? `<b>Роль:</b> ${esc(info.role)}<br>` : ""}
+        ${good ? esc(info.hint || "") :
+          `${esc(info.hint || "")}${expected ? `<br><b>На позиции ${i+1}</b> ожидается блок типа: ${esc(ex.lex[expected]?.role || expected)}.` : ""}`}
+      </div>
+    `;
+    cards.appendChild(card);
+  });
+
+  if(ok){
+    breakdown.style.display = "block";
+    const head = `
+      <div class="breakdown-row breakdown-head">
+        <div>Слово</div><div>Pinyin</div><div>Часть речи</div><div>Перевод</div><div>Функция / порядок</div>
+      </div>`;
+    const rows = ex.answer.map(word=>{
+      const i = ex.lex[word];
+      return `
+        <div class="breakdown-row">
+          <div><b style="font-size:20px">${esc(word)}</b></div>
+          <div>${esc(i.pinyin)}</div>
+          <div>${esc(i.pos)}</div>
+          <div>${esc(i.meaning)}</div>
+          <div><b>${esc(i.role)}</b><br>${esc(i.hint)}</div>
+        </div>`;
+    }).join("");
+    breakdown.innerHTML = head + rows;
+  }
+}
+
+function showSimpleAnalysis(ex, ok, userValue){
+  const analysis = $("analysis");
+  const summary = $("analysisSummary");
+  analysis.classList.add("show");
+  $("analysisTitle").textContent = ok ? "✅ Разбор ответа" : "💡 Подсказка";
+  summary.className = "analysis-summary " + (ok ? "ok" : "bad");
+  summary.innerHTML = ok
+    ? `<b>Правильно.</b><br>${esc(ex.explanation || ex.hint || "")}`
+    : `<b>Пока неверно.</b><br>${esc(ex.hint || "")}${ex.explanation ? `<br>${esc(ex.explanation)}` : ""}`;
+  $("wordFeedback").innerHTML = "";
+  $("sentenceBreakdown").style.display = "none";
+}
+
 $("checkBtn").onclick = ()=>{
   const ex=current();
   let ok=false;
+
   if(mode==="order"){
     const ans=[...$("answerZone").querySelectorAll(".tile")].map(x=>x.textContent);
     ok = ans.length===ex.answer.length && ans.every((v,i)=>v===ex.answer[i]);
+
+    markOrderTiles(ex, ans);
+    showOrderAnalysis(ex, ans, ok);
+
   } else if(mode==="choice"){
     ok = selectedChoice===ex.answer;
+    showSimpleAnalysis(ex, ok, selectedChoice);
+
   } else {
     const val=normalize($("fillInput").value);
     const possible=[ex.answer,...(ex.alt||[])].map(normalize);
     ok = possible.includes(val);
+    showSimpleAnalysis(ex, ok, val);
   }
 
   stats.total++;
@@ -443,7 +723,9 @@ $("checkBtn").onclick = ()=>{
     f.textContent="✅ Правильно";
   }else{
     f.className="feedback bad";
-    f.textContent="❌ Пока неправильно. Попробуй ещё.";
+    f.textContent= mode==="order"
+      ? "❌ Не всё на своих местах — зелёное уже правильно, красное надо переставить."
+      : "❌ Пока неправильно. Посмотри подсказку ниже.";
   }
 };
 
