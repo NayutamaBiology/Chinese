@@ -21,7 +21,7 @@
       font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",
       "Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif}
     body{min-height:100vh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-    .app{max-width:820px;margin:auto;padding:20px 18px 42px}
+    .app{max-width:960px;margin:auto;padding:24px 22px 48px}
     header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
     h1{font-size:28px;margin:0;letter-spacing:-.02em}
     .sub{color:var(--muted);font-size:14px;margin-top:4px}
@@ -31,15 +31,15 @@
     .tab{border:0;background:#fff;padding:12px 8px;border-radius:14px;font-weight:700;
       box-shadow:0 1px 0 var(--line);font-size:15px}
     .tab.active{background:var(--accent);color:white}
-    .card{background:var(--card);border-radius:22px;padding:20px;box-shadow:var(--shadow);border:1px solid #eeeef5}
+    .card{background:var(--card);border-radius:22px;padding:24px;box-shadow:var(--shadow);border:1px solid #eeeef5;overflow:visible}
     .label{font-size:13px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
     .prompt{font-size:24px;line-height:1.45;margin:10px 0 16px;font-weight:700}
     .prompt.cn{font-size:30px;line-height:1.55}
     .hint{font-size:14px;color:var(--muted);margin-bottom:14px}
-    .zone{min-height:82px;border:2px dashed #cfd2e8;border-radius:18px;padding:12px;display:flex;
+    .zone{min-height:92px;border:2px dashed #cfd2e8;border-radius:18px;padding:14px;display:flex;
       flex-wrap:wrap;gap:10px;align-content:flex-start;background:#fbfbff;touch-action:none}
-    .bank{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px}
-    .tile{border:1px solid #d8daea;background:white;border-radius:14px;padding:11px 15px;
+    .bank{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;min-height:58px;align-items:flex-start}
+    .tile{border:1px solid #d8daea;background:white;border-radius:14px;padding:12px 16px;
       font-size:24px;line-height:1.2;box-shadow:0 3px 10px rgba(50,55,90,.06);
       user-select:none;-webkit-user-select:none;touch-action:none;cursor:grab}
     .tile:active{cursor:grabbing;transform:scale(.98)}
@@ -64,6 +64,17 @@
     .settings{margin-top:14px;background:#fff;border-radius:18px;padding:14px 16px;border:1px solid var(--line)}
     .settings summary{font-weight:800;cursor:pointer}
     .settings p{color:var(--muted);line-height:1.5}
+
+    @media (min-width:900px){
+      .app{padding-top:34px}
+      .tabs{gap:12px}
+      .tab{font-size:17px;padding:14px 10px}
+      .prompt{font-size:27px}
+      .prompt.cn{font-size:33px}
+      .tile{font-size:26px}
+      .actions{margin-top:22px}
+    }
+
     @media (max-width:520px){
       h1{font-size:23px}.prompt{font-size:21px}.prompt.cn{font-size:27px}.tile{font-size:22px}
       .choices{grid-template-columns:1fr 1fr}
@@ -75,7 +86,7 @@
   <header>
     <div>
       <h1>中文训练</h1>
-      <div class="sub">HSK 4 → HSK 5 · восстановление китайского</div>
+      <div class="sub">HSK 4 → HSK 5 · восстановление китайского · v1.1</div>
     </div>
     <div class="score" id="score">0 / 0</div>
   </header>
@@ -237,52 +248,134 @@ function makeTile(text, id){
   el.textContent = text;
   el.dataset.id = id + "-" + Math.random();
 
-  el.addEventListener("click", ()=>{
+  let state = {
+    pointerId: null,
+    startX: 0,
+    startY: 0,
+    dragging: false,
+    ghost: null,
+    suppressClick: false
+  };
+
+  function cleanup(){
+    if(state.ghost){
+      state.ghost.remove();
+      state.ghost = null;
+    }
+    el.style.opacity = "1";
+    el.style.transform = "";
+    el.classList.remove("selected");
+    if(state.pointerId !== null){
+      try{
+        if(el.hasPointerCapture && el.hasPointerCapture(state.pointerId)){
+          el.releasePointerCapture(state.pointerId);
+        }
+      }catch(e){}
+    }
+    state.pointerId = null;
+    state.dragging = false;
+  }
+
+  function moveElementToPoint(clientX, clientY){
+    const target = document.elementFromPoint(clientX, clientY);
+    const zone = $("answerZone");
+    const bank = $("bank");
+
+    if(target && (target === zone || target.closest("#answerZone"))){
+      const tiles = [...zone.querySelectorAll(".tile")].filter(t => t !== el);
+      let before = null;
+
+      for(const t of tiles){
+        const r = t.getBoundingClientRect();
+        const sameRow = clientY >= r.top - 14 && clientY <= r.bottom + 14;
+        if(sameRow && clientX < r.left + r.width/2){
+          before = t;
+          break;
+        }
+      }
+      if(before) zone.insertBefore(el, before);
+      else zone.appendChild(el);
+      return;
+    }
+
+    if(target && (target === bank || target.closest("#bank"))){
+      bank.appendChild(el);
+    }
+  }
+
+  el.addEventListener("click", e=>{
+    if(state.suppressClick){
+      state.suppressClick = false;
+      e.preventDefault();
+      return;
+    }
     if(el.parentElement === $("bank")) $("answerZone").appendChild(el);
     else $("bank").appendChild(el);
   });
 
-  // Pointer-based drag that works on touch
-  let dragging = false, ghost = null, startX=0, startY=0;
   el.addEventListener("pointerdown", e=>{
-    startX=e.clientX; startY=e.clientY; dragging=false;
-    el.setPointerCapture(e.pointerId);
-  });
-  el.addEventListener("pointermove", e=>{
-    const dist = Math.hypot(e.clientX-startX, e.clientY-startY);
-    if(dist<8) return;
-    dragging=true;
-    if(!ghost){
-      ghost=el.cloneNode(true);
-      ghost.style.position="fixed";
-      ghost.style.zIndex="9999";
-      ghost.style.pointerEvents="none";
-      ghost.style.opacity=".9";
-      ghost.style.width=el.getBoundingClientRect().width+"px";
-      document.body.appendChild(ghost);
-      el.style.opacity=".25";
-    }
-    ghost.style.left=(e.clientX-ghost.offsetWidth/2)+"px";
-    ghost.style.top=(e.clientY-ghost.offsetHeight/2)+"px";
+    // primary mouse button only; touch/pen are fine
+    if(e.pointerType === "mouse" && e.button !== 0) return;
 
-    const zone = $("answerZone");
-    const target = document.elementFromPoint(e.clientX,e.clientY);
-    if(target && (target===zone || target.closest("#answerZone"))){
-      const tiles=[...zone.querySelectorAll(".tile")].filter(t=>t!==el);
-      let before=null;
-      for(const t of tiles){
-        const r=t.getBoundingClientRect();
-        if(e.clientX < r.left+r.width/2 && e.clientY>=r.top-10 && e.clientY<=r.bottom+10){ before=t; break; }
-      }
-      if(before) zone.insertBefore(el,before); else zone.appendChild(el);
-    } else if(target && (target===$("bank") || target.closest("#bank"))){
-      $("bank").appendChild(el);
+    state.pointerId = e.pointerId;
+    state.startX = e.clientX;
+    state.startY = e.clientY;
+    state.dragging = false;
+    state.suppressClick = false;
+
+    try{ el.setPointerCapture(e.pointerId); }catch(err){}
+  });
+
+  el.addEventListener("pointermove", e=>{
+    if(state.pointerId !== e.pointerId) return;
+
+    const dist = Math.hypot(e.clientX - state.startX, e.clientY - state.startY);
+    if(!state.dragging && dist < 9) return;
+
+    if(!state.dragging){
+      state.dragging = true;
+      state.suppressClick = true;
+
+      state.ghost = el.cloneNode(true);
+      state.ghost.removeAttribute("data-id");
+      state.ghost.style.position = "fixed";
+      state.ghost.style.zIndex = "99999";
+      state.ghost.style.pointerEvents = "none";
+      state.ghost.style.margin = "0";
+      state.ghost.style.opacity = ".94";
+      state.ghost.style.boxShadow = "0 12px 28px rgba(50,55,90,.18)";
+      state.ghost.style.width = el.getBoundingClientRect().width + "px";
+      document.body.appendChild(state.ghost);
+
+      el.style.opacity = ".22";
     }
+
+    if(state.ghost){
+      const r = state.ghost.getBoundingClientRect();
+      state.ghost.style.left = (e.clientX - r.width/2) + "px";
+      state.ghost.style.top = (e.clientY - r.height/2) + "px";
+    }
+
+    moveElementToPoint(e.clientX, e.clientY);
+    e.preventDefault();
   });
-  el.addEventListener("pointerup", e=>{
-    if(ghost){ ghost.remove(); ghost=null; el.style.opacity="1"; }
-    setTimeout(()=>dragging=false,0);
+
+  function finish(e){
+    if(state.pointerId !== null && e && e.pointerId !== undefined && e.pointerId !== state.pointerId) return;
+    const wasDragging = state.dragging;
+    cleanup();
+    if(wasDragging){
+      // click fires after pointerup in some browsers
+      setTimeout(()=>{ state.suppressClick = false; }, 60);
+    }
+  }
+
+  el.addEventListener("pointerup", finish);
+  el.addEventListener("pointercancel", finish);
+  el.addEventListener("lostpointercapture", ()=>{
+    if(state.dragging || state.ghost) cleanup();
   });
+
   return el;
 }
 
