@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
   <meta name="theme-color" content="#eef0ff">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="中文训练">
@@ -21,7 +24,7 @@
       font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",
       "Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif}
     body{min-height:100vh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-    .app{max-width:960px;margin:auto;padding:24px 22px 48px}
+    .app{max-width:900px;margin:auto;padding:24px 20px 48px}
     header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
     h1{font-size:28px;margin:0;letter-spacing:-.02em}
     .sub{color:var(--muted);font-size:14px;margin-top:4px}
@@ -31,19 +34,24 @@
     .tab{border:0;background:#fff;padding:12px 8px;border-radius:14px;font-weight:700;
       box-shadow:0 1px 0 var(--line);font-size:15px}
     .tab.active{background:var(--accent);color:white}
-    .card{background:var(--card);border-radius:22px;padding:24px;box-shadow:var(--shadow);border:1px solid #eeeef5;overflow:visible}
+    .card{background:var(--card);border-radius:22px;padding:20px;box-shadow:var(--shadow);border:1px solid #eeeef5}
     .label{font-size:13px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
     .prompt{font-size:24px;line-height:1.45;margin:10px 0 16px;font-weight:700}
     .prompt.cn{font-size:30px;line-height:1.55}
     .hint{font-size:14px;color:var(--muted);margin-bottom:14px}
-    .zone{min-height:92px;border:2px dashed #cfd2e8;border-radius:18px;padding:14px;display:flex;
+    .zone{min-height:96px;border:2px dashed #cfd2e8;border-radius:18px;padding:14px;display:flex;
       flex-wrap:wrap;gap:10px;align-content:flex-start;background:#fbfbff;touch-action:none}
-    .bank{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;min-height:58px;align-items:flex-start}
-    .tile{border:1px solid #d8daea;background:white;border-radius:14px;padding:12px 16px;
+    .bank{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px;min-height:62px;align-items:flex-start}
+    .tile{border:1px solid #d8daea;background:white;border-radius:14px;padding:11px 15px;
       font-size:24px;line-height:1.2;box-shadow:0 3px 10px rgba(50,55,90,.06);
       user-select:none;-webkit-user-select:none;touch-action:none;cursor:grab}
     .tile:active{cursor:grabbing;transform:scale(.98)}
     .tile.selected{outline:3px solid #b9beff;background:#f5f6ff}
+
+    .tile.dragging{opacity:.35}
+    .tile.drag-over{outline:2px solid var(--accent)}
+    .drag-ghost{opacity:.92;transform:rotate(1deg);box-shadow:0 14px 32px rgba(50,55,90,.18)}
+
     .choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
     .choice{border:1px solid #d8daea;background:#fff;border-radius:16px;padding:16px;
       font-size:27px;font-weight:700}
@@ -64,17 +72,6 @@
     .settings{margin-top:14px;background:#fff;border-radius:18px;padding:14px 16px;border:1px solid var(--line)}
     .settings summary{font-weight:800;cursor:pointer}
     .settings p{color:var(--muted);line-height:1.5}
-
-    @media (min-width:900px){
-      .app{padding-top:34px}
-      .tabs{gap:12px}
-      .tab{font-size:17px;padding:14px 10px}
-      .prompt{font-size:27px}
-      .prompt.cn{font-size:33px}
-      .tile{font-size:26px}
-      .actions{margin-top:22px}
-    }
-
     @media (max-width:520px){
       h1{font-size:23px}.prompt{font-size:21px}.prompt.cn{font-size:27px}.tile{font-size:22px}
       .choices{grid-template-columns:1fr 1fr}
@@ -86,7 +83,7 @@
   <header>
     <div>
       <h1>中文训练</h1>
-      <div class="sub">HSK 4 → HSK 5 · восстановление китайского · v1.1</div>
+      <div class="sub">HSK 4 → HSK 5 · восстановление китайского · v2.0</div>
     </div>
     <div class="score" id="score">0 / 0</div>
   </header>
@@ -248,64 +245,11 @@ function makeTile(text, id){
   el.textContent = text;
   el.dataset.id = id + "-" + Math.random();
 
-  let state = {
-    pointerId: null,
-    startX: 0,
-    startY: 0,
-    dragging: false,
-    ghost: null,
-    suppressClick: false
-  };
-
-  function cleanup(){
-    if(state.ghost){
-      state.ghost.remove();
-      state.ghost = null;
-    }
-    el.style.opacity = "1";
-    el.style.transform = "";
-    el.classList.remove("selected");
-    if(state.pointerId !== null){
-      try{
-        if(el.hasPointerCapture && el.hasPointerCapture(state.pointerId)){
-          el.releasePointerCapture(state.pointerId);
-        }
-      }catch(e){}
-    }
-    state.pointerId = null;
-    state.dragging = false;
-  }
-
-  function moveElementToPoint(clientX, clientY){
-    const target = document.elementFromPoint(clientX, clientY);
-    const zone = $("answerZone");
-    const bank = $("bank");
-
-    if(target && (target === zone || target.closest("#answerZone"))){
-      const tiles = [...zone.querySelectorAll(".tile")].filter(t => t !== el);
-      let before = null;
-
-      for(const t of tiles){
-        const r = t.getBoundingClientRect();
-        const sameRow = clientY >= r.top - 14 && clientY <= r.bottom + 14;
-        if(sameRow && clientX < r.left + r.width/2){
-          before = t;
-          break;
-        }
-      }
-      if(before) zone.insertBefore(el, before);
-      else zone.appendChild(el);
-      return;
-    }
-
-    if(target && (target === bank || target.closest("#bank"))){
-      bank.appendChild(el);
-    }
-  }
-
+  // ---------- Tap/click ----------
+  let suppressClick = false;
   el.addEventListener("click", e=>{
-    if(state.suppressClick){
-      state.suppressClick = false;
+    if(suppressClick){
+      suppressClick = false;
       e.preventDefault();
       return;
     }
@@ -313,71 +257,163 @@ function makeTile(text, id){
     else $("bank").appendChild(el);
   });
 
-  el.addEventListener("pointerdown", e=>{
-    // primary mouse button only; touch/pen are fine
-    if(e.pointerType === "mouse" && e.button !== 0) return;
+  // ---------- Desktop mouse: native HTML5 drag ----------
+  el.draggable = true;
 
-    state.pointerId = e.pointerId;
-    state.startX = e.clientX;
-    state.startY = e.clientY;
-    state.dragging = false;
-    state.suppressClick = false;
-
-    try{ el.setPointerCapture(e.pointerId); }catch(err){}
+  el.addEventListener("dragstart", e=>{
+    el.classList.add("dragging");
+    e.dataTransfer.effectAllowed = "move";
+    try{
+      e.dataTransfer.setData("text/plain", el.dataset.id);
+    }catch(_){}
   });
 
-  el.addEventListener("pointermove", e=>{
-    if(state.pointerId !== e.pointerId) return;
-
-    const dist = Math.hypot(e.clientX - state.startX, e.clientY - state.startY);
-    if(!state.dragging && dist < 9) return;
-
-    if(!state.dragging){
-      state.dragging = true;
-      state.suppressClick = true;
-
-      state.ghost = el.cloneNode(true);
-      state.ghost.removeAttribute("data-id");
-      state.ghost.style.position = "fixed";
-      state.ghost.style.zIndex = "99999";
-      state.ghost.style.pointerEvents = "none";
-      state.ghost.style.margin = "0";
-      state.ghost.style.opacity = ".94";
-      state.ghost.style.boxShadow = "0 12px 28px rgba(50,55,90,.18)";
-      state.ghost.style.width = el.getBoundingClientRect().width + "px";
-      document.body.appendChild(state.ghost);
-
-      el.style.opacity = ".22";
-    }
-
-    if(state.ghost){
-      const r = state.ghost.getBoundingClientRect();
-      state.ghost.style.left = (e.clientX - r.width/2) + "px";
-      state.ghost.style.top = (e.clientY - r.height/2) + "px";
-    }
-
-    moveElementToPoint(e.clientX, e.clientY);
-    e.preventDefault();
+  el.addEventListener("dragend", ()=>{
+    el.classList.remove("dragging");
+    document.querySelectorAll(".tile.drag-over").forEach(x=>x.classList.remove("drag-over"));
   });
 
-  function finish(e){
-    if(state.pointerId !== null && e && e.pointerId !== undefined && e.pointerId !== state.pointerId) return;
-    const wasDragging = state.dragging;
-    cleanup();
-    if(wasDragging){
-      // click fires after pointerup in some browsers
-      setTimeout(()=>{ state.suppressClick = false; }, 60);
+  // ---------- Touch / pen ----------
+  let touch = {
+    active:false,
+    pointerId:null,
+    startX:0,
+    startY:0,
+    ghost:null,
+    dragging:false
+  };
+
+  function cleanupTouch(){
+    if(touch.ghost){
+      touch.ghost.remove();
+      touch.ghost = null;
+    }
+    el.style.opacity = "";
+    touch.active = false;
+    touch.dragging = false;
+    touch.pointerId = null;
+    document.querySelectorAll(".tile.drag-over").forEach(x=>x.classList.remove("drag-over"));
+  }
+
+  function placeByPoint(clientX, clientY){
+    // hide ghost during hit-test so it never intercepts the pointer
+    if(touch.ghost) touch.ghost.style.display = "none";
+    const target = document.elementFromPoint(clientX, clientY);
+    if(touch.ghost) touch.ghost.style.display = "";
+
+    const zone = $("answerZone");
+    const bank = $("bank");
+
+    if(target && (target===zone || target.closest("#answerZone"))){
+      const hoveredTile = target.closest(".tile");
+      if(hoveredTile && hoveredTile!==el && hoveredTile.parentElement===zone){
+        const r = hoveredTile.getBoundingClientRect();
+        if(clientX < r.left + r.width/2) zone.insertBefore(el, hoveredTile);
+        else zone.insertBefore(el, hoveredTile.nextSibling);
+      } else {
+        zone.appendChild(el);
+      }
+      return;
+    }
+
+    if(target && (target===bank || target.closest("#bank"))){
+      bank.appendChild(el);
     }
   }
 
-  el.addEventListener("pointerup", finish);
-  el.addEventListener("pointercancel", finish);
+  el.addEventListener("pointerdown", e=>{
+    // Mouse uses native DnD above.
+    if(e.pointerType === "mouse") return;
+
+    touch.active = true;
+    touch.pointerId = e.pointerId;
+    touch.startX = e.clientX;
+    touch.startY = e.clientY;
+    touch.dragging = false;
+    try{ el.setPointerCapture(e.pointerId); }catch(_){}
+  });
+
+  el.addEventListener("pointermove", e=>{
+    if(!touch.active || e.pointerId !== touch.pointerId) return;
+
+    const dist = Math.hypot(e.clientX-touch.startX, e.clientY-touch.startY);
+    if(!touch.dragging && dist < 10) return;
+
+    if(!touch.dragging){
+      touch.dragging = true;
+      suppressClick = true;
+
+      touch.ghost = el.cloneNode(true);
+      touch.ghost.removeAttribute("draggable");
+      touch.ghost.classList.add("drag-ghost");
+      Object.assign(touch.ghost.style,{
+        position:"fixed",
+        zIndex:"999999",
+        pointerEvents:"none",
+        margin:"0",
+        width:el.getBoundingClientRect().width+"px"
+      });
+      document.body.appendChild(touch.ghost);
+      el.style.opacity = ".28";
+    }
+
+    const r = touch.ghost.getBoundingClientRect();
+    touch.ghost.style.left = (e.clientX-r.width/2)+"px";
+    touch.ghost.style.top  = (e.clientY-r.height/2)+"px";
+
+    placeByPoint(e.clientX,e.clientY);
+    e.preventDefault();
+  }, {passive:false});
+
+  function finishTouch(e){
+    if(!touch.active) return;
+    if(e && e.pointerId!==undefined && e.pointerId!==touch.pointerId) return;
+    const wasDragging = touch.dragging;
+    cleanupTouch();
+    if(wasDragging){
+      // prevent the synthetic click that may follow touch drag
+      setTimeout(()=>{ suppressClick=false; }, 120);
+    }
+  }
+
+  el.addEventListener("pointerup", finishTouch);
+  el.addEventListener("pointercancel", finishTouch);
   el.addEventListener("lostpointercapture", ()=>{
-    if(state.dragging || state.ghost) cleanup();
+    if(touch.active) cleanupTouch();
   });
 
   return el;
 }
+
+
+function enableNativeDrop(container){
+  container.addEventListener("dragover", e=>{
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+
+    const dragging = document.querySelector(".tile.dragging");
+    if(!dragging) return;
+
+    const tile = e.target.closest(".tile");
+    if(tile && tile!==dragging && tile.parentElement===container){
+      const r = tile.getBoundingClientRect();
+      if(e.clientX < r.left+r.width/2) container.insertBefore(dragging,tile);
+      else container.insertBefore(dragging,tile.nextSibling);
+    } else if(e.target===container){
+      container.appendChild(dragging);
+    }
+  });
+
+  container.addEventListener("drop", e=>{
+    e.preventDefault();
+    const dragging = document.querySelector(".tile.dragging");
+    if(dragging && dragging.parentElement!==container){
+      container.appendChild(dragging);
+    }
+  });
+}
+enableNativeDrop($("answerZone"));
+enableNativeDrop($("bank"));
 
 function normalize(s){
   return (s||"").replace(/[，。！？\s]/g,"").toLowerCase();
@@ -429,8 +465,18 @@ document.querySelectorAll(".tab").forEach(t=>{
   };
 });
 
+// v2.0: deliberately remove the old offline worker/cache.
 if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+  window.addEventListener("load", async ()=>{
+    try{
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for(const reg of regs) await reg.unregister();
+      if("caches" in window){
+        const keys = await caches.keys();
+        for(const key of keys) await caches.delete(key);
+      }
+    }catch(e){}
+  });
 }
 render();
 </script>
