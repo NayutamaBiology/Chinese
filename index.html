@@ -86,6 +86,7 @@
       font-family:inherit;background:#fff}
     .actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
     button.action{border:0;border-radius:15px;padding:13px 18px;font-size:16px;font-weight:800;cursor:pointer}
+    button.action:disabled{opacity:.4;cursor:not-allowed}
     .primary{background:var(--accent);color:#fff;flex:1}
     .ghost{background:#eef0f5;color:#3f414c}
     .danger{background:#fff1f1;color:var(--bad)}
@@ -204,6 +205,29 @@
       .breakdown-row > div:nth-child(5){grid-column:1/-1;border-left:0;border-top:1px dashed var(--line)}
     }
 
+    /* ---- Summary / results screen ---- */
+    .summary-hero{
+      background:#fff;border-radius:22px;padding:26px 22px;box-shadow:var(--shadow);
+      border:1px solid #eeeef5;text-align:center;
+    }
+    .summary-hero .big{font-size:44px;margin-bottom:6px}
+    .summary-hero .score-line{font-size:22px;font-weight:800}
+    .summary-hero .score-sub{color:var(--muted);font-size:14px;margin-top:6px}
+    .summary-mistakes{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+    .mistake-card{
+      background:#fff;border:1px solid #efb6b6;background-color:#fff8f8;
+      border-radius:16px;padding:14px 16px;
+    }
+    .mistake-card .m-q{font-size:18px;font-weight:800;margin-bottom:6px}
+    .mistake-card .m-row{font-size:14px;line-height:1.5;margin-top:2px}
+    .mistake-card .m-your{color:var(--bad)}
+    .mistake-card .m-right{color:var(--ok)}
+    .no-mistakes{
+      margin-top:20px;background:#eaf8f1;color:#126d49;border-radius:16px;
+      padding:16px;text-align:center;font-weight:700;
+    }
+    .summary-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+
     @media (max-width:520px){
       h1{font-size:23px}.prompt{font-size:21px}.prompt.cn{font-size:27px}.tile{font-size:22px}
       .choices{grid-template-columns:1fr 1fr}
@@ -215,7 +239,7 @@
   <header>
     <div>
       <h1>中文训练</h1>
-      <div class="sub">Повторение китайского · HSK 3 → 5 · v4.0</div>
+      <div class="sub">Повторение китайского · HSK 3 → 5 · v5.0</div>
     </div>
     <div class="score" id="score">0 / 0</div>
   </header>
@@ -305,9 +329,10 @@
       </div>
 
       <div class="actions">
+        <button class="action ghost" id="prevBtn">← Назад</button>
         <button class="action ghost" id="resetBtn">Сбросить</button>
         <button class="action primary" id="checkBtn">Проверить</button>
-        <button class="action ghost" id="nextBtn">Следующее</button>
+        <button class="action primary" id="nextBtn" style="display:none">Следующее →</button>
       </div>
 
       <div class="progress"><div class="bar" id="bar"></div></div>
@@ -318,10 +343,28 @@
       <p>
         В режиме 语序 можно либо перетаскивать плашки пальцем, либо просто нажимать:
         тап по слову переносит его в ответ, тап по слову в ответе возвращает его назад.
-        В режиме 选择 после ответа показывается разбор — почему правильный вариант верный
-        и почему остальные не подходят. Прогресс сохраняется на этом устройстве.
+        Кнопка «← Назад» возвращает к предыдущему заданию, если промотал(а) случайно.
+        После «Проверить» появляется кнопка «Следующее» — жать «Проверить» снова не нужно.
+        В конце подборки покажется итог с разбором ошибок. Прогресс сохраняется на этом устройстве.
       </p>
     </details>
+  </div>
+
+  <!-- ================= SUMMARY / RESULTS SCREEN ================= -->
+  <div class="screen" id="summaryScreen">
+    <div class="summary-hero">
+      <div class="big" id="summaryEmoji">🎉</div>
+      <div class="score-line" id="summaryScoreLine"></div>
+      <div class="score-sub" id="summaryScoreSub"></div>
+    </div>
+
+    <div id="summaryMistakes" class="summary-mistakes"></div>
+    <div id="noMistakes" class="no-mistakes" style="display:none">Ошибок не было — отличный результат! 👏</div>
+
+    <div class="summary-actions">
+      <button class="action ghost" id="summaryHomeBtn" style="flex:1">В меню</button>
+      <button class="action primary" id="retryBtn" style="flex:1">Пройти ещё раз ↻</button>
+    </div>
   </div>
 </div>
 
@@ -407,6 +450,54 @@ const DATA = {
           "我们":{pinyin:"wǒmen",pos:"местоимение",meaning:"мы",role:"подлежащее второй части",hint:"Идёт сразу после 但是."},
           "还是要出去":{pinyin:"háishi yào chūqù",pos:"наречие + модальный глагол + глагол",meaning:"всё равно собираемся выйти",role:"сказуемое",hint:"还是 подчёркивает неизменность намерения, несмотря на условие."}
         }
+      },
+      {
+        prompt:"Собери предложение: Он смотрит телевизор и одновременно ест.",
+        translation:"Он смотрит телевизор и одновременно ест.",
+        structure:"主语 + 一边 + 动词A + 一边 + 动词B · 一边...一边... = два одновременных действия",
+        words:["一边吃饭","他","一边看电视"],
+        answer:["他","一边看电视","一边吃饭"],
+        lex:{
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"В начале предложения."},
+          "一边看电视":{pinyin:"yìbiān kàn diànshì",pos:"наречие + глагольное сочетание",meaning:"одновременно смотрит телевизор",role:"первое из двух действий",hint:"一边 открывает первое из двух одновременных действий."},
+          "一边吃饭":{pinyin:"yìbiān chīfàn",pos:"наречие + глагольное сочетание",meaning:"одновременно ест",role:"второе из двух действий",hint:"一边...一边... соединяет два действия, происходящих в одно время."}
+        }
+      },
+      {
+        prompt:"Собери предложение: Мы сначала поедим, а потом пойдём смотреть фильм.",
+        translation:"Мы сначала поедим, а потом пойдём смотреть фильм.",
+        structure:"主语 + 先 + 动词A,然后(再) + 动词B · 先...然后(再)... = последовательность действий",
+        words:["然后再去看电影","我们","先吃饭"],
+        answer:["我们","先吃饭","然后再去看电影"],
+        lex:{
+          "我们":{pinyin:"wǒmen",pos:"местоимение",meaning:"мы",role:"подлежащее",hint:"В начале предложения."},
+          "先吃饭":{pinyin:"xiān chīfàn",pos:"наречие + глагольное сочетание",meaning:"сначала поедим",role:"первое действие",hint:"先 обозначает первое по порядку действие."},
+          "然后再去看电影":{pinyin:"ránhòu zài qù kàn diànyǐng",pos:"наречие + глагольное сочетание",meaning:"потом пойдём смотреть фильм",role:"второе действие",hint:"然后(再) вводит следующее по порядку действие."}
+        }
+      },
+      {
+        prompt:"Собери предложение: Эта одежда слишком дорогая, я не могу себе это позволить.",
+        translation:"Эта одежда слишком дорогая, я не могу себе это позволить.",
+        structure:"主语 + 太 + 形容词 + 了,主语 + 动词 + 不起 · 买不起 = потенциальный результат «не по карману»",
+        words:["我买不起","这件衣服","太贵了"],
+        answer:["这件衣服","太贵了","我买不起"],
+        lex:{
+          "这件衣服":{pinyin:"zhè jiàn yīfu",pos:"сущ. со счётным словом",meaning:"эта одежда",role:"подлежащее первой части",hint:"Подлежащее — в начале предложения."},
+          "太贵了":{pinyin:"tài guì le",pos:"наречие + прилагательное + 了",meaning:"слишком дорогая",role:"сказуемое первой части",hint:"太...了 усиливает признак: 'слишком дорого'."},
+          "我买不起":{pinyin:"wǒ mǎibuqǐ",pos:"местоимение + глагол-потенциальный комплемент",meaning:"я не могу себе это позволить",role:"вторая часть-вывод",hint:"买不起 — потенциальный комплемент: 'не хватает денег, чтобы купить'."}
+        }
+      },
+      {
+        prompt:"Собери предложение: Тебе следует пить больше воды и меньше кофе.",
+        translation:"Тебе следует пить больше воды и меньше кофе.",
+        structure:"主语 + 应该 + 多/少 + 动词宾语 · модальный глагол 应该 + 多/少 + глагол",
+        words:["少喝咖啡","你","应该多喝水"],
+        answer:["你","应该多喝水","少喝咖啡"],
+        lex:{
+          "你":{pinyin:"nǐ",pos:"местоимение",meaning:"ты",role:"подлежащее",hint:"В начале предложения."},
+          "应该多喝水":{pinyin:"yīnggāi duō hē shuǐ",pos:"модальный глагол + наречие + глагольное сочетание",meaning:"следует пить больше воды",role:"первая рекомендация",hint:"应该 + 多/少 + глагол = совет 'следует делать больше/меньше чего-то'."},
+          "少喝咖啡":{pinyin:"shǎo hē kāfēi",pos:"наречие + глагольное сочетание",meaning:"меньше пить кофе",role:"вторая рекомендация",hint:"Параллельная конструкция с 少 продолжает совет."}
+        }
       }
     ],
     choice: [
@@ -465,6 +556,62 @@ const DATA = {
           "也":"也 значит «тоже», но не образует парную конструкцию 又...又...",
           "还":"还 значит «ещё» и не используется во второй части устойчивой конструкции 又...又...",
           "才":"才 указывает на поздний результат, что не подходит по смыслу и грамматике."
+        }},
+      {prompt:"这个房间___小,我们换一个吧。", options:["有点儿","一点儿","很","太"], answer:"有点儿",
+        explain:{
+          "有点儿":"有点儿 + прилагательное = «немного / слегка» (обычно с оттенком недовольства) — ставится перед прилагательным.",
+          "一点儿":"一点儿 обычно стоит после прилагательного для сравнения (大一点儿), а не перед ним в этом значении.",
+          "很":"很 значит просто «очень», не передаёт оттенок «слегка не то».",
+          "太":"太 значит «слишком» — это более сильная степень, чем нужно по смыслу."
+        }},
+      {prompt:"这本书是___图书馆借的。", options:["从","在","离","向"], answer:"从",
+        explain:{
+          "从":"从 + место = «из» (источник, откуда что-то получено): «взял(а) из библиотеки».",
+          "在":"在 указывает место действия, но не источник, откуда что-то взято.",
+          "离":"离 используется для указания расстояния («от... до...»), а не источника действия.",
+          "向":"向 значит «по направлению к», а не «из»."
+        }},
+      {prompt:"他先做作业,___看电视。", options:["再","又","还","才"], answer:"再",
+        explain:{
+          "再":"先...再... = «сначала..., потом...» — 再 вводит второе по порядку действие.",
+          "又":"又 означает повторение уже свершившегося действия («снова»), а не последовательность.",
+          "还":"还 значит «ещё» и не передаёт идею последовательности действий.",
+          "才":"才 указывает на поздний результат, а не на порядок действий."
+        }},
+      {prompt:"只要你努力,___能成功。", options:["就","才","也","都"], answer:"就",
+        explain:{
+          "就":"只要...就... = «стоит лишь..., как...» — 就 показывает достаточное условие для результата.",
+          "才":"才 используется в конструкции 除非...才... (необходимое условие), а не 只要...就...",
+          "也":"也 значит «тоже» и не связано с этой конструкцией.",
+          "都":"都 обобщает несколько случаев, а не выражает достаточное условие."
+        }},
+      {prompt:"这不是我的钱包,___是我朋友的。", options:["而是","但是","所以","因为"], answer:"而是",
+        explain:{
+          "而是":"不是A,而是B = «не A, а B» — 而是 вводит правильный вариант вместо отвергнутого.",
+          "但是":"但是 вводит противопоставление («но»), а не замену одного факта другим.",
+          "所以":"所以 вводит следствие, а не альтернативный факт.",
+          "因为":"因为 вводит причину, а не замену одного утверждения другим."
+        }},
+      {prompt:"天阴了,___要下雨了。", options:["好像","已经","刚才","本来"], answer:"好像",
+        explain:{
+          "好像":"好像 = «кажется, похоже» — выражает предположение по внешним признакам (небо потемнело).",
+          "已经":"已经 значит «уже» и не выражает предположение.",
+          "刚才":"刚才 значит «только что» (о прошлом моменте), а не предположение о будущем.",
+          "本来":"本来 значит «изначально», не связано с предположением по признакам."
+        }},
+      {prompt:"你___喜不喜欢这个礼物?", options:["到底","难道","竟然","居然"], answer:"到底",
+        explain:{
+          "到底":"到底 в вопросе усиливает требование прямого ответа: «так нравится тебе или нет, в конце концов?»",
+          "难道":"难道 используется в риторических вопросах с оттенком удивления и не подходит для прямого вопроса о факте.",
+          "竟然":"竟然 выражает удивление неожиданным результатом и не используется в самом вопросе о выборе.",
+          "居然":"居然 тоже выражает удивление, а не усиление вопроса."
+        }},
+      {prompt:"这两件衣服的价格___,你随便买哪件都行。", options:["差不多","差远了","不一定","说不定"], answer:"差不多",
+        explain:{
+          "差不多":"差不多 = «почти одинаковый, примерно одно и то же» — по смыслу цены близки.",
+          "差远了":"差远了 значит «сильно отличаются», что противоречит смыслу предложения.",
+          "不一定":"不一定 значит «не обязательно / не факт», не описывает сравнение цен.",
+          "说不定":"说不定 значит «возможно, как знать» — используется для предположений, а не сравнения."
         }}
     ],
     fill: [
@@ -485,7 +632,19 @@ const DATA = {
         explanation:"因为...所以... — причинно-следственная конструкция; 没有 + глагол отрицает совершённое действие в прошлом."},
       {prompt:"Чем больше учишь, тем интереснее.",
         answer:"越学越有意思", alt:["越学越有意思。","你越学越有意思"],
-        explanation:"越A越B = «чем больше/сильнее A, тем больше/сильнее B» — устойчивая парная конструкция."}
+        explanation:"越A越B = «чем больше/сильнее A, тем больше/сильнее B» — устойчивая парная конструкция."},
+      {prompt:"Я думаю, что этот фильм неинтересный.",
+        answer:"我觉得这部电影没有意思", alt:["我觉得这个电影没有意思"],
+        explanation:"觉得 = «считать, полагать» вводит субъективное мнение; 没有意思 = «неинтересно» (буквально «нет смысла»)."},
+      {prompt:"Можно, я сяду здесь?",
+        answer:"我可以坐在这里吗", alt:["我能坐在这里吗"],
+        explanation:"可以/能 + глагол = просьба о разрешении; 在这里 указывает место после глагола 坐."},
+      {prompt:"Сначала я позвоню ему, а потом пойду.",
+        answer:"我先给他打电话,然后再走", alt:["我先打电话给他,然后再走"],
+        explanation:"先...然后(再)... = последовательность действий; 给他打电话 = «позвонить ему»."},
+      {prompt:"У меня немного болит голова.",
+        answer:"我头有点儿疼", alt:["我有点儿头疼"],
+        explanation:"有点儿 + прилагательное/глагол = «немного» (обычно негативный оттенок); 头疼 = «голова болит»."}
     ]
   },
 
@@ -574,6 +733,55 @@ const DATA = {
           "迟到了":{pinyin:"chídào le",pos:"глагол + 了",meaning:"опоздали",role:"сказуемое",hint:"Основной глагол с 了 показывает завершённое действие."},
           "半个小时":{pinyin:"bàn gè xiǎoshí",pos:"количественно-временная группа",meaning:"полчаса",role:"длительность/степень",hint:"Насколько именно опоздали — ставится после глагола."}
         }
+      },
+      {
+        prompt:"Собери предложение: Эту книгу я купил(а) вчера в книжном магазине.",
+        translation:"Эту книгу я купил(а) вчера в книжном магазине.",
+        structure:"话题(宾语) + 是 + 时间 + 地点 + 动词 + 的 · конструкция 是...的 подчёркивает обстоятельства прошлого действия",
+        words:["买的","这本书","是我昨天","在书店"],
+        answer:["这本书","是我昨天","在书店","买的"],
+        lex:{
+          "这本书":{pinyin:"zhè běn shū",pos:"сущ. со счётным словом",meaning:"эта книга",role:"тема (вынесенный объект)",hint:"Объект-тема выносится в начало предложения."},
+          "是我昨天":{pinyin:"shì wǒ zuótiān",pos:"是 + местоимение + время",meaning:"это я вчера",role:"начало конструкции 是...的",hint:"是...的 подчёркивает обстоятельства (когда/где/как) уже свершившегося действия."},
+          "在书店":{pinyin:"zài shūdiàn",pos:"предложная группа",meaning:"в книжном магазине",role:"место",hint:"Уточняющее место ставится перед глаголом внутри конструкции 是...的."},
+          "买的":{pinyin:"mǎi de",pos:"глагол + 的",meaning:"купил(а)",role:"завершение конструкции",hint:"的 закрывает конструкцию 是...的 после глагола."}
+        }
+      },
+      {
+        prompt:"Собери предложение: Мой кошелёк украл вор.",
+        translation:"Мой кошелёк украл вор (был украден вором).",
+        structure:"受事 + 被 + 施事 + 动词 + 结果 + 了 · пассивная конструкция 被",
+        words:["偷走了","我的钱包","被小偷"],
+        answer:["我的钱包","被小偷","偷走了"],
+        lex:{
+          "我的钱包":{pinyin:"wǒ de qiánbāo",pos:"притяжат. + существительное",meaning:"мой кошелёк",role:"объект действия (пациенс)",hint:"В пассивной конструкции объект действия ставится в начало."},
+          "被小偷":{pinyin:"bèi xiǎotōu",pos:"被ушедший + существительное",meaning:"вором",role:"исполнитель действия",hint:"被 вводит того, кто совершил действие над объектом."},
+          "偷走了":{pinyin:"tōu zǒu le",pos:"глагол + результат + 了",meaning:"украл(и), унёс(ли)",role:"сказуемое",hint:"Глагол с результатом и 了 показывает завершённое действие в пассиве."}
+        }
+      },
+      {
+        prompt:"Собери предложение: Кроме английского, он ещё умеет говорить по-французски и по-немецки.",
+        translation:"Кроме английского, он ещё умеет говорить по-французски и по-немецки.",
+        structure:"除了 + A + 以外,主语 + 还 + 动词 + B · 除了...还... = «кроме A, ещё и B»",
+        words:["还会说法语和德语","除了英语以外","他"],
+        answer:["除了英语以外","他","还会说法语和德语"],
+        lex:{
+          "除了英语以外":{pinyin:"chúle Yīngyǔ yǐwài",pos:"предложная группа",meaning:"кроме английского",role:"вводная часть конструкции",hint:"除了...以外 вводит уже известный/дополняемый элемент."},
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"Подлежащее идёт после вводной части."},
+          "还会说法语和德语":{pinyin:"hái huì shuō Fǎyǔ hé Déyǔ",pos:"наречие + модальный глагол + глагольное сочетание",meaning:"ещё умеет говорить по-французски и по-немецки",role:"добавляемая информация",hint:"还 показывает добавление к уже упомянутому."}
+        }
+      },
+      {
+        prompt:"Собери предложение: Как бы он ни был занят, он каждый день занимается спортом.",
+        translation:"Как бы он ни был занят, он каждый день занимается спортом.",
+        structure:"无论 + 条件,主语 + 都 + 动词 · 无论...都... = «независимо от того..., в любом случае...»",
+        words:["每天都要锻炼身体","无论多忙","他"],
+        answer:["无论多忙","他","每天都要锻炼身体"],
+        lex:{
+          "无论多忙":{pinyin:"wúlùn duō máng",pos:"союз + прилагательное",meaning:"как бы занят ни был",role:"условная часть",hint:"无论 вводит любое возможное условие, часто с вопросительным словом типа 多."},
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"Подлежащее идёт после условной части."},
+          "每天都要锻炼身体":{pinyin:"měitiān dōu yào duànliàn shēntǐ",pos:"наречие + модальный глагол + глагольное сочетание",meaning:"каждый день обязательно занимается спортом",role:"результат",hint:"都 обобщает результат независимо от условия."}
+        }
       }
     ],
     choice: [
@@ -632,6 +840,62 @@ const DATA = {
           "才":"才 связано с поздним/условным результатом, а не с обобщением всех случаев.",
           "就":"就 показывает быстрый результат в конкретном случае, а не обобщение независимо от условий.",
           "也":"也 значит «тоже» и не образует конструкцию 不管...都..."
+        }},
+      {prompt:"他___学习中文,是因为他喜欢中国文化。", options:["之所以","因为","由于","既然"], answer:"之所以",
+        explain:{
+          "之所以":"之所以A,是因为B = «то, что A, объясняется тем, что B» — 之所以 вводит факт, который затем объясняется.",
+          "因为":"因为 само вводит причину, но по конструкции здесь нужно 之所以 в первой части, согласуясь с 是因为 во второй.",
+          "由于":"由于 тоже вводит причину, но не сочетается с последующим 是因为 в этой парной конструкции.",
+          "既然":"既然 значит «раз уж, поскольку» и используется в конструкции 既然...就..., а не с 是因为."
+        }},
+      {prompt:"___在家看电视,不如出去运动。", options:["与其","即使","甚至","反而"], answer:"与其",
+        explain:{
+          "与其":"与其A,不如B = «чем A, лучше B» — 与其 вводит менее предпочтительный вариант.",
+          "即使":"即使...也... = «даже если» — другая конструкция, не сравнение предпочтений.",
+          "甚至":"甚至 значит «даже» (усиление примера), не образует сравнение предпочтений с 不如.",
+          "反而":"反而 значит «наоборот», используется для неожиданного результата, а не сравнения предпочтений."
+        }},
+      {prompt:"你___答应了,就不能反悔。", options:["一旦","即使","甚至","不管"], answer:"一旦",
+        explain:{
+          "一旦":"一旦...就... = «как только...(случится это), то...» — вводит условие, после наступления которого следует результат.",
+          "即使":"即使...也... = «даже если» — другая по смыслу уступительная конструкция.",
+          "甚至":"甚至 значит «даже» для усиления примера, а не условие.",
+          "不管":"不管...都... = «независимо от», не подходит по структуре с 就 в этом контексте."
+        }},
+      {prompt:"___下大雨,我们也要去。", options:["即使","一旦","甚至","除非"], answer:"即使",
+        explain:{
+          "即使":"即使...也... = «даже если...(случится это), всё равно...» — уступительное условие.",
+          "一旦":"一旦...就... описывает конкретное будущее условие с результатом 就, а не гипотетическую уступку с 也.",
+          "甚至":"甚至 усиливает пример («даже»), не образует уступительную конструкцию с 也.",
+          "除非":"除非...才... = «только если» — конструкция необходимого условия, а не уступки."
+        }},
+      {prompt:"他___连老师的名字都不记得。", options:["甚至","竟然","居然","难道"], answer:"甚至",
+        explain:{
+          "甚至":"甚至...都... усиливает крайний пример: даже имя учителя не помнит.",
+          "竟然":"竟然 выражает удивление результатом, но по конструкции здесь нужен усилитель именно 甚至 перед 连.",
+          "居然":"居然 тоже выражает удивление, но не сочетается с 连...都... так же естественно, как 甚至.",
+          "难道":"难道 используется в риторических вопросах, а не для усиления примера в утверждении."
+        }},
+      {prompt:"这件事没有你想的那么简单,___我们时间也不够。", options:["更何况","反而","甚至","与其"], answer:"更何况",
+        explain:{
+          "更何况":"更何况 = «тем более что / не говоря уже о том, что» — добавляет ещё более веский аргумент.",
+          "反而":"反而 значит «наоборот», вводит неожиданный контраст, а не дополнительный аргумент.",
+          "甚至":"甚至 усиливает пример («даже»), но не вводит дополнительный аргумент в этом стиле.",
+          "与其":"与其 используется в сравнении предпочтений (与其...不如...), не подходит здесь."
+        }},
+      {prompt:"他不但没有生气,___笑了起来。", options:["反而","而且","于是","从而"], answer:"反而",
+        explain:{
+          "反而":"反而 = «наоборот» — показывает результат, противоположный ожидаемому (ожидали гнев, а получили смех).",
+          "而且":"而且 добавляет однонаправленную информацию (不但...而且...), но здесь нужен контраст, а не добавление.",
+          "于是":"于是 = «и тогда, поэтому» вводит логичное следствие, а не неожиданный контраст.",
+          "从而":"从而 = «тем самым» вводит результат-следствие в официальном стиле, не подходит для контраста."
+        }},
+      {prompt:"这次考试不难,但也___人人都能及格。", options:["未必","一定","本来","难道"], answer:"未必",
+        explain:{
+          "未必":"未必 = «не обязательно, вовсе не факт» — смягчает уверенное утверждение.",
+          "一定":"一定 значит «обязательно, точно» — противоположно по смыслу нужному «не факт».",
+          "本来":"本来 значит «изначально», не передаёт значение сомнения в результате.",
+          "难道":"难道 используется в риторическом вопросе, а не в утвердительном предложении с 也."
         }}
     ],
     fill: [
@@ -650,21 +914,44 @@ const DATA = {
       {prompt:"Несмотря на трудности, мы всё равно закончили этот проект вовремя.",
         answer:"尽管有困难,我们还是按时完成了这个项目",
         alt:["尽管很困难,我们还是按时完成了这个项目","虽然有困难,我们还是按时完成了这个项目"],
-        explanation:"尽管...还是... подчёркивает, что результат не изменился несмотря на трудности; 按时 = «вовремя», 完成 = «завершить»."}
+        explanation:"尽管...还是... подчёркивает, что результат не изменился несмотря на трудности; 按时 = «вовремя», 完成 = «завершить»."},
+      {prompt:"То, что он опоздал, объясняется пробкой.",
+        answer:"他之所以迟到,是因为堵车", alt:["他之所以迟到,是因为交通堵塞"],
+        explanation:"之所以A,是因为B — объясняет причину уже названного факта A."},
+      {prompt:"Чем сидеть дома, лучше пойти погулять.",
+        answer:"与其在家呆着,不如出去走走", alt:["与其待在家里,不如出去走走"],
+        explanation:"与其A,不如B = «чем A, лучше B» — сравнение двух вариантов в пользу второго."},
+      {prompt:"Как только он придёт, мы начнём собрание.",
+        answer:"他一到,我们就开始开会", alt:["他一来,我们就开会"],
+        explanation:"一...就... = «как только..., сразу...» — связывает два последовательных события."},
+      {prompt:"Даже если будет трудно, я не сдамся.",
+        answer:"即使很难,我也不会放弃", alt:["即使困难,我也不放弃"],
+        explanation:"即使...也... — уступительная конструкция: результат не меняется, даже если условие неблагоприятно."},
+      {prompt:"Эта задача решена не мной, а моим коллегой.",
+        answer:"这个问题不是我解决的,而是我同事解决的", alt:["这个问题不是我解决的,是我同事解决的"],
+        explanation:"不是A而是B = «не A, а B» в конструкции 是...的 подчёркивает, кто именно совершил действие."}
     ]
   }
 };
 
 let level = "34";
 let mode = "order";
-let idx = {
-  "34": {order:0, choice:0, fill:0},
-  "45": {order:0, choice:0, fill:0}
-};
+
+let sessionQueue = [];
+let sessionPos = 0;
+let sessionResults = [];
+let checked = false;
+
 let stats = JSON.parse(localStorage.getItem("cnTrainerStatsV4") || '{"34":{"correct":0,"total":0},"45":{"correct":0,"total":0}}');
 let selectedChoice = null;
 
 const $ = id => document.getElementById(id);
+
+function showScreen(name){
+  ["homeScreen","quizScreen","summaryScreen"].forEach(id=>{
+    $(id).classList.toggle("active", id===name);
+  });
+}
 
 function saveStats(){
   localStorage.setItem("cnTrainerStatsV4", JSON.stringify(stats));
@@ -687,7 +974,23 @@ function updateModeCounts(){
   });
 }
 
-function current(){ return DATA[level][mode][idx[level][mode] % DATA[level][mode].length]; }
+function shuffledIndices(n){
+  const arr = Array.from({length:n}, (_,i)=>i);
+  for(let i=arr.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]] = [arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function startSession(){
+  const n = DATA[level][mode].length;
+  sessionQueue = shuffledIndices(n);
+  sessionPos = 0;
+  sessionResults = new Array(n).fill(null);
+}
+
+function current(){ return DATA[level][mode][ sessionQueue[sessionPos] ]; }
 
 // ---------------- Home screen wiring ----------------
 $("levelToggle").querySelectorAll(".level-btn").forEach(b=>{
@@ -711,14 +1014,13 @@ $("modeCards").querySelectorAll(".mode-card").forEach(c=>{
 $("startBtn").onclick = ()=> goToQuiz();
 
 function goToQuiz(){
-  $("homeScreen").classList.remove("active");
-  $("quizScreen").classList.add("active");
+  startSession();
+  showScreen("quizScreen");
   syncQuizChrome();
   render();
 }
 function goHome(){
-  $("quizScreen").classList.remove("active");
-  $("homeScreen").classList.add("active");
+  showScreen("homeScreen");
   updateModeCounts();
   updateScoreBadge();
   updateLevelStatsLabels();
@@ -726,7 +1028,7 @@ function goHome(){
 $("backBtn").onclick = goHome;
 
 function syncQuizChrome(){
-  document.querySelectorAll(".quiz-topbar ~ .tabs .tab, .tabs .tab").forEach(t=>{
+  document.querySelectorAll(".tabs .tab").forEach(t=>{
     t.classList.toggle("active", t.dataset.mode===mode);
   });
   $("quizMeta").textContent = DATA[level].label;
@@ -735,9 +1037,8 @@ function syncQuizChrome(){
 
 document.querySelectorAll(".tabs .tab").forEach(t=>{
   t.onclick = ()=>{
-    document.querySelectorAll(".tabs .tab").forEach(x=>x.classList.remove("active"));
-    t.classList.add("active");
     mode = t.dataset.mode;
+    startSession();
     syncQuizChrome();
     render();
   };
@@ -746,6 +1047,8 @@ document.querySelectorAll(".tabs .tab").forEach(t=>{
 // ---------------- Quiz render ----------------
 function render(){
   const ex = current();
+  checked = false;
+
   $("feedback").className = "feedback";
   $("feedback").textContent = "";
   $("analysis").classList.remove("show");
@@ -756,6 +1059,10 @@ function render(){
   $("sentenceBreakdown").style.display = "none";
   document.querySelectorAll(".tile").forEach(t=>t.classList.remove("correct-pos","wrong-pos"));
   selectedChoice = null;
+
+  $("checkBtn").style.display = "";
+  $("nextBtn").style.display = "none";
+  $("prevBtn").disabled = sessionPos === 0;
 
   $("orderUI").style.display = mode==="order" ? "block":"none";
   $("choiceUI").style.display = mode==="choice" ? "block":"none";
@@ -781,6 +1088,7 @@ function render(){
       b.className = "choice";
       b.textContent = ch;
       b.onclick = ()=>{
+        if(checked) return;
         selectedChoice = ch;
         [...$("choices").children].forEach(x=>x.classList.remove("selected"));
         b.classList.add("selected");
@@ -791,8 +1099,7 @@ function render(){
     $("fillInput").value = "";
   }
 
-  const pos = idx[level][mode] % DATA[level][mode].length;
-  $("bar").style.width = `${((pos+1)/DATA[level][mode].length)*100}%`;
+  $("bar").style.width = `${((sessionPos+1)/sessionQueue.length)*100}%`;
 }
 
 function makeTile(text, id){
@@ -1100,10 +1407,16 @@ function showFillAnalysis(ex, ok){
 $("checkBtn").onclick = ()=>{
   const ex=current();
   let ok=false;
+  let userDisplay = "";
+  let correctDisplay = "";
+  let explanationText = "";
 
   if(mode==="order"){
     const ans=[...$("answerZone").querySelectorAll(".tile")].map(x=>x.textContent);
     ok = ans.length===ex.answer.length && ans.every((v,i)=>v===ex.answer[i]);
+    userDisplay = ans.join("");
+    correctDisplay = ex.answer.join("");
+    explanationText = ex.translation;
 
     markOrderTiles(ex, ans);
     showOrderAnalysis(ex, ans, ok);
@@ -1111,14 +1424,30 @@ $("checkBtn").onclick = ()=>{
   } else if(mode==="choice"){
     if(!selectedChoice) return;
     ok = selectedChoice===ex.answer;
+    userDisplay = selectedChoice;
+    correctDisplay = ex.answer;
+    explanationText = ex.explain[ex.answer] || "";
     showChoiceAnalysis(ex, ok, selectedChoice);
 
   } else {
-    const val=normalize($("fillInput").value);
+    const raw = $("fillInput").value;
+    const val=normalize(raw);
     const possible=[ex.answer,...(ex.alt||[])].map(normalize);
     ok = possible.includes(val);
+    userDisplay = raw || "(пусто)";
+    correctDisplay = ex.answer;
+    explanationText = ex.explanation || "";
     showFillAnalysis(ex, ok);
   }
+
+  checked = true;
+  $("checkBtn").style.display = "none";
+  $("nextBtn").style.display = "";
+
+  sessionResults[sessionPos] = {
+    prompt: ex.prompt,
+    ok, userDisplay, correctDisplay, explanationText
+  };
 
   stats[level].total++;
   if(ok) stats[level].correct++;
@@ -1136,15 +1465,73 @@ $("checkBtn").onclick = ()=>{
   }
 };
 
-$("nextBtn").onclick=()=>{ idx[level][mode]++; render(); };
-$("resetBtn").onclick=()=>{
-  if(mode==="order") render();
-  else if(mode==="choice"){
-    selectedChoice=null; [...$("choices").children].forEach(x=>x.classList.remove("selected"));
-    $("feedback").className="feedback";
+$("nextBtn").onclick = ()=>{
+  sessionPos++;
+  if(sessionPos >= sessionQueue.length){
+    showCompletion();
   } else {
-    $("fillInput").value=""; $("feedback").className="feedback";
+    render();
   }
+};
+
+$("prevBtn").onclick = ()=>{
+  if(sessionPos > 0){
+    sessionPos--;
+    render();
+  }
+};
+
+$("resetBtn").onclick = ()=>{ render(); };
+
+function showCompletion(){
+  const total = sessionResults.length;
+  const correct = sessionResults.filter(r=>r && r.ok).length;
+  const mistakes = sessionResults.filter(r=>r && !r.ok);
+
+  let emoji = "🎉", line = "";
+  if(correct===total){
+    emoji = "🎉";
+    line = `Отлично! Ты прошёл(ла) ${correct} из ${total} правильно!`;
+  } else if(correct/total >= 0.7){
+    emoji = "👍";
+    line = `Хорошо! ${correct} из ${total} правильно.`;
+  } else {
+    emoji = "💪";
+    line = `${correct} из ${total} правильно — есть куда расти.`;
+  }
+
+  $("summaryEmoji").textContent = emoji;
+  $("summaryScoreLine").textContent = line;
+  $("summaryScoreSub").textContent = `${DATA[level].label} · ${mode==="order" ? "语序" : mode==="choice" ? "选择" : "填空"}`;
+
+  const box = $("summaryMistakes");
+  box.innerHTML = "";
+  if(mistakes.length === 0){
+    $("noMistakes").style.display = "block";
+  } else {
+    $("noMistakes").style.display = "none";
+    mistakes.forEach(m=>{
+      const card = document.createElement("div");
+      card.className = "mistake-card";
+      card.innerHTML = `
+        <div class="m-q">${esc(m.prompt)}</div>
+        <div class="m-row m-your"><b>Твой ответ:</b> ${esc(m.userDisplay)}</div>
+        <div class="m-row m-right"><b>Правильно:</b> ${esc(m.correctDisplay)}</div>
+        ${m.explanationText ? `<div class="m-row">${esc(m.explanationText)}</div>` : ""}
+      `;
+      box.appendChild(card);
+    });
+  }
+
+  showScreen("summaryScreen");
+}
+
+$("summaryHomeBtn").onclick = goHome;
+$("retryBtn").onclick = ()=>{
+  startSession();
+  showScreen("quizScreen");
+  syncQuizChrome();
+  render();
 };
 
 // v2.0: deliberately remove the old offline worker/cache.
