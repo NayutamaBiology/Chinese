@@ -35,12 +35,13 @@
     .screen.active{display:block}
 
     .label{font-size:13px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+    .group-label{font-size:12.5px;color:var(--muted);font-weight:700;margin:14px 0 6px}
 
-    .level-toggle{display:flex;gap:8px;margin:10px 0 4px}
-    .level-btn{flex:1;border:2px solid var(--line);background:#fff;padding:12px 10px;border-radius:16px;
-      font-weight:800;font-size:15px;color:var(--ink);text-align:center;cursor:pointer}
+    .level-toggle{display:flex;gap:8px;margin:4px 0}
+    .level-btn{flex:1;border:2px solid var(--line);background:#fff;padding:11px 8px;border-radius:16px;
+      font-weight:800;font-size:14px;color:var(--ink);text-align:center;cursor:pointer}
     .level-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-    .level-btn .lv-stats{display:block;font-weight:600;font-size:11.5px;opacity:.85;margin-top:3px}
+    .level-btn .lv-stats{display:block;font-weight:600;font-size:11px;opacity:.85;margin-top:3px}
 
     .mode-cards{display:flex;flex-direction:column;gap:12px;margin:14px 0 20px}
     .mode-card{display:flex;align-items:center;gap:14px;background:#fff;border:2px solid var(--line);
@@ -100,137 +101,74 @@
     .settings summary{font-weight:800;cursor:pointer}
     .settings p{color:var(--muted);line-height:1.5}
 
-    .tile.correct-pos{
-      border:2px solid #28a06a;
-      background:#ecfbf3;
-      color:#126d49;
-      box-shadow:0 3px 10px rgba(22,138,91,.08);
-    }
-    .tile.wrong-pos{
-      border:2px solid #d45b5b;
-      background:#fff1f1;
-      color:#9f3434;
-      box-shadow:0 3px 10px rgba(201,71,71,.08);
-    }
+    .tile.correct-pos{border:2px solid #28a06a;background:#ecfbf3;color:#126d49;box-shadow:0 3px 10px rgba(22,138,91,.08)}
+    .tile.wrong-pos{border:2px solid #d45b5b;background:#fff1f1;color:#9f3434;box-shadow:0 3px 10px rgba(201,71,71,.08)}
     .choice.correct-choice{border:2px solid #28a06a;background:#ecfbf3;color:#126d49}
     .choice.wrong-choice{border:2px solid #d45b5b;background:#fff1f1;color:#9f3434}
-    .analysis{
-      margin-top:16px;
-      border-top:1px solid var(--line);
-      padding-top:16px;
-      display:none;
-    }
+    .analysis{margin-top:16px;border-top:1px solid var(--line);padding-top:16px;display:none}
     .analysis.show{display:block}
     .analysis h3{margin:0 0 10px;font-size:18px}
-    .analysis-summary{
-      border-radius:16px;
-      padding:13px 15px;
-      margin-bottom:12px;
-      line-height:1.5;
-      background:#f6f7fb;
-    }
+    .analysis-summary{border-radius:16px;padding:13px 15px;margin-bottom:12px;line-height:1.5;background:#f6f7fb}
     .analysis-summary.ok{background:#eaf8f1;color:#126d49}
     .analysis-summary.bad{background:#fff3f3;color:#8f3333}
-    .word-feedback{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:10px;
-      margin-top:10px;
-    }
-    .word-card{
-      border:1px solid var(--line);
-      border-radius:15px;
-      padding:12px 13px;
-      background:#fff;
-    }
+    .word-feedback{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px}
+    .word-card{border:1px solid var(--line);border-radius:15px;padding:12px 13px;background:#fff}
     .word-card.good{border-color:#a7dfc5;background:#f5fcf8}
     .word-card.bad{border-color:#efb6b6;background:#fff8f8}
-    .word-head{
-      display:flex;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:8px;
-      margin-bottom:7px;
-    }
+    .word-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:7px}
     .word-hanzi{font-size:25px;font-weight:800}
     .word-pinyin{font-size:14px;color:var(--muted)}
     .word-meta{font-size:14px;line-height:1.5}
-    .grammar-chip{
-      display:inline-block;
-      background:var(--accent-soft);
-      color:var(--accent);
-      border-radius:999px;
-      padding:4px 8px;
-      font-size:12px;
-      font-weight:800;
-      margin-top:6px;
-    }
-    .sentence-breakdown{
-      margin-top:12px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      overflow:hidden;
-      background:#fff;
-    }
-    .breakdown-row{
-      display:grid;
-      grid-template-columns:110px 130px 120px 1fr 1.2fr;
-      gap:0;
-      border-top:1px solid var(--line);
-    }
+    .grammar-chip{display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:999px;
+      padding:4px 8px;font-size:12px;font-weight:800;margin-top:6px}
+    .sentence-breakdown{margin-top:12px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+    .breakdown-row{display:grid;grid-template-columns:110px 130px 120px 1fr 1.2fr;gap:0;border-top:1px solid var(--line)}
     .breakdown-row:first-child{border-top:0}
-    .breakdown-row > div{
-      padding:10px 11px;
-      border-left:1px solid var(--line);
-      line-height:1.35;
-      font-size:14px;
-    }
+    .breakdown-row > div{padding:10px 11px;border-left:1px solid var(--line);line-height:1.35;font-size:14px}
     .breakdown-row > div:first-child{border-left:0}
     .breakdown-head{background:#f7f7fb;font-weight:800}
-    .sentence-result{
-      font-size:25px;
-      line-height:1.5;
-      font-weight:800;
-      margin:6px 0;
-    }
-    .sentence-pinyin{
-      color:var(--muted);
-      margin-bottom:5px;
-      font-size:15px;
-    }
+    .sentence-result{font-size:25px;line-height:1.5;font-weight:800;margin:6px 0}
     @media(max-width:700px){
-      .breakdown-row{
-        grid-template-columns:82px 105px 95px 1fr;
-      }
+      .breakdown-row{grid-template-columns:82px 105px 95px 1fr}
       .breakdown-row > div:nth-child(5){grid-column:1/-1;border-left:0;border-top:1px dashed var(--line)}
     }
 
+    .click-word{cursor:pointer;border-bottom:2px dotted var(--accent);padding-bottom:1px}
+    .click-word:hover{background:var(--accent-soft)}
+
+    .word-modal-overlay{position:fixed;inset:0;background:rgba(20,20,30,.5);display:none;
+      align-items:center;justify-content:center;z-index:99999;padding:20px}
+    .word-modal-overlay.show{display:flex}
+    .word-modal{background:#fff;border-radius:22px;padding:22px;max-width:360px;width:100%;
+      position:relative;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+    .word-modal-close{position:absolute;top:12px;right:12px;border:0;background:#eef0f5;border-radius:50%;
+      width:32px;height:32px;font-weight:800;cursor:pointer;font-size:16px;line-height:1}
+    .word-modal-hanzi{font-size:42px;font-weight:800;margin-bottom:2px}
+    .word-modal-pinyin{color:var(--muted);font-size:16px;margin-bottom:14px}
+    .word-modal-row{font-size:14.5px;line-height:1.6;margin-bottom:6px}
+    .word-modal-link{display:block;margin-top:14px;text-align:center;background:var(--accent-soft);
+      color:var(--accent);border-radius:12px;padding:12px;font-weight:800;text-decoration:none}
+
     /* ---- Summary / results screen ---- */
-    .summary-hero{
-      background:#fff;border-radius:22px;padding:26px 22px;box-shadow:var(--shadow);
-      border:1px solid #eeeef5;text-align:center;
-    }
+    .summary-hero{background:#fff;border-radius:22px;padding:26px 22px;box-shadow:var(--shadow);
+      border:1px solid #eeeef5;text-align:center}
     .summary-hero .big{font-size:44px;margin-bottom:6px}
     .summary-hero .score-line{font-size:22px;font-weight:800}
     .summary-hero .score-sub{color:var(--muted);font-size:14px;margin-top:6px}
     .summary-mistakes{margin-top:20px;display:flex;flex-direction:column;gap:12px}
-    .mistake-card{
-      background:#fff;border:1px solid #efb6b6;background-color:#fff8f8;
-      border-radius:16px;padding:14px 16px;
-    }
+    .mistake-card{background:#fff8f8;border:1px solid #efb6b6;border-radius:16px;padding:14px 16px}
     .mistake-card .m-q{font-size:18px;font-weight:800;margin-bottom:6px}
     .mistake-card .m-row{font-size:14px;line-height:1.5;margin-top:2px}
     .mistake-card .m-your{color:var(--bad)}
     .mistake-card .m-right{color:var(--ok)}
-    .no-mistakes{
-      margin-top:20px;background:#eaf8f1;color:#126d49;border-radius:16px;
-      padding:16px;text-align:center;font-weight:700;
-    }
+    .no-mistakes{margin-top:20px;background:#eaf8f1;color:#126d49;border-radius:16px;padding:16px;
+      text-align:center;font-weight:700}
     .summary-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
 
     @media (max-width:520px){
       h1{font-size:23px}.prompt{font-size:21px}.prompt.cn{font-size:27px}.tile{font-size:22px}
       .choices{grid-template-columns:1fr 1fr}
+      .level-btn{font-size:12.5px;padding:10px 4px}
     }
   </style>
 </head>
@@ -239,21 +177,24 @@
   <header>
     <div>
       <h1>中文训练</h1>
-      <div class="sub">Повторение китайского · HSK 3 → 5 · v5.0</div>
+      <div class="sub">Повторение китайского · HSK 3 → 5 · v6.0</div>
     </div>
     <div class="score" id="score">0 / 0</div>
   </header>
 
   <!-- ================= HOME / MENU SCREEN ================= -->
   <div class="screen active" id="homeScreen">
-    <div class="label">Уровень</div>
-    <div class="level-toggle" id="levelToggle">
-      <button class="level-btn active" data-level="34">
-        HSK 3–4<span class="lv-stats" id="lvStats34"></span>
-      </button>
-      <button class="level-btn" data-level="45">
-        HSK 4–5<span class="lv-stats" id="lvStats45"></span>
-      </button>
+    <div class="group-label">Повторение (материал этого уровня)</div>
+    <div class="level-toggle" id="levelToggleReview">
+      <button class="level-btn active" data-level="l3">HSK 3<span class="lv-stats" id="lvStats-l3"></span></button>
+      <button class="level-btn" data-level="l4">HSK 4<span class="lv-stats" id="lvStats-l4"></span></button>
+      <button class="level-btn" data-level="l5">HSK 5<span class="lv-stats" id="lvStats-l5"></span></button>
+    </div>
+
+    <div class="group-label">Переход (что нового и в чём разница)</div>
+    <div class="level-toggle" id="levelToggleBridge">
+      <button class="level-btn" data-level="l34">HSK 3→4<span class="lv-stats" id="lvStats-l34"></span></button>
+      <button class="level-btn" data-level="l45">HSK 4→5<span class="lv-stats" id="lvStats-l45"></span></button>
     </div>
 
     <div class="label" style="margin-top:18px">Режим</div>
@@ -286,7 +227,7 @@
 
     <button class="action primary" id="startBtn" style="width:100%">Начать ▶</button>
 
-    <div class="footer-note">Прогресс и статистика сохраняются на этом устройстве.</div>
+    <div class="footer-note">Прогресс и статистика сохраняются на этом устройстве. HSK 4 и HSK 5 пока небольшие — наполняем дальше.</div>
   </div>
 
   <!-- ================= QUIZ SCREEN ================= -->
@@ -341,11 +282,11 @@
     <details class="settings">
       <summary>⚙️ Как пользоваться</summary>
       <p>
-        В режиме 语序 можно либо перетаскивать плашки пальцем, либо просто нажимать:
-        тап по слову переносит его в ответ, тап по слову в ответе возвращает его назад.
-        Кнопка «← Назад» возвращает к предыдущему заданию, если промотал(а) случайно.
-        После «Проверить» появляется кнопка «Следующее» — жать «Проверить» снова не нужно.
-        В конце подборки покажется итог с разбором ошибок. Прогресс сохраняется на этом устройстве.
+        В режиме 语序 можно перетаскивать плашки или просто нажимать на них.
+        «← Назад» возвращает к предыдущему заданию. После «Проверить» появляется «Следующее» —
+        жать «Проверить» снова не нужно. После ответа нажми на любое китайское слово в разборе —
+        откроется карточка с переводом и ссылкой на живые примеры в словаре. В конце подборки —
+        итог с разбором ошибок.
       </p>
     </details>
   </div>
@@ -368,573 +309,1273 @@
   </div>
 </div>
 
+<!-- ================= WORD DETAIL MODAL ================= -->
+<div class="word-modal-overlay" id="wordModalOverlay">
+  <div class="word-modal">
+    <button class="word-modal-close" id="wordModalClose">✕</button>
+    <div class="word-modal-hanzi" id="wmHanzi"></div>
+    <div class="word-modal-pinyin" id="wmPinyin"></div>
+    <div class="word-modal-row" id="wmPos"></div>
+    <div class="word-modal-row" id="wmMeaning"></div>
+    <div class="word-modal-row" id="wmUsage"></div>
+    <a class="word-modal-link" id="wmDictLink" target="_blank" rel="noopener">🔍 Смотреть живые примеры в словаре →</a>
+  </div>
+</div>
+
 <script>
+/* =========================================================
+   DATA: 5 categories
+   l3, l4, l5  = "чистое повторение" материала этого уровня (HSK 3.0, 9-уровневый стандарт)
+   l34, l45    = "переход" — что нового и в чём разница между уровнями
+   ========================================================= */
 const DATA = {
-  "34": {
-    label: "HSK 3–4",
+
+  l3: {
+    label: "HSK 3 (повторение)",
     order: [
-      {
-        prompt:"Собери предложение: Я каждый день встаю в семь утра.",
+      { prompt:"Собери предложение: Я сейчас ем.",
+        translation:"Я сейчас ем.",
+        structure:"主语 + 正在 + 动词宾语 · подлежащее + прогрессив 正在 + глагол+объект",
+        words:["吃饭","我","正在"], answer:["我","正在","吃饭"],
+        lex:{
+          "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"В начале предложения."},
+          "正在":{pinyin:"zhèngzài",pos:"наречие прогрессива",meaning:"сейчас, в процессе",role:"показатель текущего действия",hint:"正在 ставится перед глаголом и показывает, что действие происходит прямо сейчас."},
+          "吃饭":{pinyin:"chīfàn",pos:"глагольное сочетание",meaning:"есть, кушать",role:"сказуемое",hint:"Основное действие идёт после 正在."}
+        }},
+      { prompt:"Собери предложение: Он бегает быстро.",
+        translation:"Он бегает быстро.",
+        structure:"主语 + 动词得 + 形容词 · глагол+得 + прилагательное описывает, КАК выполняется действие",
+        words:["很快","他","跑得"], answer:["他","跑得","很快"],
+        lex:{
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"В начале предложения."},
+          "跑得":{pinyin:"pǎo de",pos:"глагол + 得",meaning:"бегает (и...)",role:"сказуемое, открывает комплемент",hint:"得 после глагола вводит описание того, как совершается действие."},
+          "很快":{pinyin:"hěn kuài",pos:"наречие + прилагательное",meaning:"быстро",role:"комплемент степени",hint:"Описывает качество выполнения действия."}
+        }},
+      { prompt:"Собери предложение: Я сделал(а) домашнее задание.",
+        translation:"Я сделал(а) домашнее задание (полностью).",
+        structure:"主语 + 把 + 宾语 + 动词 + 结果 + 了 ·把作业做完了",
+        words:["做完了","我","把作业"], answer:["我","把作业","做完了"],
+        lex:{
+          "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"В начале предложения."},
+          "把作业":{pinyin:"bǎ zuòyè",pos:"把 + существительное",meaning:"домашнее задание (объект)",role:"объект конструкции 把",hint:"把 выносит объект перед глаголом, когда важен результат."},
+          "做完了":{pinyin:"zuò wán le",pos:"глагол + результат + 了",meaning:"сделал(а) (до конца)",role:"сказуемое + результат",hint:"完 показывает завершение действия целиком."}
+        }},
+      { prompt:"Собери предложение: Этот иероглиф я не понимаю.",
+        translation:"Этот иероглиф я не понимаю (глядя на него).",
+        structure:"宾语(话题) + 主语 + 动词 + 不 + 结果 · потенциальный комплемент 看不懂",
+        words:["看不懂","这个字","我"], answer:["这个字","我","看不懂"],
+        lex:{
+          "这个字":{pinyin:"zhège zì",pos:"сущ. с указ. мест.",meaning:"этот иероглиф",role:"тема (вынесенный объект)",hint:"Объект-тема выносится в начало."},
+          "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Идёт после темы, перед глаголом."},
+          "看不懂":{pinyin:"kànbudǒng",pos:"потенциальный комплемент",meaning:"не могу понять, глядя",role:"сказуемое",hint:"看不懂 = 'смотрю, но не понимаю' — отрицательный потенциальный комплемент."}
+        }},
+      { prompt:"Собери предложение: Чем дальше мы идём, тем больше устаём.",
+        translation:"Чем дальше мы идём, тем больше устаём.",
+        structure:"主语 + 越 + 动词A,越 + 形容词B · 越A越B",
+        words:["越累","我们","越走"], answer:["我们","越走","越累"],
+        lex:{
+          "我们":{pinyin:"wǒmen",pos:"местоимение",meaning:"мы",role:"подлежащее",hint:"В начале предложения."},
+          "越走":{pinyin:"yuè zǒu",pos:"越 + глагол",meaning:"чем дальше идём",role:"первая часть 越A越B",hint:"越 перед первым действием."},
+          "越累":{pinyin:"yuè lèi",pos:"越 + прилагательное",meaning:"тем больше устаём",role:"вторая часть 越A越B",hint:"越 перед результатом-следствием."}
+        }},
+      { prompt:"Собери предложение: Он идёт и одновременно разговаривает по телефону.",
+        translation:"Он идёт и одновременно разговаривает по телефону.",
+        structure:"主语 + 一边 + 动词A + 一边 + 动词B · 一边...一边...",
+        words:["一边打电话","他","一边走路"], answer:["他","一边走路","一边打电话"],
+        lex:{
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"В начале предложения."},
+          "一边走路":{pinyin:"yìbiān zǒulù",pos:"наречие + глагольное сочетание",meaning:"одновременно идёт",role:"первое действие",hint:"一边 открывает первое из двух одновременных действий."},
+          "一边打电话":{pinyin:"yìbiān dǎ diànhuà",pos:"наречие + глагольное сочетание",meaning:"одновременно звонит",role:"второе действие",hint:"一边...一边... связывает два одновременных действия."}
+        }},
+      { prompt:"Собери предложение: Сначала помой руки, потом ешь.",
+        translation:"Сначала помой руки, потом ешь.",
+        structure:"主语 + 先 + 动词A,然后 + 动词B · 先...然后...",
+        words:["然后吃饭","你","先洗手"], answer:["你","先洗手","然后吃饭"],
+        lex:{
+          "你":{pinyin:"nǐ",pos:"местоимение",meaning:"ты",role:"подлежащее",hint:"В начале предложения."},
+          "先洗手":{pinyin:"xiān xǐshǒu",pos:"наречие + глагольное сочетание",meaning:"сначала помой руки",role:"первое действие",hint:"先 обозначает первое по порядку действие."},
+          "然后吃饭":{pinyin:"ránhòu chīfàn",pos:"наречие + глагольное сочетание",meaning:"потом ешь",role:"второе действие",hint:"然后 вводит следующее по порядку действие."}
+        }},
+      { prompt:"Собери предложение: Погода становится всё теплее.",
+        translation:"Погода становится всё теплее.",
+        structure:"主语 + 越来越 + 形容词 + 了 · 越来越 = 'становится всё более...'",
+        words:["越来越暖和了","天气"], answer:["天气","越来越暖和了"],
+        lex:{
+          "天气":{pinyin:"tiānqì",pos:"существительное",meaning:"погода",role:"подлежащее",hint:"В начале предложения."},
+          "越来越暖和了":{pinyin:"yuèláiyuè nuǎnhuo le",pos:"越来越 + прилагательное + 了",meaning:"становится всё теплее",role:"сказуемое",hint:"越来越 показывает постепенное усиление признака."}
+        }},
+      { prompt:"Собери предложение: Кроме яблок, он ещё любит бананы.",
+        translation:"Кроме яблок, он ещё любит бананы.",
+        structure:"除了 + A + 以外,主语 + 还 + 动词 + B · 除了...还...",
+        words:["还喜欢吃香蕉","除了苹果以外","他"], answer:["除了苹果以外","他","还喜欢吃香蕉"],
+        lex:{
+          "除了苹果以外":{pinyin:"chúle píngguǒ yǐwài",pos:"предложная группа",meaning:"кроме яблок",role:"вводная часть",hint:"除了...以外 вводит уже известный элемент."},
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"Идёт после вводной части."},
+          "还喜欢吃香蕉":{pinyin:"hái xǐhuan chī xiāngjiāo",pos:"наречие + глагольное сочетание",meaning:"ещё любит есть бананы",role:"добавляемая информация",hint:"还 показывает добавление к уже упомянутому."}
+        }},
+      { prompt:"Собери предложение: Мой ключ пропал.",
+        translation:"Мой ключ пропал.",
+        structure:"主语 + 不见 + 了 · устойчивое выражение потери",
+        words:["不见了","我的钥匙"], answer:["我的钥匙","不见了"],
+        lex:{
+          "我的钥匙":{pinyin:"wǒ de yàoshi",pos:"притяжат. + существительное",meaning:"мой ключ",role:"подлежащее",hint:"В начале предложения."},
+          "不见了":{pinyin:"bújiàn le",pos:"устойчивое выражение",meaning:"пропал, исчез",role:"сказуемое",hint:"不见了 буквально 'не виден стал' = 'потерялся'."}
+        }},
+      { prompt:"Собери предложение: Он скоро закончит университет.",
+        translation:"Он скоро закончит университет (выпустится).",
+        structure:"主语 + 快要 + 动词 + 了 · близкое будущее",
+        words:["毕业了","他","快要"], answer:["他","快要","毕业了"],
+        lex:{
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"В начале предложения."},
+          "快要":{pinyin:"kuàiyào",pos:"наречие",meaning:"скоро",role:"показатель близкого будущего",hint:"快要...了 = событие вот-вот произойдёт."},
+          "毕业了":{pinyin:"bìyè le",pos:"глагол + 了",meaning:"выпустится, закончит учёбу",role:"сказуемое",hint:"了 в конце закрывает конструкцию 快要...了."}
+        }},
+      { prompt:"Собери предложение: Это задание я решил(а) неправильно.",
+        translation:"Это задание я решил(а) неправильно.",
+        structure:"宾语(话题) + 主语 + 动词 + 结果 + 了 · результативный комплемент 错",
+        words:["做错了","这道题","我"], answer:["这道题","我","做错了"],
+        lex:{
+          "这道题":{pinyin:"zhè dào tí",pos:"сущ. со счётным словом",meaning:"это задание",role:"тема (вынесенный объект)",hint:"Объект-тема — в начале."},
+          "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Идёт после темы."},
+          "做错了":{pinyin:"zuò cuò le",pos:"глагол + результат + 了",meaning:"сделал(а) неправильно",role:"сказуемое",hint:"错 как результативный комплемент = 'неправильно'."}
+        }},
+      { prompt:"Собери предложение: Пожалуйста, открой окно.",
+        translation:"Пожалуйста, открой окно.",
+        structure:"请 + 把 + 宾语 + 动词结果 · вежливая просьба с 把",
+        words:["打开","请把窗户"], answer:["请把窗户","打开"],
+        lex:{
+          "请把窗户":{pinyin:"qǐng bǎ chuānghu",pos:"请 + 把 + существительное",meaning:"пожалуйста, окно (объект)",role:"вводная часть + объект",hint:"请 смягчает просьбу, 把 выносит объект перед глаголом."},
+          "打开":{pinyin:"dǎkāi",pos:"глагол + результат",meaning:"открыть",role:"сказуемое",hint:"打开 — устойчивое глагольное сочетание 'открыть'."}
+        }},
+      { prompt:"Собери предложение: Мой телефон забрал младший брат.",
+        translation:"Мой телефон забрал (унёс) младший брат.",
+        structure:"受事 + 被 + 施事 + 动词 + 结果 + 了 · пассив 被",
+        words:["拿走了","我的手机","被弟弟"], answer:["我的手机","被弟弟","拿走了"],
+        lex:{
+          "我的手机":{pinyin:"wǒ de shǒujī",pos:"притяжат. + существительное",meaning:"мой телефон",role:"объект действия (пациенс)",hint:"В пассиве объект действия — в начале."},
+          "被弟弟":{pinyin:"bèi dìdi",pos:"被ушедший + существительное",meaning:"младшим братом",role:"исполнитель действия",hint:"被 вводит того, кто совершил действие."},
+          "拿走了":{pinyin:"ná zǒu le",pos:"глагол + результат + 了",meaning:"забрал, унёс",role:"сказуемое",hint:"走 как результат = 'унести прочь'."}
+        }},
+      { prompt:"Собери предложение: Это он мне вчера сказал.",
+        translation:"Это он мне вчера сказал (именно вчера).",
+        structure:"话题 + 是 + 时间 + 动词 + 的 · 是...的 подчёркивает обстоятельства",
+        words:["告诉我的","这件事","是他昨天"], answer:["这件事","是他昨天","告诉我的"],
+        lex:{
+          "这件事":{pinyin:"zhè jiàn shì",pos:"сущ. со счётным словом",meaning:"это дело/это",role:"тема",hint:"Тема выносится в начало."},
+          "是他昨天":{pinyin:"shì tā zuótiān",pos:"是 + местоимение + время",meaning:"это он вчера",role:"начало конструкции 是...的",hint:"是...的 подчёркивает, кто/когда совершил действие."},
+          "告诉我的":{pinyin:"gàosu wǒ de",pos:"глагол + местоимение + 的",meaning:"сказал мне",role:"завершение конструкции",hint:"的 закрывает конструкцию 是...的."}
+        }},
+      { prompt:"Собери предложение: Он забежал в комнату.",
+        translation:"Он забежал в комнату.",
+        structure:"主语 + 动词 + 结果(进) + 地点 + 结果(去/来) · направительный комплемент 进...去/来",
+        words:["去了","他","跑进屋子里"], answer:["他","跑进屋子里","去了"],
+        lex:{
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"В начале предложения."},
+          "跑进屋子里":{pinyin:"pǎo jìn wūzi lǐ",pos:"глагол + результат + место",meaning:"забежал внутрь комнаты",role:"сказуемое + результат + место",hint:"进 показывает движение внутрь, после него — само место."},
+          "去了":{pinyin:"qù le",pos:"направительный комплемент + 了",meaning:"(удаляясь от говорящего) + завершённость",role:"завершение направительной конструкции",hint:"去 показывает направление от говорящего; 了 закрывает действие."}
+        }},
+      { prompt:"Собери предложение: Завтра, возможно, пойдёт дождь.",
+        translation:"Завтра, возможно, пойдёт дождь.",
+        structure:"主语(时间) + 可能 + 会 + 动词 · 可能 = 'возможно'",
+        words:["会下雨","明天","可能"], answer:["明天","可能","会下雨"],
+        lex:{
+          "明天":{pinyin:"míngtiān",pos:"слово времени",meaning:"завтра",role:"обстоятельство времени",hint:"Время — в начале предложения."},
+          "可能":{pinyin:"kěnéng",pos:"наречие/модальное слово",meaning:"возможно",role:"показатель вероятности",hint:"可能 ставится перед предположением."},
+          "会下雨":{pinyin:"huì xiàyǔ",pos:"модальный глагол + глагол",meaning:"пойдёт дождь",role:"сказуемое",hint:"会 показывает вероятность будущего события."}
+        }},
+      { prompt:"Собери предложение: У меня нет другого выхода, я вынужден принять этот результат.",
+        translation:"У меня нет другого выхода, я вынужден принять этот результат.",
+        structure:"主语 + 不得不 + 动词宾语 · 不得不 = 'вынужден, не может не'",
+        words:["接受这个结果","我","不得不"], answer:["我","不得不","接受这个结果"],
+        lex:{
+          "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"В начале предложения."},
+          "不得不":{pinyin:"bùdébù",pos:"устойчивое сочетание",meaning:"вынужден, не может не",role:"показатель вынужденности",hint:"不得不 показывает, что нет другого выбора."},
+          "接受这个结果":{pinyin:"jiēshòu zhège jiéguǒ",pos:"глагольное сочетание",meaning:"принять этот результат",role:"сказуемое + объект",hint:"Идёт после 不得不."}
+        }},
+      { prompt:"Собери предложение: Он не подготовился, в результате плохо сдал экзамен.",
+        translation:"Он не подготовился, в результате плохо сдал экзамен.",
+        structure:"主语 + 没有 + 动词,结果 + 动词短语 · 结果 = 'в результате'",
+        words:["结果考试没考好","他","没有准备"], answer:["他","没有准备","结果考试没考好"],
+        lex:{
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"В начале предложения."},
+          "没有准备":{pinyin:"méiyǒu zhǔnbèi",pos:"отрицание + глагол",meaning:"не подготовился",role:"первая часть",hint:"Причина/предыдущее событие."},
+          "结果考试没考好":{pinyin:"jiéguǒ kǎoshì méi kǎohǎo",pos:"союз-связка + подлежащее + отрицание + результат",meaning:"в результате плохо сдал экзамен",role:"следствие",hint:"结果 связывает причину со следствием как факт."}
+        }},
+      { prompt:"Собери предложение: Я чуть не забыл эту вещь.",
+        translation:"Я чуть не забыл эту вещь.",
+        structure:"主语 + 差点儿 + 动词 + 了 · 差点儿 = 'чуть не'",
+        words:["忘了这件事","我","差点儿"], answer:["我","差点儿","忘了这件事"],
+        lex:{
+          "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"В начале предложения."},
+          "差点儿":{pinyin:"chàdiǎnr",pos:"наречие",meaning:"чуть не, почти",role:"показатель близкого несостоявшегося действия",hint:"差点儿 ставится перед глаголом."},
+          "忘了这件事":{pinyin:"wàng le zhè jiàn shì",pos:"глагол + 了 + существительное",meaning:"забыл эту вещь",role:"сказуемое",hint:"Действие, которое чуть не произошло."}
+        }},
+      { prompt:"Собери предложение: Я иду в супермаркет, заодно куплю немного фруктов.",
+        translation:"Я иду в супермаркет, заодно куплю немного фруктов.",
+        structure:"主语 + 动词地点,顺便 + 动词宾语 · 顺便 = 'заодно, по пути'",
+        words:["顺便买点儿水果","我","去超市"], answer:["我","去超市","顺便买点儿水果"],
+        lex:{
+          "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"В начале предложения."},
+          "去超市":{pinyin:"qù chāoshì",pos:"глагольное сочетание",meaning:"иду в супермаркет",role:"первое действие",hint:"Основная цель похода."},
+          "顺便买点儿水果":{pinyin:"shùnbiàn mǎi diǎnr shuǐguǒ",pos:"наречие + глагольное сочетание",meaning:"заодно куплю немного фруктов",role:"попутное действие",hint:"顺便 показывает, что действие совершается попутно с основным."}
+        }},
+      { prompt:"Собери предложение: Обязательно не опаздывай.",
+        translation:"Обязательно не опаздывай.",
+        structure:"主语 + 千万 + 别 + 动词 · 千万 усиливает запрет/просьбу",
+        words:["别迟到","你","千万"], answer:["你","千万","别迟到"],
+        lex:{
+          "你":{pinyin:"nǐ",pos:"местоимение",meaning:"ты",role:"подлежащее",hint:"В начале предложения."},
+          "千万":{pinyin:"qiānwàn",pos:"наречие",meaning:"обязательно, во что бы то ни стало",role:"усилитель просьбы/запрета",hint:"千万 ставится перед 别/要 для категоричности."},
+          "别迟到":{pinyin:"bié chídào",pos:"отрицание + глагол",meaning:"не опаздывай",role:"сказуемое",hint:"别 + глагол = запрет."}
+        }},
+      { prompt:"Собери предложение: С возрастом он стал более зрелым.",
+        translation:"С возрастом он стал более зрелым.",
+        structure:"随着 + 变化,主语 + 变得 + 形容词 + 了 · 随着 = 'по мере того как'",
+        words:["他变得更成熟了","随着年龄的增长"], answer:["随着年龄的增长","他变得更成熟了"],
+        lex:{
+          "随着年龄的增长":{pinyin:"suízhe niánlíng de zēngzhǎng",pos:"предложная группа",meaning:"по мере роста возраста",role:"обстоятельство сопутствующего изменения",hint:"随着 вводит фон, вместе с которым что-то меняется."},
+          "他变得更成熟了":{pinyin:"tā biànde gèng chéngshú le",pos:"местоимение + глагол + прилагательное + 了",meaning:"он стал более зрелым",role:"результат",hint:"变得 + прилагательное показывает изменение состояния."}
+        }},
+      { prompt:"Собери предложение: Мы уже решили, так что не стоит больше сомневаться.",
+        translation:"Мы уже решили, так что не стоит больше сомневаться.",
+        structure:"反正 + 从句A,就 + 别 + 动词 · 反正 = 'в любом случае'",
+        words:["就别再犹豫了","反正我们已经决定了"], answer:["反正我们已经决定了","就别再犹豫了"],
+        lex:{
+          "反正我们已经决定了":{pinyin:"fǎnzhèng wǒmen yǐjīng juédìng le",pos:"наречие + подлежащее + глагол + 了",meaning:"в любом случае мы уже решили",role:"первая часть",hint:"反正 показывает, что факт не изменится, что бы ни случилось."},
+          "就别再犹豫了":{pinyin:"jiù bié zài yóuyù le",pos:"наречие + отрицание + глагол + 了",meaning:"так что не стоит больше сомневаться",role:"вывод-совет",hint:"就 вводит логичный вывод из первой части."}
+        }}
+    ],
+    choice: [
+      {prompt:"我在中国学习___三年了。", options:["了","过","着","的"], answer:"了",
+        explain:{"了":"了 показывает, что действие длится и продолжается по сей момент: 'учусь уже три года'.",
+          "过":"过 отмечает прошлый опыт без связи с настоящим моментом, а не длительность до сих пор.",
+          "着":"着 показывает статичное состояние, а не подсчёт длительности.",
+          "的":"的 грамматически не подходит в этой позиции."}},
+      {prompt:"他正___做作业呢。", options:["在","了","过","就"], answer:"在",
+        explain:{"在":"正在 = 'сейчас, в процессе' — действие происходит прямо сейчас.",
+          "了":"了 показывает завершённость, а не процесс, идущий сейчас.",
+          "过":"过 указывает на прошлый опыт, а не на текущий процесс.",
+          "就":"就 не образует конструкцию 正...呢 и не подходит по смыслу."}},
+      {prompt:"这儿的天气跟那儿___。", options:["一样","一点儿","有点儿","不错"], answer:"一样",
+        explain:{"一样":"跟...一样 = 'такой же, как...' — сравнение на равенство.",
+          "一点儿":"一点儿 не образует сравнительную конструкцию с 跟.",
+          "有点儿":"有点儿 значит 'немного' и не подходит для сравнения 'такой же'.",
+          "不错":"不错 значит 'неплохой' — это оценка, а не сравнение."}},
+      {prompt:"他跑___很快。", options:["得","的","地","了"], answer:"得",
+        explain:{"得":"Глагол + 得 + прилагательное описывает, КАК происходит действие: 'бегает быстро'.",
+          "的":"的 используется для притяжательности или перед существительным, не для описания действия.",
+          "地":"地 ставится перед глаголом при наречии, а не после него.",
+          "了":"了 показывает завершённость, а не характер выполнения действия."}},
+      {prompt:"他说___很清楚。", options:["得","地","的","过"], answer:"得",
+        explain:{"得":"动词 + 得 + прилагательное описывает качество действия: 'говорит понятно'.",
+          "地":"地 стоит перед глаголом, а не после него.",
+          "的":"的 обозначает притяжательность/определение, а не характеристику действия.",
+          "过":"过 показывает опыт в прошлом, а не характер речи."}},
+      {prompt:"他慢慢___走进教室。", options:["地","得","的","了"], answer:"地",
+        explain:{"地":"Наречие + 地 + глагол показывает, КАК совершается действие: 'медленно идёт'.",
+          "得":"得 ставится после глагола для описания результата действия, а не перед ним.",
+          "的":"的 используется с существительными, не с наречиями перед глаголом.",
+          "了":"了 не образует наречную конструкцию с 慢慢."}},
+      {prompt:"请把书放___桌子上。", options:["在","到","给","把"], answer:"在",
+        explain:{"在":"放在 + место = 'положить куда-то' — 在 вводит конечное место после глагола результата.",
+          "到":"到 тоже может показывать место назначения, но со 放 естественнее и чаще используется именно 在.",
+          "给":"给 вводит адресата действия ('кому'), а не место.",
+          "把":"把 уже использовано в начале предложения, повторно после глагола не ставится."}},
+      {prompt:"他从图书馆走___来了。", options:["出","进","上","回"], answer:"出",
+        explain:{"出":"走出来 = 'выйти (наружу)' — 出 показывает движение изнутри наружу.",
+          "进":"进 значит 'войти внутрь' — противоположное направление.",
+          "上":"上 значит 'подняться', не подходит к выходу из библиотеки.",
+          "回":"回 значит 'вернуться назад' — отдельное направление, не 'выйти'."}},
+      {prompt:"他终于把这个问题解决___了。", options:["好","错","懂","见"], answer:"好",
+        explain:{"好":"解决好 = 'успешно решить (до конца)' — 好 как результативный комплемент означает завершение в удовлетворительном виде.",
+          "错":"解决错 значило бы 'решить неправильно', что противоречит слову 终于 ('наконец-то').",
+          "懂":"懂 используется с глаголами восприятия (看懂, 听懂), не с 解决.",
+          "见":"见 используется с глаголами восприятия (看见, 听见), не подходит к 解决."}},
+      {prompt:"这个电影我已经看___三遍了。", options:["了","过","着","的"], answer:"了",
+        explain:{"了":"看了三遍 = 'посмотрел(а) три раза' — 了 с числом раз показывает счёт совершённых действий.",
+          "过":"过 без 了 просто показывает факт опыта, но здесь важен итог с 已经...了, поэтому естественнее 了.",
+          "着":"着 показывает длящееся состояние, а не законченное действие с подсчётом раз.",
+          "的":"的 не используется в этой позиции для завершённого действия."}},
+      {prompt:"你先做作业,___去玩儿。", options:["再","才","就","还"], answer:"再",
+        explain:{"再":"先...再... = 'сначала...потом...' — 再 вводит второе действие по порядку.",
+          "才":"才 указывает на поздний результат, не на простую последовательность действий.",
+          "就":"就 показывает быстрое/немедленное следствие, а не заранее спланированную последовательность.",
+          "还":"还 значит 'ещё' и не выражает последовательность действий."}},
+      {prompt:"屋子里___很多人,很热闹。", options:["有","是","在","被"], answer:"有",
+        explain:{"有":"地点 + 有 + существительное = 'где-то есть что-то/кто-то' — стандартная бытийная конструкция.",
+          "是":"是 используется для отождествления, а не для наличия множества людей.",
+          "在":"在 обычно ставится перед местом, а не после него в этой конструкции.",
+          "被":"被 вводит пассивную конструкцию, здесь она не нужна."}},
+      {prompt:"你___多吃蔬菜,少吃肉。", options:["应该","可以","会","能"], answer:"应该",
+        explain:{"应该":"应该 = 'следует, надо' — используется для советов и рекомендаций.",
+          "可以":"可以 значит 'можно/разрешается' — это не совет, а разрешение.",
+          "会":"会 обозначает умение или вероятность, а не рекомендацию.",
+          "能":"能 обозначает физическую возможность, а не то, что 'следует делать'."}},
+      {prompt:"如果明天下雨,我们___不去公园了。", options:["就","才","也","还"], answer:"就",
+        explain:{"就":"如果...就... = 'если..., то...' — 就 вводит следствие условия.",
+          "才":"才 подходит к конструкции 除非...才... (необходимое условие), а не 如果...就...",
+          "也":"也 значит 'тоже' и не связывает условие со следствием напрямую.",
+          "还":"还 значит 'ещё' и не выражает следствие условия."}},
+      {prompt:"我把杯子打___了。", options:["破","坏","错","好"], answer:"破",
+        explain:{"破":"打破 = 'разбить' — 破 как результативный комплемент означает 'разбит(а)' для хрупких предметов.",
+          "坏":"打坏 тоже возможно ('сломать'), но для стеклянной чашки естественнее 打破.",
+          "错":"打错 значит 'набрать/сделать неправильно' (打错电话) — не подходит к чашке.",
+          "好":"打好 значило бы завершить действие успешно, что противоречит идее 'разбить'."}},
+      {prompt:"你别客气,___吃点儿吧。", options:["多","很","太","真"], answer:"多",
+        explain:{"多":"多 + глагол = 'делай что-то больше/активнее' — 'ешь побольше'.",
+          "很":"很 обычно ставится перед прилагательным ('очень'), а не перед глаголом в этом значении.",
+          "太":"太 значит 'слишком' и не подходит к дружескому приглашению.",
+          "真":"真 значит 'действительно' и не выражает 'больше'."}},
+      {prompt:"他汉语说得不太___。", options:["流利","快乐","方便","热闹"], answer:"流利",
+        explain:{"流利":"流利 = 'бегло, свободно' — естественная характеристика речи.",
+          "快乐":"快乐 значит 'счастливый' — это не характеристика речи.",
+          "方便":"方便 значит 'удобный' — не подходит для описания того, как говорят.",
+          "热闹":"热闹 значит 'оживлённый, шумный (о месте/событии)', а не о качестве речи."}},
+      {prompt:"我___明天去看电影,你呢?", options:["打算","以为","觉得","懂得"], answer:"打算",
+        explain:{"打算":"打算 = 'планировать, собираться' — естественно перед конкретным действием в будущем.",
+          "以为":"以为 = 'ошибочно полагать' — не подходит для простого плана.",
+          "觉得":"觉得 = 'считать, чувствовать' — вводит мнение, а не план действия.",
+          "懂得":"懂得 = 'понимать, знать как' — не связано с планами на будущее."}},
+      {prompt:"你这么努力,一定会___的。", options:["成功","流利","方便","热闹"], answer:"成功",
+        explain:{"成功":"成功 = 'добиться успеха' — логичный результат старательности.",
+          "流利":"流利 описывает беглость речи, не связано с усилиями и результатом.",
+          "方便":"方便 значит 'удобный' — не подходит как итог старательности.",
+          "热闹":"热闹 значит 'оживлённый' — тоже не подходит по смыслу."}},
+      {prompt:"这个消息让我很___。", options:["吃惊","方便","流利","打算"], answer:"吃惊",
+        explain:{"吃惊":"让 + человек + 很 + 吃惊 = 'удивить кого-то' — 吃惊 значит 'удивлённый'.",
+          "方便":"方便 значит 'удобный' — обычно не описывает эмоциональную реакцию на новость.",
+          "流利":"流利 относится к речи, а не к эмоциям.",
+          "打算":"打算 — это глагол 'планировать', а не прилагательное для чувств."}},
+      {prompt:"别担心,一切都会___的。", options:["好","快","多","早"], answer:"好",
+        explain:{"好":"会好的 = 'всё будет хорошо' — устойчивое утешительное выражение.",
+          "快":"快 значит 'быстро' — не подходит по смыслу утешения.",
+          "多":"多 значит 'много' — не образует естественное выражение с 会...的 здесь.",
+          "早":"早 значит 'рано' — тоже не подходит по смыслу утешения."}},
+      {prompt:"这个包又轻___好看。", options:["又","也","还","都"], answer:"又",
+        explain:{"又":"又A又B описывает два качества одновременно: лёгкая И красивая.",
+          "也":"也 значит 'тоже' и не образует парную структуру 又...又...",
+          "还":"还 значит 'ещё' — не подходит для парной структуры двух качеств.",
+          "都":"都 обобщает несколько объектов, а не два качества одного предмета."}},
+      {prompt:"除了汉语,他___学习日语。", options:["还","就","才","也"], answer:"还",
+        explain:{"还":"除了...还... = 'кроме A, ещё и B' — 还 добавляет дополнительную информацию.",
+          "就":"就 не образует эту дополнительную конструкцию с 除了.",
+          "才":"才 указывает на поздний/условный результат — не подходит здесь.",
+          "也":"也 значит 'тоже', но менее естественно именно в паре с 除了...以外."}},
+      {prompt:"我等了半天,他___没来。", options:["还","就","才","都"], answer:"还",
+        explain:{"还":"还没 = 'до сих пор ещё не...' — показывает, что ожидаемое действие так и не произошло.",
+          "就":"就 показывает быстрый результат, а не длительное безрезультатное ожидание.",
+          "才":"才 обычно используется, когда что-то наконец случилось поздно, а не когда так и не случилось.",
+          "都":"都 обобщает, не подходит к этому значению."}},
+      {prompt:"你怎么现在___来?", options:["才","就","还","都"], answer:"才",
+        explain:{"才":"才 показывает, что что-то произошло поздно: 'только сейчас пришёл'.",
+          "就":"就 показывает быстрый/ранний результат — противоположно по смыслу.",
+          "还":"还 значит 'ещё' и не подчёркивает позднее время.",
+          "都":"都 обобщает несколько случаев, не подходит к единичному позднему приходу."}},
+      {prompt:"我明天有考试,今天晚上___复习。", options:["得","可以","会","要是"], answer:"得",
+        explain:{"得":"得(děi) = 'должен, нужно' — выражает необходимость перед экзаменом.",
+          "可以":"可以 значит 'можно, разрешается' — это не обязательство.",
+          "会":"会 показывает умение или вероятность, а не необходимость.",
+          "要是":"要是 значит 'если' — это союз условия, а не модальный глагол."}},
+      {prompt:"今天___昨天冷。", options:["没有","不比","比","跟"], answer:"没有",
+        explain:{"没有":"A没有B+прил. = 'A не такой..., как B' — 'сегодня не так холодно, как вчера'.",
+          "不比":"不比 обычно используется в более сложной конструкции 不比...更..., менее естественно в базовом отрицательном сравнении.",
+          "比":"比 используется в утвердительном сравнении (A比B更...), а не в отрицательном.",
+          "跟":"跟 используется в конструкции 跟...一样 (равенство), а не в сравнении по степени."}},
+      {prompt:"他每天都___锻炼身体。", options:["坚持","打算","决定","希望"], answer:"坚持",
+        explain:{"坚持":"坚持 = 'упорно продолжать' — 'каждый день упорно занимается спортом'.",
+          "打算":"打算 значит 'планировать', а не 'постоянно делать несмотря ни на что'.",
+          "决定":"决定 значит 'решить (один раз)', а не ежедневное упорство.",
+          "希望":"希望 значит 'надеяться' — не подходит по смыслу постоянного действия."}},
+      {prompt:"我们班___三十个学生。", options:["有","是","在","要"], answer:"有",
+        explain:{"有":"место + 有 + число + существительное = 'в чём-то есть столько-то'.",
+          "是":"是 используется для отождествления, а не количества в этой конструкции.",
+          "在":"在 указывает место, а не количество.",
+          "要":"要 — модальный глагол/глагол 'хотеть', не подходит для количества."}},
+      {prompt:"你别难过,这只是___小事。", options:["一件","一点儿","一些","一下"], answer:"一件",
+        explain:{"一件":"一件 + событие/дело = счётное слово для дел: 'это всего лишь одно небольшое дело'.",
+          "一点儿":"一点儿 используется с неисчисляемыми существительными или значит 'немного'.",
+          "一些":"一些 значит 'несколько' (для множества), а не 'одно конкретное дело'.",
+          "一下":"一下 используется после глагола для кратковременного действия, не перед существительным."}},
+      {prompt:"明天___会下雨,你带伞吧。", options:["可能","已经","刚才","本来"], answer:"可能",
+        explain:{"可能":"可能 = 'возможно' — выражает вероятность будущего события.",
+          "已经":"已经 значит 'уже' и не выражает предположение.",
+          "刚才":"刚才 значит 'только что' (о прошлом моменте), не подходит к будущему.",
+          "本来":"本来 значит 'изначально' — не связано с предположением."}},
+      {prompt:"我差点儿___这件事,幸好你提醒我。", options:["忘了","记得","知道","懂得"], answer:"忘了",
+        explain:{"忘了":"差点儿 + 忘了 = 'чуть не забыл' — логично с продолжением 'хорошо, что ты напомнил'.",
+          "记得":"记得 значит 'помнить' — противоречит смыслу предложения.",
+          "知道":"知道 значит 'знать' — не подходит по смыслу.",
+          "懂得":"懂得 значит 'понимать, знать как' — тоже не подходит."}},
+      {prompt:"我去超市,___买点儿水果。", options:["顺便","突然","特意","故意"], answer:"顺便",
+        explain:{"顺便":"顺便 = 'заодно, по пути' — естественно для попутного действия.",
+          "突然":"突然 значит 'внезапно' — не подходит по смыслу.",
+          "特意":"特意 значит 'специально' — противоречит идее 'заодно'.",
+          "故意":"故意 значит 'нарочно' — тоже не подходит."}},
+      {prompt:"你___别迟到,老板在等你。", options:["千万","也许","大概","差不多"], answer:"千万",
+        explain:{"千万":"千万 = 'во что бы то ни стало' — усиливает категоричную просьбу/запрет.",
+          "也许":"也许 значит 'возможно' — не подходит для категоричного требования.",
+          "大概":"大概 значит 'примерно, вероятно' — тоже не подходит.",
+          "差不多":"差不多 значит 'почти' — не подходит по смыслу."}},
+      {prompt:"___年龄的增长,他变得更成熟了。", options:["随着","通过","根据","按照"], answer:"随着",
+        explain:{"随着":"随着 = 'по мере того как, вместе с' — показывает сопутствующее изменение.",
+          "通过":"通过 значит 'через, посредством' — для способа действия.",
+          "根据":"根据 значит 'согласно, на основании' — для источника информации.",
+          "按照":"按照 значит 'в соответствии с' — тоже не про постепенное изменение."}},
+      {prompt:"___我们已经决定了,就别再犹豫了。", options:["反正","反而","况且","何况"], answer:"反正",
+        explain:{"反正":"反正 = 'в любом случае, так или иначе' — факт не изменится.",
+          "反而":"反而 значит 'наоборот' — не подходит по смыслу.",
+          "况且":"况且 значит 'к тому же' — добавляет аргумент, но не передаёт 'в любом случае'.",
+          "何况":"何况 значит 'тем более что' — тоже не то значение."}},
+      {prompt:"他没有准备,___考试没考好。", options:["结果","可能","大概","反正"], answer:"结果",
+        explain:{"结果":"结果 = 'в результате' — связывает причину со следствием как свершившийся факт.",
+          "可能":"可能 выражает вероятность, а не свершившийся факт.",
+          "大概":"大概 значит 'примерно, вероятно' — тоже вероятность, а не факт.",
+          "反正":"反正 значит 'в любом случае' — не связывает причину со следствием."}},
+      {prompt:"没有别的办法,我___接受这个结果。", options:["不得不","可以","应该","愿意"], answer:"不得不",
+        explain:{"不得不":"不得不 = 'вынужден, не может не' — нет другого выбора.",
+          "可以":"可以 значит 'можно' — не передаёт вынужденность.",
+          "应该":"应该 значит 'следует' — это совет, а не вынужденность.",
+          "愿意":"愿意 значит 'готов, согласен' — противоречит смыслу 'нет выбора'."}},
+      {prompt:"他___在图书馆学习,很少出去玩。", options:["一直","一旦","一边","一点儿"], answer:"一直",
+        explain:{"一直":"一直 = 'постоянно, всё время' — описывает непрерывность действия.",
+          "一旦":"一旦 значит 'как только' — вводит условие, не подходит здесь.",
+          "一边":"一边 используется для двух одновременных действий (一边...一边...).",
+          "一点儿":"一点儿 значит 'немного' — не подходит по смыслу."}},
+      {prompt:"他___迟到,老师都不批评他了。", options:["总是","总共","总算","总而言之"], answer:"总是",
+        explain:{"总是":"总是 = 'всегда' — повторяющееся действие (постоянно опаздывает).",
+          "总共":"总共 значит 'в общей сложности' — для подсчёта количества.",
+          "总算":"总算 значит 'наконец-то' — другое значение, не про повторение.",
+          "总而言之":"总而言之 значит 'одним словом' — вводное выражение, не подходит здесь."}},
+      {prompt:"经过三年的努力,他___成功了。", options:["终于","终究","究竟","毕竟"], answer:"终于",
+        explain:{"终于":"终于 = 'наконец' — после долгого ожидания или усилий.",
+          "终究":"终究 значит 'в конце концов' — более книжный вариант, менее естественный здесь.",
+          "究竟":"究竟 используется для усиления вопроса ('в конце концов, что...'), не в утверждении.",
+          "毕竟":"毕竟 значит 'всё-таки' и обычно вводит объяснение причины, а не итог усилий."}},
+      {prompt:"你___想不想去,先告诉我一声。", options:["究竟","毕竟","反正","索性"], answer:"究竟",
+        explain:{"究竟":"究竟 в вопросе усиливает требование прямого ответа (аналог 到底).",
+          "毕竟":"毕竟 значит 'всё-таки' — не усиливает вопрос.",
+          "反正":"反正 значит 'в любом случае' — не подходит к вопросу.",
+          "索性":"索性 значит 'просто взять и' — не подходит по смыслу и грамматике."}},
+      {prompt:"这个问题___太简单了,谁都能回答。", options:["简直","几乎","差不多","甚至"], answer:"简直",
+        explain:{"简直":"简直 = 'просто, буквально' — усиливает эмоциональную оценку.",
+          "几乎":"几乎 значит 'почти' — не передаёт эмоциональное усиление.",
+          "差不多":"差不多 значит 'почти' — тоже не подходит по оттенку.",
+          "甚至":"甚至 значит 'даже' — используется для усиления примера, а не оценки."}},
+      {prompt:"___你提醒我,我肯定就迟到了。", options:["幸亏","反正","究竟","简直"], answer:"幸亏",
+        explain:{"幸亏":"幸亏 = 'к счастью' — вводит благоприятное обстоятельство, предотвратившее плохой исход.",
+          "反正":"反正 значит 'в любом случае' — не подходит по смыслу.",
+          "究竟":"究竟 используется для усиления вопроса, не подходит в утверждении.",
+          "简直":"简直 значит 'просто, буквально' — не подходит по смыслу здесь."}},
+      {prompt:"我们要___把这件事做好。", options:["尽量","尽管","随便","竟然"], answer:"尽量",
+        explain:{"尽量":"尽量 = 'по мере возможности, максимально' — усилие сделать как можно лучше.",
+          "尽管":"尽管 значит 'несмотря на' (в другом контексте) — не подходит по смыслу.",
+          "随便":"随便 значит 'как удобно, как попало' — противоречит смыслу 'постараться'.",
+          "竟然":"竟然 значит 'неожиданно' — не подходит по смыслу."}},
+      {prompt:"他对中国文化很感兴趣,___是对中国书法。", options:["尤其","反正","究竟","简直"], answer:"尤其",
+        explain:{"尤其":"尤其 = 'особенно' — выделяет наиболее яркий пример из уже упомянутой группы.",
+          "反正":"反正 значит 'в любом случае' — не подходит по смыслу.",
+          "究竟":"究竟 используется для усиления вопроса — не подходит здесь.",
+          "简直":"简直 значит 'просто, буквально' — не подходит по смыслу."}},
+      {prompt:"这个方法是___多次实验才找到的。", options:["通过","根据","按照","随着"], answer:"通过",
+        explain:{"通过":"通过 = 'посредством, через' — указывает способ действия (через эксперименты).",
+          "根据":"根据 значит 'на основании' — для источника информации, а не способа.",
+          "按照":"按照 значит 'в соответствии с' — обычно для правил/инструкций.",
+          "随着":"随着 значит 'по мере' — про сопутствующее изменение, не способ."}},
+      {prompt:"___天气预报,明天有雨。", options:["根据","通过","按照","随着"], answer:"根据",
+        explain:{"根据":"根据 = 'согласно, на основании' — источник информации (прогноз погоды).",
+          "通过":"通过 значит 'посредством' — для способа действия, не источника.",
+          "按照":"按照 значит 'в соответствии с' — чаще для правил, а не источника сведений.",
+          "随着":"随着 значит 'по мере' — про изменение, не источник."}},
+      {prompt:"你可以___选择自己喜欢的颜色。", options:["随便","随着","顺便","千万"], answer:"随便",
+        explain:{"随便":"随便 = 'как угодно, на своё усмотрение' — подходит к свободному выбору.",
+          "随着":"随着 значит 'по мере, вместе с' — про сопутствующее изменение.",
+          "顺便":"顺便 значит 'заодно, попутно' — не подходит по смыслу.",
+          "千万":"千万 значит 'обязательно' — не подходит по смыслу."}}
+    ],
+    fill: [
+      {prompt:"Я сейчас ем обед.", answer:"我正在吃午饭", alt:["我在吃午饭"],
+        explanation:"正在 + глагол = действие происходит прямо сейчас."},
+      {prompt:"Он бегает очень быстро.", answer:"他跑得很快", alt:[],
+        explanation:"得 + прилагательное после глагола описывает, как выполняется действие."},
+      {prompt:"Я уже был(а) в Пекине два раза.", answer:"我去过北京两次", alt:["我已经去过北京两次了"],
+        explanation:"过 показывает опыт в прошлом; 两次 — количество раз (после глагола)."},
+      {prompt:"Пожалуйста, положи книгу на стол.", answer:"请把书放在桌子上", alt:[],
+        explanation:"把 + объект + глагол + результат(在桌子上) — типичная конструкция 把."},
+      {prompt:"Этот иероглиф я не понимаю.", answer:"这个字我看不懂", alt:[],
+        explanation:"看不懂 — потенциальный комплемент отрицания: 'не могу понять, глядя'."},
+      {prompt:"Погода становится всё теплее.", answer:"天气越来越暖和了", alt:[],
+        explanation:"越来越 + прилагательное(+了) = 'становится всё более...'."},
+      {prompt:"Он идёт домой и одновременно слушает музыку.", answer:"他一边走路回家一边听音乐", alt:["他一边回家一边听音乐"],
+        explanation:"一边...一边... = два действия одновременно."},
+      {prompt:"Сначала сделай домашнее задание, потом играй.", answer:"你先做作业,然后再玩", alt:["你先做作业,然后玩"],
+        explanation:"先...然后(再)... = последовательность действий."},
+      {prompt:"Кроме английского, он ещё изучает японский.", answer:"除了英语,他还学习日语", alt:[],
+        explanation:"除了...还... = 'кроме A, ещё и B'."},
+      {prompt:"Мой ключ пропал.", answer:"我的钥匙不见了", alt:[],
+        explanation:"不见了 — устойчивое выражение 'пропасть, потеряться'."},
+      {prompt:"Он скоро закончит университет.", answer:"他快要大学毕业了", alt:["他就要大学毕业了"],
+        explanation:"快要...了 / 就要...了 = близкое будущее событие."},
+      {prompt:"Извини, я решил(а) эту задачу неправильно.", answer:"对不起,这道题我做错了", alt:["这道题我做错了"],
+        explanation:"做错了 — результативный комплемент 错 = 'сделать неправильно'."},
+      {prompt:"Мой телефон забрал младший брат.", answer:"我的手机被弟弟拿走了", alt:[],
+        explanation:"被 + исполнитель + глагол+результат — пассивная конструкция."},
+      {prompt:"Это именно он мне вчера сказал.", answer:"这件事是他昨天告诉我的", alt:[],
+        explanation:"是...的 подчёркивает обстоятельства (кто/когда) уже совершённого действия."},
+      {prompt:"В комнате много людей, очень оживлённо.", answer:"屋子里有很多人,很热闹", alt:[],
+        explanation:"место + 有 + существительное = бытийная конструкция наличия."},
+      {prompt:"Если завтра пойдёт дождь, мы не пойдём в парк.", answer:"如果明天下雨,我们就不去公园了", alt:[],
+        explanation:"如果...就... = условная конструкция."},
+      {prompt:"Тебе следует есть больше овощей и меньше мяса.", answer:"你应该多吃蔬菜,少吃肉", alt:[],
+        explanation:"应该 = совет/рекомендация; 多/少 + глагол."},
+      {prompt:"Сегодня не так холодно, как вчера.", answer:"今天没有昨天冷", alt:[],
+        explanation:"A没有B+прил. = 'A не такой..., как B' (отрицательное сравнение)."},
+      {prompt:"В нашем классе 30 учеников.", answer:"我们班有三十个学生", alt:[],
+        explanation:"место/группа + 有 + число + существительное."},
+      {prompt:"Не переживай, всё будет хорошо.", answer:"别担心,一切都会好的", alt:[],
+        explanation:"会...的 — устойчивая конструкция уверенного прогноза/утешения."},
+      {prompt:"Возможно, завтра пойдёт дождь, возьми зонт.", answer:"明天可能会下雨,你带伞吧", alt:[],
+        explanation:"可能 = 'возможно' — выражает вероятность."},
+      {prompt:"Я чуть не забыл эту вещь, хорошо что ты напомнил.", answer:"我差点儿忘了这件事,幸好你提醒我", alt:[],
+        explanation:"差点儿 = 'чуть не...'; 幸好 = 'к счастью'."},
+      {prompt:"Я иду в супермаркет, заодно куплю немного фруктов.", answer:"我去超市,顺便买点儿水果", alt:[],
+        explanation:"顺便 = 'заодно, по пути'."},
+      {prompt:"Обязательно не опаздывай, начальник тебя ждёт.", answer:"你千万别迟到,老板在等你", alt:[],
+        explanation:"千万 усиливает запрет/просьбу — 'во что бы то ни стало'."},
+      {prompt:"С возрастом он стал более зрелым.", answer:"随着年龄的增长,他变得更成熟了", alt:[],
+        explanation:"随着 = 'по мере того как, вместе с изменением чего-либо'."},
+      {prompt:"Мы уже решили, так что не стоит больше сомневаться.", answer:"反正我们已经决定了,就别再犹豫了", alt:[],
+        explanation:"反正 = 'в любом случае, так или иначе'."},
+      {prompt:"Он не подготовился, в результате плохо сдал экзамен.", answer:"他没有准备,结果考试没考好", alt:[],
+        explanation:"结果 = 'в результате' — связывает причину со следствием."},
+      {prompt:"Другого выхода нет, мне придётся принять этот результат.", answer:"没有别的办法,我不得不接受这个结果", alt:[],
+        explanation:"不得不 = 'вынужден, не может не' — нет выбора."},
+      {prompt:"Он всё время учится в библиотеке, редко выходит гулять.", answer:"他一直在图书馆学习,很少出去玩", alt:[],
+        explanation:"一直 = 'постоянно, всё время' — непрерывность действия."},
+      {prompt:"После трёх лет усилий он наконец добился успеха.", answer:"经过三年的努力,他终于成功了", alt:[],
+        explanation:"终于 = 'наконец' — после долгого ожидания."},
+      {prompt:"К счастью, дождь был несильный, а то мы бы промокли.", answer:"幸亏雨不大,不然我们就淋湿了", alt:["幸亏雨不大,要不然我们就淋湿了"],
+        explanation:"幸亏...不然/要不然... = 'к счастью..., а то...'."},
+      {prompt:"Постарайся сделать это дело как можно лучше.", answer:"你要尽量把这件事做好", alt:[],
+        explanation:"尽量 = 'по мере возможности, максимально'."},
+      {prompt:"Мне особенно нравится китайская каллиграфия.", answer:"我尤其喜欢中国书法", alt:["我特别喜欢中国书法"],
+        explanation:"尤其/特别 = 'особенно' — выделяет наиболее яркий пример."},
+      {prompt:"Согласно прогнозу погоды, завтра будет дождь.", answer:"根据天气预报,明天有雨", alt:[],
+        explanation:"根据 = 'согласно, на основании' — источник информации."}
+    ]
+  },
+
+  l34: {
+    label: "HSK 3→4 (переход)",
+    order: [
+      { prompt:"Собери предложение: Я каждый день встаю в семь утра.",
         translation:"Я каждый день встаю в семь утра.",
         structure:"主语 + 频率 + 具体时间 + 动词 · подлежащее + частота + точное время + глагол",
-        words:["起床","我","每天","早上七点"],
-        answer:["我","每天","早上七点","起床"],
+        words:["起床","我","每天","早上七点"], answer:["我","每天","早上七点","起床"],
         lex:{
           "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Подлежащее — в начале предложения."},
           "每天":{pinyin:"měitiān",pos:"наречие частоты",meaning:"каждый день",role:"обстоятельство частоты",hint:"Частота действия ставится после подлежащего."},
           "早上七点":{pinyin:"zǎoshang qī diǎn",pos:"обстоятельство времени",meaning:"в семь утра",role:"точное время",hint:"Точное время идёт после общей частоты, перед глаголом."},
           "起床":{pinyin:"qǐchuáng",pos:"глагол",meaning:"вставать (с постели)",role:"сказуемое",hint:"Основной глагол завершает такую конструкцию."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Этот дом больше того дома.",
+        }},
+      { prompt:"Собери предложение: Этот дом больше того дома.",
         translation:"Этот дом больше того дома.",
         structure:"A + 比 + B + 形容词 · A + 比 + B + прилагательное (сравнение)",
-        words:["大","这个房子","比","那个房子"],
-        answer:["这个房子","比","那个房子","大"],
+        words:["大","这个房子","比","那个房子"], answer:["这个房子","比","那个房子","大"],
         lex:{
           "这个房子":{pinyin:"zhège fángzi",pos:"сущ. с указ. мест.",meaning:"этот дом",role:"объект сравнения A",hint:"Первый объект сравнения — в начале."},
           "比":{pinyin:"bǐ",pos:"предлог сравнения",meaning:"чем (сравнение)",role:"маркер сравнения",hint:"比 соединяет два объекта: A 比 B."},
           "那个房子":{pinyin:"nàge fángzi",pos:"сущ. с указ. мест.",meaning:"тот дом",role:"объект сравнения B",hint:"Второй объект идёт сразу после 比."},
           "大":{pinyin:"dà",pos:"прилагательное",meaning:"большой",role:"признак сравнения",hint:"Прилагательное-результат сравнения — в конце."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Я уже позавтракал(а).",
+        }},
+      { prompt:"Собери предложение: Я уже позавтракал(а).",
         translation:"Я уже позавтракал(а).",
         structure:"主语 + 已经 + 动词宾语 + 了 · подлежащее + уже + глагол+объект + 了 (завершённость)",
-        words:["了","我","已经","吃早饭"],
-        answer:["我","已经","吃早饭","了"],
+        words:["了","我","已经","吃早饭"], answer:["我","已经","吃早饭","了"],
         lex:{
           "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"В начале предложения."},
           "已经":{pinyin:"yǐjīng",pos:"наречие",meaning:"уже",role:"обстоятельство",hint:"已经 ставится перед глаголом, показывает, что действие уже произошло."},
           "吃早饭":{pinyin:"chī zǎofàn",pos:"глагольное сочетание",meaning:"завтракать",role:"сказуемое + объект",hint:"Идёт после 已经."},
           "了":{pinyin:"le",pos:"частица завершённости",meaning:"(частица)",role:"показатель завершённости",hint:"了 в конце подтверждает, что действие завершено."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Я поставил(а) чашку на стол.",
+        }},
+      { prompt:"Собери предложение: Я поставил(а) чашку на стол.",
         translation:"Я поставил(а) чашку на стол.",
         structure:"主语 + 把 + 宾语 + 动词+结果 + 了 · конструкция 把: подлежащее + 把 + объект + глагол + результат",
-        words:["了","我","把杯子","放在桌子上"],
-        answer:["我","把杯子","放在桌子上","了"],
+        words:["了","我","把杯子","放在桌子上"], answer:["我","把杯子","放在桌子上","了"],
         lex:{
           "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"В начале предложения."},
           "把杯子":{pinyin:"bǎ bēizi",pos:"把 + существительное",meaning:"чашку (объект)",role:"объект конструкции 把",hint:"把 выносит объект перед глаголом, когда важен результат действия над ним."},
           "放在桌子上":{pinyin:"fàng zài zhuōzi shàng",pos:"глагол + результат места",meaning:"положить на стол",role:"сказуемое + результат",hint:"Глагол с результатом идёт после 把+объект."},
           "了":{pinyin:"le",pos:"частица завершённости",meaning:"(частица)",role:"завершённость",hint:"了 в конце показывает, что действие уже выполнено."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Он каждую субботу ходит играть в баскетбол.",
+        }},
+      { prompt:"Собери предложение: Он каждую субботу ходит играть в баскетбол.",
         translation:"Он каждую субботу ходит играть в баскетбол.",
         structure:"主语 + 时间 + 去 + 动词宾语 · подлежащее + время + идти + глагол+объект",
-        words:["打篮球","他","每星期六","去"],
-        answer:["他","每星期六","去","打篮球"],
+        words:["打篮球","他","每星期六","去"], answer:["他","每星期六","去","打篮球"],
         lex:{
           "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"В начале предложения."},
           "每星期六":{pinyin:"měi xīngqīliù",pos:"обстоятельство времени",meaning:"каждую субботу",role:"время",hint:"Регулярное время ставится после подлежащего."},
           "去":{pinyin:"qù",pos:"глагол",meaning:"идти",role:"вспомогательный глагол движения",hint:"去 + действие показывает цель похода куда-либо."},
           "打篮球":{pinyin:"dǎ lánqiú",pos:"глагольное сочетание",meaning:"играть в баскетбол",role:"сказуемое + объект",hint:"Конкретное действие идёт после 去."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Хотя идёт дождь, мы всё равно собираемся выйти.",
+        }},
+      { prompt:"Собери предложение: Хотя идёт дождь, мы всё равно собираемся выйти.",
         translation:"Хотя идёт дождь, мы всё равно собираемся выйти.",
         structure:"虽然 + 从句A,但是 + 主语 + 还是 + 动词 · уступительная конструкция 虽然...但是...",
-        words:["还是要出去","虽然下雨","但是","我们"],
-        answer:["虽然下雨","但是","我们","还是要出去"],
+        words:["还是要出去","虽然下雨","但是","我们"], answer:["虽然下雨","但是","我们","还是要出去"],
         lex:{
           "虽然下雨":{pinyin:"suīrán xiàyǔ",pos:"уступительное придаточное",meaning:"хотя идёт дождь",role:"первая часть конструкции",hint:"虽然 открывает уступительное предложение и ставится в самом начале."},
           "但是":{pinyin:"dànshì",pos:"союз",meaning:"но",role:"союз второй части",hint:"但是 связывает две части конструкции 虽然...但是..."},
           "我们":{pinyin:"wǒmen",pos:"местоимение",meaning:"мы",role:"подлежащее второй части",hint:"Идёт сразу после 但是."},
           "还是要出去":{pinyin:"háishi yào chūqù",pos:"наречие + модальный глагол + глагол",meaning:"всё равно собираемся выйти",role:"сказуемое",hint:"还是 подчёркивает неизменность намерения, несмотря на условие."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Он смотрит телевизор и одновременно ест.",
+        }},
+      { prompt:"Собери предложение: Он смотрит телевизор и одновременно ест.",
         translation:"Он смотрит телевизор и одновременно ест.",
         structure:"主语 + 一边 + 动词A + 一边 + 动词B · 一边...一边... = два одновременных действия",
-        words:["一边吃饭","他","一边看电视"],
-        answer:["他","一边看电视","一边吃饭"],
+        words:["一边吃饭","他","一边看电视"], answer:["他","一边看电视","一边吃饭"],
         lex:{
           "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"В начале предложения."},
           "一边看电视":{pinyin:"yìbiān kàn diànshì",pos:"наречие + глагольное сочетание",meaning:"одновременно смотрит телевизор",role:"первое из двух действий",hint:"一边 открывает первое из двух одновременных действий."},
           "一边吃饭":{pinyin:"yìbiān chīfàn",pos:"наречие + глагольное сочетание",meaning:"одновременно ест",role:"второе из двух действий",hint:"一边...一边... соединяет два действия, происходящих в одно время."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Мы сначала поедим, а потом пойдём смотреть фильм.",
+        }},
+      { prompt:"Собери предложение: Мы сначала поедим, а потом пойдём смотреть фильм.",
         translation:"Мы сначала поедим, а потом пойдём смотреть фильм.",
         structure:"主语 + 先 + 动词A,然后(再) + 动词B · 先...然后(再)... = последовательность действий",
-        words:["然后再去看电影","我们","先吃饭"],
-        answer:["我们","先吃饭","然后再去看电影"],
+        words:["然后再去看电影","我们","先吃饭"], answer:["我们","先吃饭","然后再去看电影"],
         lex:{
           "我们":{pinyin:"wǒmen",pos:"местоимение",meaning:"мы",role:"подлежащее",hint:"В начале предложения."},
           "先吃饭":{pinyin:"xiān chīfàn",pos:"наречие + глагольное сочетание",meaning:"сначала поедим",role:"первое действие",hint:"先 обозначает первое по порядку действие."},
           "然后再去看电影":{pinyin:"ránhòu zài qù kàn diànyǐng",pos:"наречие + глагольное сочетание",meaning:"потом пойдём смотреть фильм",role:"второе действие",hint:"然后(再) вводит следующее по порядку действие."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Эта одежда слишком дорогая, я не могу себе это позволить.",
+        }},
+      { prompt:"Собери предложение: Эта одежда слишком дорогая, я не могу себе это позволить.",
         translation:"Эта одежда слишком дорогая, я не могу себе это позволить.",
         structure:"主语 + 太 + 形容词 + 了,主语 + 动词 + 不起 · 买不起 = потенциальный результат «не по карману»",
-        words:["我买不起","这件衣服","太贵了"],
-        answer:["这件衣服","太贵了","我买不起"],
+        words:["我买不起","这件衣服","太贵了"], answer:["这件衣服","太贵了","我买不起"],
         lex:{
           "这件衣服":{pinyin:"zhè jiàn yīfu",pos:"сущ. со счётным словом",meaning:"эта одежда",role:"подлежащее первой части",hint:"Подлежащее — в начале предложения."},
           "太贵了":{pinyin:"tài guì le",pos:"наречие + прилагательное + 了",meaning:"слишком дорогая",role:"сказуемое первой части",hint:"太...了 усиливает признак: 'слишком дорого'."},
           "我买不起":{pinyin:"wǒ mǎibuqǐ",pos:"местоимение + глагол-потенциальный комплемент",meaning:"я не могу себе это позволить",role:"вторая часть-вывод",hint:"买不起 — потенциальный комплемент: 'не хватает денег, чтобы купить'."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Тебе следует пить больше воды и меньше кофе.",
+        }},
+      { prompt:"Собери предложение: Тебе следует пить больше воды и меньше кофе.",
         translation:"Тебе следует пить больше воды и меньше кофе.",
         structure:"主语 + 应该 + 多/少 + 动词宾语 · модальный глагол 应该 + 多/少 + глагол",
-        words:["少喝咖啡","你","应该多喝水"],
-        answer:["你","应该多喝水","少喝咖啡"],
+        words:["少喝咖啡","你","应该多喝水"], answer:["你","应该多喝水","少喝咖啡"],
         lex:{
           "你":{pinyin:"nǐ",pos:"местоимение",meaning:"ты",role:"подлежащее",hint:"В начале предложения."},
           "应该多喝水":{pinyin:"yīnggāi duō hē shuǐ",pos:"модальный глагол + наречие + глагольное сочетание",meaning:"следует пить больше воды",role:"первая рекомендация",hint:"应该 + 多/少 + глагол = совет 'следует делать больше/меньше чего-то'."},
           "少喝咖啡":{pinyin:"shǎo hē kāfēi",pos:"наречие + глагольное сочетание",meaning:"меньше пить кофе",role:"вторая рекомендация",hint:"Параллельная конструкция с 少 продолжает совет."}
-        }
-      }
+        }}
     ],
     choice: [
       {prompt:"我只看了一遍___明白了。", options:["就","才","都","还"], answer:"就",
-        explain:{
-          "就":"就 показывает, что результат наступил быстро: всего один раз — и уже понял(а).",
+        explain:{"就":"就 показывает, что результат наступил быстро: всего один раз — и уже понял(а).",
           "才":"才 обычно указывает на поздний или трудный результат — здесь по смыслу не подходит.",
           "都":"都 значит «все, всё» и используется для обобщения, а не для скорости результата.",
-          "还":"还 означает «ещё» и не передаёт идею быстрого результата."
-        }},
+          "还":"还 означает «ещё» и не передаёт идею быстрого результата."}},
       {prompt:"我去___中国,很喜欢那里。", options:["过","了","着","在"], answer:"过",
-        explain:{
-          "过":"过 после глагола показывает прошлый опыт: «бывал(а) в Китае».",
+        explain:{"过":"过 после глагола показывает прошлый опыт: «бывал(а) в Китае».",
           "了":"了 показывает завершённость конкретного действия, а не общий жизненный опыт.",
           "着":"着 показывает продолженное состояние, а не опыт в прошлом.",
-          "在":"在 — предлог места или показатель длящегося действия, а не маркер опыта."
-        }},
+          "在":"在 — предлог места или показатель длящегося действия, а не маркер опыта."}},
       {prompt:"今天比昨天___冷。", options:["更","很","最","太"], answer:"更",
-        explain:{
-          "更":"更 = «ещё более» — используется вместе с 比 для усиления сравнения.",
+        explain:{"更":"更 = «ещё более» — используется вместе с 比 для усиления сравнения.",
           "很":"很 обычно означает просто «очень» без сравнения, с 比 так не сочетается.",
           "最":"最 означает превосходную степень «самый», а не сравнение двух вещей.",
-          "太":"太 значит «слишком» и не используется в конструкции сравнения с 比."
-        }},
+          "太":"太 значит «слишком» и не используется в конструкции сравнения с 比."}},
       {prompt:"除了周末以外,我___不休息。", options:["都","才","就","也"], answer:"都",
-        explain:{
-          "都":"除了...以外,都... = «кроме..., во всех остальных случаях» — 都 обобщает оставшиеся дни.",
+        explain:{"都":"除了...以外,都... = «кроме..., во всех остальных случаях» — 都 обобщает оставшиеся дни.",
           "才":"才 не подходит по смыслу — здесь речь не о позднем результате.",
           "就":"就 не передаёт значение «во всех остальных случаях».",
-          "也":"也 значит «тоже», но не обобщает все оставшиеся случаи, как 都."
-        }},
+          "也":"也 значит «тоже», но не обобщает все оставшиеся случаи, как 都."}},
       {prompt:"虽然很累,___我还是要去上班。", options:["但是","所以","因为","虽然"], answer:"但是",
-        explain:{
-          "但是":"但是 — вторая часть конструкции 虽然...但是..., связывает уступку с результатом.",
+        explain:{"但是":"但是 — вторая часть конструкции 虽然...但是..., связывает уступку с результатом.",
           "所以":"所以 используется в конструкции 因为...所以... (причина-следствие), а не с 虽然.",
           "因为":"因为 вводит причину, но 虽然 уже стоит в начале — 因为 здесь лишний.",
-          "虽然":"虽然 уже употреблено в первой части, повторять его во второй не нужно."
-        }},
+          "虽然":"虽然 уже употреблено в первой части, повторять его во второй не нужно."}},
       {prompt:"因为下雨,___比赛取消了。", options:["所以","但是","而且","还是"], answer:"所以",
-        explain:{
-          "所以":"所以 вводит следствие после причины, названной через 因为.",
+        explain:{"所以":"所以 вводит следствие после причины, названной через 因为.",
           "但是":"但是 вводит противопоставление, а не следствие.",
           "而且":"而且 добавляет дополнительную информацию («к тому же»), а не следствие.",
-          "还是":"还是 означает «всё равно / или» и не связывает причину со следствием."
-        }},
+          "还是":"还是 означает «всё равно / или» и не связывает причину со следствием."}},
       {prompt:"他一下课___回家。", options:["就","才","又","也"], answer:"就",
-        explain:{
-          "就":"一...就... = «как только..., сразу...» — 就 показывает немедленное следствие.",
+        explain:{"就":"一...就... = «как только..., сразу...» — 就 показывает немедленное следствие.",
           "才":"才 показывает, что что-то произошло только после долгого ожидания — противоречит смыслу «сразу».",
           "又":"又 означает повторение действия («снова»), это не подходит по смыслу.",
-          "也":"也 значит «тоже» и не связано с конструкцией 一...就..."
-        }},
+          "也":"也 значит «тоже» и не связано с конструкцией 一...就..."}},
       {prompt:"这个菜又便宜___好吃。", options:["又","也","还","才"], answer:"又",
-        explain:{
-          "又":"又A又B = «и A, и B одновременно» — блюдо одновременно дешёвое и вкусное.",
+        explain:{"又":"又A又B = «и A, и B одновременно» — блюдо одновременно дешёвое и вкусное.",
           "也":"也 значит «тоже», но не образует парную конструкцию 又...又...",
           "还":"还 значит «ещё» и не используется во второй части устойчивой конструкции 又...又...",
-          "才":"才 указывает на поздний результат, что не подходит по смыслу и грамматике."
-        }},
+          "才":"才 указывает на поздний результат, что не подходит по смыслу и грамматике."}},
       {prompt:"这个房间___小,我们换一个吧。", options:["有点儿","一点儿","很","太"], answer:"有点儿",
-        explain:{
-          "有点儿":"有点儿 + прилагательное = «немного / слегка» (обычно с оттенком недовольства) — ставится перед прилагательным.",
+        explain:{"有点儿":"有点儿 + прилагательное = «немного / слегка» (обычно с оттенком недовольства) — ставится перед прилагательным.",
           "一点儿":"一点儿 обычно стоит после прилагательного для сравнения (大一点儿), а не перед ним в этом значении.",
           "很":"很 значит просто «очень», не передаёт оттенок «слегка не то».",
-          "太":"太 значит «слишком» — это более сильная степень, чем нужно по смыслу."
-        }},
+          "太":"太 значит «слишком» — это более сильная степень, чем нужно по смыслу."}},
       {prompt:"这本书是___图书馆借的。", options:["从","在","离","向"], answer:"从",
-        explain:{
-          "从":"从 + место = «из» (источник, откуда что-то получено): «взял(а) из библиотеки».",
+        explain:{"从":"从 + место = «из» (источник, откуда что-то получено): «взял(а) из библиотеки».",
           "在":"在 указывает место действия, но не источник, откуда что-то взято.",
           "离":"离 используется для указания расстояния («от... до...»), а не источника действия.",
-          "向":"向 значит «по направлению к», а не «из»."
-        }},
+          "向":"向 значит «по направлению к», а не «из»."}},
       {prompt:"他先做作业,___看电视。", options:["再","又","还","才"], answer:"再",
-        explain:{
-          "再":"先...再... = «сначала..., потом...» — 再 вводит второе по порядку действие.",
+        explain:{"再":"先...再... = «сначала..., потом...» — 再 вводит второе по порядку действие.",
           "又":"又 означает повторение уже свершившегося действия («снова»), а не последовательность.",
           "还":"还 значит «ещё» и не передаёт идею последовательности действий.",
-          "才":"才 указывает на поздний результат, а не на порядок действий."
-        }},
+          "才":"才 указывает на поздний результат, а не на порядок действий."}},
       {prompt:"只要你努力,___能成功。", options:["就","才","也","都"], answer:"就",
-        explain:{
-          "就":"只要...就... = «стоит лишь..., как...» — 就 показывает достаточное условие для результата.",
+        explain:{"就":"只要...就... = «стоит лишь..., как...» — 就 показывает достаточное условие для результата.",
           "才":"才 используется в конструкции 除非...才... (необходимое условие), а не 只要...就...",
           "也":"也 значит «тоже» и не связано с этой конструкцией.",
-          "都":"都 обобщает несколько случаев, а не выражает достаточное условие."
-        }},
+          "都":"都 обобщает несколько случаев, а не выражает достаточное условие."}},
       {prompt:"这不是我的钱包,___是我朋友的。", options:["而是","但是","所以","因为"], answer:"而是",
-        explain:{
-          "而是":"不是A,而是B = «не A, а B» — 而是 вводит правильный вариант вместо отвергнутого.",
+        explain:{"而是":"不是A,而是B = «не A, а B» — 而是 вводит правильный вариант вместо отвергнутого.",
           "但是":"但是 вводит противопоставление («но»), а не замену одного факта другим.",
           "所以":"所以 вводит следствие, а не альтернативный факт.",
-          "因为":"因为 вводит причину, а не замену одного утверждения другим."
-        }},
+          "因为":"因为 вводит причину, а не замену одного утверждения другим."}},
       {prompt:"天阴了,___要下雨了。", options:["好像","已经","刚才","本来"], answer:"好像",
-        explain:{
-          "好像":"好像 = «кажется, похоже» — выражает предположение по внешним признакам (небо потемнело).",
+        explain:{"好像":"好像 = «кажется, похоже» — выражает предположение по внешним признакам (небо потемнело).",
           "已经":"已经 значит «уже» и не выражает предположение.",
           "刚才":"刚才 значит «только что» (о прошлом моменте), а не предположение о будущем.",
-          "本来":"本来 значит «изначально», не связано с предположением по признакам."
-        }},
+          "本来":"本来 значит «изначально», не связано с предположением по признакам."}},
       {prompt:"你___喜不喜欢这个礼物?", options:["到底","难道","竟然","居然"], answer:"到底",
-        explain:{
-          "到底":"到底 в вопросе усиливает требование прямого ответа: «так нравится тебе или нет, в конце концов?»",
+        explain:{"到底":"到底 в вопросе усиливает требование прямого ответа: «так нравится тебе или нет, в конце концов?»",
           "难道":"难道 используется в риторических вопросах с оттенком удивления и не подходит для прямого вопроса о факте.",
           "竟然":"竟然 выражает удивление неожиданным результатом и не используется в самом вопросе о выборе.",
-          "居然":"居然 тоже выражает удивление, а не усиление вопроса."
-        }},
+          "居然":"居然 тоже выражает удивление, а не усиление вопроса."}},
       {prompt:"这两件衣服的价格___,你随便买哪件都行。", options:["差不多","差远了","不一定","说不定"], answer:"差不多",
-        explain:{
-          "差不多":"差不多 = «почти одинаковый, примерно одно и то же» — по смыслу цены близки.",
+        explain:{"差不多":"差不多 = «почти одинаковый, примерно одно и то же» — по смыслу цены близки.",
           "差远了":"差远了 значит «сильно отличаются», что противоречит смыслу предложения.",
           "不一定":"不一定 значит «не обязательно / не факт», не описывает сравнение цен.",
-          "说不定":"说不定 значит «возможно, как знать» — используется для предположений, а не сравнения."
-        }}
+          "说不定":"说不定 значит «возможно, как знать» — используется для предположений, а не сравнения."}}
     ],
     fill: [
-      {prompt:"Я хочу выпить чашку чая.",
-        answer:"我想喝一杯茶", alt:["我想喝一杯茶。"],
+      {prompt:"Я хочу выпить чашку чая.", answer:"我想喝一杯茶", alt:["我想喝一杯茶。"],
         explanation:"想 + глагол = «хотеть сделать что-то»; счётное слово 杯 используется для напитков в чашках/стаканах."},
-      {prompt:"Пожалуйста, закрой дверь.",
-        answer:"请关门", alt:["请把门关上","请你关门"],
+      {prompt:"Пожалуйста, закрой дверь.", answer:"请关门", alt:["请把门关上","请你关门"],
         explanation:"请 + глагол = вежливая просьба; 关门 = «закрыть дверь» (глагол+объект)."},
-      {prompt:"Он бегает быстрее меня.",
-        answer:"他跑得比我快", alt:["他比我跑得快"],
+      {prompt:"Он бегает быстрее меня.", answer:"他跑得比我快", alt:["他比我跑得快"],
         explanation:"Конструкция 得 + прилагательное описывает, как выполняется действие; вместе с 比 показывает сравнение по качеству действия."},
-      {prompt:"Хотя это дорого, но я всё равно куплю.",
-        answer:"虽然贵,但是我还是要买", alt:["虽然很贵,但是我还是会买","虽然贵,但是我还是想买"],
+      {prompt:"Хотя это дорого, но я всё равно куплю.", answer:"虽然贵,但是我还是要买", alt:["虽然很贵,但是我还是会买","虽然贵,但是我还是想买"],
         explanation:"虽然...但是... — уступительная конструкция; 还是 подчёркивает, что решение не меняется несмотря на условие."},
-      {prompt:"Потому что было поздно, я не пошёл(шла).",
-        answer:"因为太晚了,所以我没有去", alt:["因为很晚了,所以我没去","因为太晚了,我没有去"],
+      {prompt:"Потому что было поздно, я не пошёл(шла).", answer:"因为太晚了,所以我没有去", alt:["因为很晚了,所以我没去","因为太晚了,我没有去"],
         explanation:"因为...所以... — причинно-следственная конструкция; 没有 + глагол отрицает совершённое действие в прошлом."},
-      {prompt:"Чем больше учишь, тем интереснее.",
-        answer:"越学越有意思", alt:["越学越有意思。","你越学越有意思"],
+      {prompt:"Чем больше учишь, тем интереснее.", answer:"越学越有意思", alt:["越学越有意思。","你越学越有意思"],
         explanation:"越A越B = «чем больше/сильнее A, тем больше/сильнее B» — устойчивая парная конструкция."},
-      {prompt:"Я думаю, что этот фильм неинтересный.",
-        answer:"我觉得这部电影没有意思", alt:["我觉得这个电影没有意思"],
+      {prompt:"Я думаю, что этот фильм неинтересный.", answer:"我觉得这部电影没有意思", alt:["我觉得这个电影没有意思"],
         explanation:"觉得 = «считать, полагать» вводит субъективное мнение; 没有意思 = «неинтересно» (буквально «нет смысла»)."},
-      {prompt:"Можно, я сяду здесь?",
-        answer:"我可以坐在这里吗", alt:["我能坐在这里吗"],
+      {prompt:"Можно, я сяду здесь?", answer:"我可以坐在这里吗", alt:["我能坐在这里吗"],
         explanation:"可以/能 + глагол = просьба о разрешении; 在这里 указывает место после глагола 坐."},
-      {prompt:"Сначала я позвоню ему, а потом пойду.",
-        answer:"我先给他打电话,然后再走", alt:["我先打电话给他,然后再走"],
+      {prompt:"Сначала я позвоню ему, а потом пойду.", answer:"我先给他打电话,然后再走", alt:["我先打电话给他,然后再走"],
         explanation:"先...然后(再)... = последовательность действий; 给他打电话 = «позвонить ему»."},
-      {prompt:"У меня немного болит голова.",
-        answer:"我头有点儿疼", alt:["我有点儿头疼"],
+      {prompt:"У меня немного болит голова.", answer:"我头有点儿疼", alt:["我有点儿头疼"],
         explanation:"有点儿 + прилагательное/глагол = «немного» (обычно негативный оттенок); 头疼 = «голова болит»."}
     ]
   },
 
-  "45": {
-    label: "HSK 4–5",
+  l4: {
+    label: "HSK 4 (повторение) · 🚧 наполняется",
     order: [
-      {
-        prompt:"Собери предложение: Сейчас я изучаю биологию в университете.",
+      { prompt:"Собери предложение: Он не только умён, но и трудолюбив.",
+        translation:"Он не только умён, но и трудолюбив.",
+        structure:"主语 + 不但 + 形容词A,而且 + 形容词B · 不但...而且...",
+        words:["而且很努力","他","不但聪明"], answer:["他","不但聪明","而且很努力"],
+        lex:{
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"В начале предложения."},
+          "不但聪明":{pinyin:"búdàn cōngming",pos:"союз + прилагательное",meaning:"не только умный",role:"первая часть",hint:"不但 открывает первую часть конструкции."},
+          "而且很努力":{pinyin:"érqiě hěn nǔlì",pos:"союз + наречие + прилагательное",meaning:"но и трудолюбивый",role:"вторая часть",hint:"而且 добавляет второй факт."}
+        }},
+      { prompt:"Собери предложение: Как только заканчиваются уроки, он идёт в библиотеку.",
+        translation:"Как только заканчиваются уроки, он идёт в библиотеку.",
+        structure:"主语 + 一 + 动词A,就 + 动词B · 一...就...",
+        words:["就去图书馆","他","一下课"], answer:["他","一下课","就去图书馆"],
+        lex:{
+          "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"В начале предложения."},
+          "一下课":{pinyin:"yī xiàkè",pos:"一 + глагол",meaning:"как только заканчиваются уроки",role:"первая часть",hint:"一 перед первым действием."},
+          "就去图书馆":{pinyin:"jiù qù túshūguǎn",pos:"就 + глагольное сочетание",meaning:"сразу идёт в библиотеку",role:"вторая часть-следствие",hint:"就 показывает немедленное следствие."}
+        }},
+      { prompt:"Собери предложение: Из-за болезни он сегодня не пришёл на занятия.",
+        translation:"Из-за болезни он сегодня не пришёл на занятия.",
+        structure:"由于 + 原因,主语 + 没 + 动词 · причина 由于 в начале",
+        words:["他今天没来上课","由于生病"], answer:["由于生病","他今天没来上课"],
+        lex:{
+          "由于生病":{pinyin:"yóuyú shēngbìng",pos:"предложная группа причины",meaning:"из-за болезни",role:"обстоятельство причины",hint:"由于 + причина ставится в начале предложения."},
+          "他今天没来上课":{pinyin:"tā jīntiān méi lái shàngkè",pos:"местоимение + время + отрицание + глагол",meaning:"он сегодня не пришёл на занятия",role:"результат",hint:"Результат идёт после причины, названной через 由于."}
+        }}
+    ],
+    choice: [
+      {prompt:"他不但会开车,___会修车。", options:["而且","但是","所以","虽然"], answer:"而且",
+        explain:{"而且":"不但...而且... = «не только..., но и...» — 而且 добавляет второй факт.",
+          "但是":"但是 вводит противопоставление, а здесь нужно добавление.",
+          "所以":"所以 вводит следствие, что не подходит к парной конструкции.",
+          "虽然":"虽然 вводит уступку, а не второе дополняющее действие."}},
+      {prompt:"他一下课___去图书馆。", options:["就","才","又","也"], answer:"就",
+        explain:{"就":"一...就... = «как только..., сразу...» — 就 показывает немедленное следствие.",
+          "才":"才 показывает поздний результат — противоречит смыслу «сразу».",
+          "又":"又 означает повторение действия, не подходит по смыслу.",
+          "也":"也 значит «тоже» и не связано с конструкцией 一...就..."}},
+      {prompt:"只要你努力,___能成功。", options:["就","才","都","也"], answer:"就",
+        explain:{"就":"只要...就... = «стоит лишь..., как...» — 就 показывает достаточное условие.",
+          "才":"才 используется в конструкции 除非...才... (необходимое условие).",
+          "都":"都 обобщает несколько случаев, а не выражает достаточное условие.",
+          "也":"也 значит «тоже» и не связано с этой конструкцией."}},
+      {prompt:"除非你道歉,他___会原谅你。", options:["才","就","都","也"], answer:"才",
+        explain:{"才":"除非...才... = «только если..., иначе не...» — 才 подчёркивает необходимое условие.",
+          "就":"就 показывает лёгкий/быстрый результат, что противоречит идее «только при этом условии».",
+          "都":"都 обобщает и не подходит к условной конструкции 除非...才...",
+          "也":"也 значит «тоже», не передаёт необходимое условие."}},
+      {prompt:"由于堵车,___我们迟到了。", options:["所以","但是","而且","还是"], answer:"所以",
+        explain:{"所以":"所以 вводит следствие после причины, названной через 由于.",
+          "但是":"但是 вводит противопоставление, а не следствие.",
+          "而且":"而且 добавляет информацию, а не следствие.",
+          "还是":"还是 не связывает причину со следствием."}}
+    ],
+    fill: [
+      {prompt:"Он не только умён, но и трудолюбив.", answer:"他不但聪明,而且很努力", alt:[],
+        explanation:"不但...而且... = «не только..., но и...»."},
+      {prompt:"Как только заканчиваются уроки, он идёт в библиотеку.", answer:"他一下课就去图书馆", alt:[],
+        explanation:"一...就... = «как только..., сразу...»."},
+      {prompt:"Из-за болезни он сегодня не пришёл на занятия.", answer:"由于生病,他今天没来上课", alt:[],
+        explanation:"由于 вводит причину в начале предложения."}
+    ]
+  },
+
+  l45: {
+    label: "HSK 4→5 (переход)",
+    order: [
+      { prompt:"Собери предложение: Сейчас я изучаю биологию в университете.",
         translation:"Сейчас я изучаю биологию в университете.",
         structure:"主语 + 时间 + 地点 + 动词 + 宾语 · подлежащее + время + место + глагол + объект",
-        words:["在大学","我","学习","现在","生物学"],
-        answer:["我","现在","在大学","学习","生物学"],
+        words:["在大学","我","学习","现在","生物学"], answer:["我","现在","在大学","学习","生物学"],
         lex:{
           "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Подлежащее обычно ставится в начале предложения."},
           "现在":{pinyin:"xiànzài",pos:"наречие времени",meaning:"сейчас",role:"обстоятельство времени",hint:"Время обычно ставится после подлежащего и перед местом/глаголом."},
           "在大学":{pinyin:"zài dàxué",pos:"предложная группа",meaning:"в университете",role:"обстоятельство места",hint:"Место с 在 обычно стоит перед основным глаголом."},
           "学习":{pinyin:"xuéxí",pos:"глагол",meaning:"учиться; изучать",role:"сказуемое",hint:"Основной глагол идёт после времени и места."},
           "生物学":{pinyin:"shēngwùxué",pos:"существительное",meaning:"биология",role:"дополнение",hint:"Объект глагола обычно идёт после глагола."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Вчера я ел(а) с другом в ресторане.",
+        }},
+      { prompt:"Собери предложение: Вчера я ел(а) с другом в ресторане.",
         translation:"Вчера я ел(а) с другом в ресторане.",
         structure:"主语 + 时间 + 同伴 + 地点 + 动词 · подлежащее + время + с кем + место + действие",
-        words:["昨天","跟朋友","我","在饭店","吃饭"],
-        answer:["我","昨天","跟朋友","在饭店","吃饭"],
+        words:["昨天","跟朋友","我","在饭店","吃饭"], answer:["我","昨天","跟朋友","在饭店","吃饭"],
         lex:{
           "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Подлежащее — в начале."},
           "昨天":{pinyin:"zuótiān",pos:"существительное времени",meaning:"вчера",role:"обстоятельство времени",hint:"Время обычно идёт после подлежащего."},
           "跟朋友":{pinyin:"gēn péngyou",pos:"предложная группа",meaning:"с другом",role:"сопутствующий участник",hint:"跟 + человек обычно ставится перед местом и основным глаголом."},
           "在饭店":{pinyin:"zài fàndiàn",pos:"предложная группа",meaning:"в ресторане",role:"обстоятельство места",hint:"在 + место ставится перед действием."},
           "吃饭":{pinyin:"chīfàn",pos:"глагольное сочетание",meaning:"есть; принимать пищу",role:"сказуемое",hint:"Основное действие завершает эту конструкцию."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Она каждый день учит китайский в библиотеке.",
+        }},
+      { prompt:"Собери предложение: Она каждый день учит китайский в библиотеке.",
         translation:"Она каждый день учит китайский в библиотеке.",
         structure:"主语 + 时间 + 地点 + 动词 + 宾语",
-        words:["每天","她","在图书馆","学习","汉语"],
-        answer:["她","每天","在图书馆","学习","汉语"],
+        words:["每天","她","在图书馆","学习","汉语"], answer:["她","每天","在图书馆","学习","汉语"],
         lex:{
           "她":{pinyin:"tā",pos:"местоимение",meaning:"она",role:"подлежащее",hint:"Подлежащее обычно первое."},
           "每天":{pinyin:"měitiān",pos:"обстоятельство времени",meaning:"каждый день",role:"частота/время",hint:"Частотность ставится перед местом и глаголом."},
           "在图书馆":{pinyin:"zài túshūguǎn",pos:"предложная группа",meaning:"в библиотеке",role:"место действия",hint:"在 + место идёт перед основным глаголом."},
           "学习":{pinyin:"xuéxí",pos:"глагол",meaning:"изучать; учиться",role:"сказуемое",hint:"Основной глагол после обстоятельств."},
           "汉语":{pinyin:"Hànyǔ",pos:"существительное",meaning:"китайский язык",role:"дополнение",hint:"То, что изучают, идёт после 学习."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Раньше я два года жил(а) в Китае.",
+        }},
+      { prompt:"Собери предложение: Раньше я два года жил(а) в Китае.",
         translation:"Раньше я жил(а) в Китае два года.",
         structure:"主语 + 时间 + 地点 + 动词 + 时量补语 · подлежащее + время + место + глагол + длительность",
-        words:["以前","在中国","我","住过","两年"],
-        answer:["我","以前","在中国","住过","两年"],
+        words:["以前","在中国","我","住过","两年"], answer:["我","以前","在中国","住过","两年"],
         lex:{
           "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Подлежащее — в начале."},
           "以前":{pinyin:"yǐqián",pos:"слово времени",meaning:"раньше; прежде",role:"обстоятельство времени",hint:"Время обычно ставится после подлежащего."},
           "在中国":{pinyin:"zài Zhōngguó",pos:"предложная группа",meaning:"в Китае",role:"место",hint:"在 + место — перед глаголом."},
           "住过":{pinyin:"zhùguo",pos:"глагол + 过",meaning:"жил(а); имел(а) опыт проживания",role:"сказуемое",hint:"过 показывает прошлый опыт."},
           "两年":{pinyin:"liǎng nián",pos:"количественно-временная группа",meaning:"два года",role:"длительность",hint:"Длительность действия часто ставится после глагола."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Завтра я буду работать в лаборатории.",
+        }},
+      { prompt:"Собери предложение: Завтра я буду работать в лаборатории.",
         translation:"Завтра я буду работать в лаборатории.",
         structure:"主语 + 时间 + 要 + 地点 + 动词",
-        words:["明天","我","要","在实验室","工作"],
-        answer:["我","明天","要","在实验室","工作"],
+        words:["明天","我","要","在实验室","工作"], answer:["我","明天","要","在实验室","工作"],
         lex:{
           "我":{pinyin:"wǒ",pos:"местоимение",meaning:"я",role:"подлежащее",hint:"Подлежащее обычно первое."},
           "明天":{pinyin:"míngtiān",pos:"слово времени",meaning:"завтра",role:"обстоятельство времени",hint:"Время ставится после подлежащего или в начале предложения."},
           "要":{pinyin:"yào",pos:"модальный глагол",meaning:"собираться; нужно; хотеть",role:"модальность/будущее намерение",hint:"Модальный глагол ставится перед местом и основным действием."},
           "在实验室":{pinyin:"zài shíyànshì",pos:"предложная группа",meaning:"в лаборатории",role:"место",hint:"在 + место идёт перед основным глаголом."},
           "工作":{pinyin:"gōngzuò",pos:"глагол",meaning:"работать",role:"сказуемое",hint:"Основное действие идёт в конце этой конструкции."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Из-за пробки мы опоздали на полчаса.",
+        }},
+      { prompt:"Собери предложение: Из-за пробки мы опоздали на полчаса.",
         translation:"Из-за пробки мы опоздали на полчаса.",
         structure:"由于 + 原因,主语 + 动词 + 时长补语 · причина (由于) + подлежащее + глагол + длительность",
-        words:["半个小时","由于交通堵塞","我们","迟到了"],
-        answer:["由于交通堵塞","我们","迟到了","半个小时"],
+        words:["半个小时","由于交通堵塞","我们","迟到了"], answer:["由于交通堵塞","我们","迟到了","半个小时"],
         lex:{
           "由于交通堵塞":{pinyin:"yóuyú jiāotōng dǔsè",pos:"предложная группа причины",meaning:"из-за пробки",role:"обстоятельство причины",hint:"由于 + причина обычно ставится в начале предложения, перед подлежащим."},
           "我们":{pinyin:"wǒmen",pos:"местоимение",meaning:"мы",role:"подлежащее",hint:"Подлежащее идёт после причины, введённой через 由于."},
           "迟到了":{pinyin:"chídào le",pos:"глагол + 了",meaning:"опоздали",role:"сказуемое",hint:"Основной глагол с 了 показывает завершённое действие."},
           "半个小时":{pinyin:"bàn gè xiǎoshí",pos:"количественно-временная группа",meaning:"полчаса",role:"длительность/степень",hint:"Насколько именно опоздали — ставится после глагола."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Эту книгу я купил(а) вчера в книжном магазине.",
+        }},
+      { prompt:"Собери предложение: Эту книгу я купил(а) вчера в книжном магазине.",
         translation:"Эту книгу я купил(а) вчера в книжном магазине.",
         structure:"话题(宾语) + 是 + 时间 + 地点 + 动词 + 的 · конструкция 是...的 подчёркивает обстоятельства прошлого действия",
-        words:["买的","这本书","是我昨天","在书店"],
-        answer:["这本书","是我昨天","在书店","买的"],
+        words:["买的","这本书","是我昨天","在书店"], answer:["这本书","是我昨天","在书店","买的"],
         lex:{
           "这本书":{pinyin:"zhè běn shū",pos:"сущ. со счётным словом",meaning:"эта книга",role:"тема (вынесенный объект)",hint:"Объект-тема выносится в начало предложения."},
           "是我昨天":{pinyin:"shì wǒ zuótiān",pos:"是 + местоимение + время",meaning:"это я вчера",role:"начало конструкции 是...的",hint:"是...的 подчёркивает обстоятельства (когда/где/как) уже свершившегося действия."},
           "在书店":{pinyin:"zài shūdiàn",pos:"предложная группа",meaning:"в книжном магазине",role:"место",hint:"Уточняющее место ставится перед глаголом внутри конструкции 是...的."},
           "买的":{pinyin:"mǎi de",pos:"глагол + 的",meaning:"купил(а)",role:"завершение конструкции",hint:"的 закрывает конструкцию 是...的 после глагола."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Мой кошелёк украл вор.",
+        }},
+      { prompt:"Собери предложение: Мой кошелёк украл вор.",
         translation:"Мой кошелёк украл вор (был украден вором).",
         structure:"受事 + 被 + 施事 + 动词 + 结果 + 了 · пассивная конструкция 被",
-        words:["偷走了","我的钱包","被小偷"],
-        answer:["我的钱包","被小偷","偷走了"],
+        words:["偷走了","我的钱包","被小偷"], answer:["我的钱包","被小偷","偷走了"],
         lex:{
           "我的钱包":{pinyin:"wǒ de qiánbāo",pos:"притяжат. + существительное",meaning:"мой кошелёк",role:"объект действия (пациенс)",hint:"В пассивной конструкции объект действия ставится в начало."},
           "被小偷":{pinyin:"bèi xiǎotōu",pos:"被ушедший + существительное",meaning:"вором",role:"исполнитель действия",hint:"被 вводит того, кто совершил действие над объектом."},
           "偷走了":{pinyin:"tōu zǒu le",pos:"глагол + результат + 了",meaning:"украл(и), унёс(ли)",role:"сказуемое",hint:"Глагол с результатом и 了 показывает завершённое действие в пассиве."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Кроме английского, он ещё умеет говорить по-французски и по-немецки.",
+        }},
+      { prompt:"Собери предложение: Кроме английского, он ещё умеет говорить по-французски и по-немецки.",
         translation:"Кроме английского, он ещё умеет говорить по-французски и по-немецки.",
         structure:"除了 + A + 以外,主语 + 还 + 动词 + B · 除了...还... = «кроме A, ещё и B»",
-        words:["还会说法语和德语","除了英语以外","他"],
-        answer:["除了英语以外","他","还会说法语和德语"],
+        words:["还会说法语和德语","除了英语以外","他"], answer:["除了英语以外","他","还会说法语和德语"],
         lex:{
           "除了英语以外":{pinyin:"chúle Yīngyǔ yǐwài",pos:"предложная группа",meaning:"кроме английского",role:"вводная часть конструкции",hint:"除了...以外 вводит уже известный/дополняемый элемент."},
           "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"Подлежащее идёт после вводной части."},
           "还会说法语和德语":{pinyin:"hái huì shuō Fǎyǔ hé Déyǔ",pos:"наречие + модальный глагол + глагольное сочетание",meaning:"ещё умеет говорить по-французски и по-немецки",role:"добавляемая информация",hint:"还 показывает добавление к уже упомянутому."}
-        }
-      },
-      {
-        prompt:"Собери предложение: Как бы он ни был занят, он каждый день занимается спортом.",
+        }},
+      { prompt:"Собери предложение: Как бы он ни был занят, он каждый день занимается спортом.",
         translation:"Как бы он ни был занят, он каждый день занимается спортом.",
         structure:"无论 + 条件,主语 + 都 + 动词 · 无论...都... = «независимо от того..., в любом случае...»",
-        words:["每天都要锻炼身体","无论多忙","他"],
-        answer:["无论多忙","他","每天都要锻炼身体"],
+        words:["每天都要锻炼身体","无论多忙","他"], answer:["无论多忙","他","每天都要锻炼身体"],
         lex:{
           "无论多忙":{pinyin:"wúlùn duō máng",pos:"союз + прилагательное",meaning:"как бы занят ни был",role:"условная часть",hint:"无论 вводит любое возможное условие, часто с вопросительным словом типа 多."},
           "他":{pinyin:"tā",pos:"местоимение",meaning:"он",role:"подлежащее",hint:"Подлежащее идёт после условной части."},
           "每天都要锻炼身体":{pinyin:"měitiān dōu yào duànliàn shēntǐ",pos:"наречие + модальный глагол + глагольное сочетание",meaning:"каждый день обязательно занимается спортом",role:"результат",hint:"都 обобщает результат независимо от условия."}
-        }
-      }
+        }}
     ],
     choice: [
       {prompt:"他连一句英语___不会说。", options:["都","才","就","还"], answer:"都",
-        explain:{
-          "都":"连...都... = «даже» — 都 усиливает: даже одной фразы сказать не может.",
+        explain:{"都":"连...都... = «даже» — 都 усиливает: даже одной фразы сказать не может.",
           "才":"才 указывает на поздний/трудный результат, а не усиление через 连.",
           "就":"就 показывает быстрый результат, что не сочетается с конструкцией 连...都...",
-          "还":"还 значит «ещё» и не образует усилительную конструкцию с 连."
-        }},
+          "还":"还 значит «ещё» и не образует усилительную конструкцию с 连."}},
       {prompt:"她不但会说英语,___会说法语。", options:["而且","但是","所以","虽然"], answer:"而且",
-        explain:{
-          "而且":"不但...而且... = «не только..., но и...» — 而且 добавляет второй факт.",
+        explain:{"而且":"不但...而且... = «не только..., но и...» — 而且 добавляет второй факт.",
           "但是":"但是 вводит противопоставление, а конструкция здесь требует добавления, а не противопоставления.",
           "所以":"所以 вводит следствие, что не подходит к парной конструкции 不但...而且...",
-          "虽然":"虽然 вводит уступку, а не второе дополняющее действие."
-        }},
+          "虽然":"虽然 вводит уступку, а не второе дополняющее действие."}},
       {prompt:"尽管很忙,他___坚持每天锻炼。", options:["还是","才","就","都"], answer:"还是",
-        explain:{
-          "还是":"尽管...还是... = «несмотря на..., всё равно...» — 还是 подчёркивает неизменность действия.",
+        explain:{"还是":"尽管...还是... = «несмотря на..., всё равно...» — 还是 подчёркивает неизменность действия.",
           "才":"才 показывает поздний результат, а не неизменность несмотря на условие.",
           "就":"就 показывает быстрый/лёгкий результат, что не подходит по смыслу уступки.",
-          "都":"都 обобщает несколько случаев, а не выражает «всё равно» при уступке."
-        }},
+          "都":"都 обобщает несколько случаев, а не выражает «всё равно» при уступке."}},
       {prompt:"除非你努力学习,你___能通过考试。", options:["才","就","都","也"], answer:"才",
-        explain:{
-          "才":"除非...才... = «только если..., иначе не...» — 才 подчёркивает необходимое условие.",
+        explain:{"才":"除非...才... = «только если..., иначе не...» — 才 подчёркивает необходимое условие.",
           "就":"就 показывает лёгкий/быстрый результат, что противоречит идее «только при этом условии».",
           "都":"都 обобщает и не подходит к условной конструкции 除非...才...",
-          "也":"也 значит «тоже», не передаёт значение необходимого условия."
-        }},
+          "也":"也 значит «тоже», не передаёт значение необходимого условия."}},
       {prompt:"我们讨论了这个项目的时间安排___预算问题。", options:["以及","还是","或者","并且"], answer:"以及",
-        explain:{
-          "以及":"以及 соединяет однородные члены в официальном/письменном стиле: «а также».",
+        explain:{"以及":"以及 соединяет однородные члены в официальном/письменном стиле: «а также».",
           "还是":"还是 используется в альтернативных вопросах («или») и не подходит для перечисления в утверждении.",
           "或者":"或者 тоже означает «или», но для выбора альтернатив, а не для соединения перечисляемых тем.",
-          "并且":"并且 означает «и притом», обычно соединяет действия/предложения, а не короткие однородные существительные здесь."
-        }},
+          "并且":"并且 означает «и притом», обычно соединяет действия/предложения, а не короткие однородные существительные здесь."}},
       {prompt:"宁可加班,他也不___迟到。", options:["愿意","才","就","都"], answer:"愿意",
-        explain:{
-          "愿意":"宁可A,也不愿意B = «лучше уж A, чем соглашаться на B» — 愿意 означает «быть готовым/согласным».",
+        explain:{"愿意":"宁可A,也不愿意B = «лучше уж A, чем соглашаться на B» — 愿意 означает «быть готовым/согласным».",
           "才":"才 не сочетается с конструкцией 宁可...也不...",
           "就":"就 не подходит по смыслу и грамматике этой конструкции.",
-          "都":"都 не образует связку с 宁可...也不..."
-        }},
+          "都":"都 не образует связку с 宁可...也不..."}},
       {prompt:"幸亏你提醒我,___我就忘了这件事。", options:["要不然","所以","但是","而且"], answer:"要不然",
-        explain:{
-          "要不然":"幸亏...要不然... = «к счастью..., иначе...» — 要不然 вводит гипотетический плохой исход, которого удалось избежать.",
+        explain:{"要不然":"幸亏...要不然... = «к счастью..., иначе...» — 要不然 вводит гипотетический плохой исход, которого удалось избежать.",
           "所以":"所以 вводит реальное следствие, а не гипотетический «иначе» сценарий.",
           "但是":"但是 вводит противопоставление, а не гипотетическую альтернативу.",
-          "而且":"而且 добавляет информацию, а не вводит несостоявшийся исход."
-        }},
+          "而且":"而且 добавляет информацию, а не вводит несостоявшийся исход."}},
       {prompt:"不管天气怎么样,比赛___会按时举行。", options:["都","才","就","也"], answer:"都",
-        explain:{
-          "都":"不管...都... = «независимо от того..., в любом случае...» — 都 обобщает все возможные условия.",
+        explain:{"都":"不管...都... = «независимо от того..., в любом случае...» — 都 обобщает все возможные условия.",
           "才":"才 связано с поздним/условным результатом, а не с обобщением всех случаев.",
           "就":"就 показывает быстрый результат в конкретном случае, а не обобщение независимо от условий.",
-          "也":"也 значит «тоже» и не образует конструкцию 不管...都..."
-        }},
+          "也":"也 значит «тоже» и не образует конструкцию 不管...都..."}},
       {prompt:"他___学习中文,是因为他喜欢中国文化。", options:["之所以","因为","由于","既然"], answer:"之所以",
-        explain:{
-          "之所以":"之所以A,是因为B = «то, что A, объясняется тем, что B» — 之所以 вводит факт, который затем объясняется.",
+        explain:{"之所以":"之所以A,是因为B = «то, что A, объясняется тем, что B» — 之所以 вводит факт, который затем объясняется.",
           "因为":"因为 само вводит причину, но по конструкции здесь нужно 之所以 в первой части, согласуясь с 是因为 во второй.",
           "由于":"由于 тоже вводит причину, но не сочетается с последующим 是因为 в этой парной конструкции.",
-          "既然":"既然 значит «раз уж, поскольку» и используется в конструкции 既然...就..., а не с 是因为."
-        }},
+          "既然":"既然 значит «раз уж, поскольку» и используется в конструкции 既然...就..., а не с 是因为."}},
       {prompt:"___在家看电视,不如出去运动。", options:["与其","即使","甚至","反而"], answer:"与其",
-        explain:{
-          "与其":"与其A,不如B = «чем A, лучше B» — 与其 вводит менее предпочтительный вариант.",
+        explain:{"与其":"与其A,不如B = «чем A, лучше B» — 与其 вводит менее предпочтительный вариант.",
           "即使":"即使...也... = «даже если» — другая конструкция, не сравнение предпочтений.",
           "甚至":"甚至 значит «даже» (усиление примера), не образует сравнение предпочтений с 不如.",
-          "反而":"反而 значит «наоборот», используется для неожиданного результата, а не сравнения предпочтений."
-        }},
+          "反而":"反而 значит «наоборот», используется для неожиданного результата, а не сравнения предпочтений."}},
       {prompt:"你___答应了,就不能反悔。", options:["一旦","即使","甚至","不管"], answer:"一旦",
-        explain:{
-          "一旦":"一旦...就... = «как только...(случится это), то...» — вводит условие, после наступления которого следует результат.",
+        explain:{"一旦":"一旦...就... = «как только...(случится это), то...» — вводит условие, после наступления которого следует результат.",
           "即使":"即使...也... = «даже если» — другая по смыслу уступительная конструкция.",
           "甚至":"甚至 значит «даже» для усиления примера, а не условие.",
-          "不管":"不管...都... = «независимо от», не подходит по структуре с 就 в этом контексте."
-        }},
+          "不管":"不管...都... = «независимо от», не подходит по структуре с 就 в этом контексте."}},
       {prompt:"___下大雨,我们也要去。", options:["即使","一旦","甚至","除非"], answer:"即使",
-        explain:{
-          "即使":"即使...也... = «даже если...(случится это), всё равно...» — уступительное условие.",
+        explain:{"即使":"即使...也... = «даже если...(случится это), всё равно...» — уступительное условие.",
           "一旦":"一旦...就... описывает конкретное будущее условие с результатом 就, а не гипотетическую уступку с 也.",
           "甚至":"甚至 усиливает пример («даже»), не образует уступительную конструкцию с 也.",
-          "除非":"除非...才... = «только если» — конструкция необходимого условия, а не уступки."
-        }},
+          "除非":"除非...才... = «только если» — конструкция необходимого условия, а не уступки."}},
       {prompt:"他___连老师的名字都不记得。", options:["甚至","竟然","居然","难道"], answer:"甚至",
-        explain:{
-          "甚至":"甚至...都... усиливает крайний пример: даже имя учителя не помнит.",
+        explain:{"甚至":"甚至...都... усиливает крайний пример: даже имя учителя не помнит.",
           "竟然":"竟然 выражает удивление результатом, но по конструкции здесь нужен усилитель именно 甚至 перед 连.",
           "居然":"居然 тоже выражает удивление, но не сочетается с 连...都... так же естественно, как 甚至.",
-          "难道":"难道 используется в риторических вопросах, а не для усиления примера в утверждении."
-        }},
+          "难道":"难道 используется в риторических вопросах, а не для усиления примера в утверждении."}},
       {prompt:"这件事没有你想的那么简单,___我们时间也不够。", options:["更何况","反而","甚至","与其"], answer:"更何况",
-        explain:{
-          "更何况":"更何况 = «тем более что / не говоря уже о том, что» — добавляет ещё более веский аргумент.",
+        explain:{"更何况":"更何况 = «тем более что / не говоря уже о том, что» — добавляет ещё более веский аргумент.",
           "反而":"反而 значит «наоборот», вводит неожиданный контраст, а не дополнительный аргумент.",
           "甚至":"甚至 усиливает пример («даже»), но не вводит дополнительный аргумент в этом стиле.",
-          "与其":"与其 используется в сравнении предпочтений (与其...不如...), не подходит здесь."
-        }},
+          "与其":"与其 используется в сравнении предпочтений (与其...不如...), не подходит здесь."}},
       {prompt:"他不但没有生气,___笑了起来。", options:["反而","而且","于是","从而"], answer:"反而",
-        explain:{
-          "反而":"反而 = «наоборот» — показывает результат, противоположный ожидаемому (ожидали гнев, а получили смех).",
+        explain:{"反而":"反而 = «наоборот» — показывает результат, противоположный ожидаемому (ожидали гнев, а получили смех).",
           "而且":"而且 добавляет однонаправленную информацию (不但...而且...), но здесь нужен контраст, а не добавление.",
           "于是":"于是 = «и тогда, поэтому» вводит логичное следствие, а не неожиданный контраст.",
-          "从而":"从而 = «тем самым» вводит результат-следствие в официальном стиле, не подходит для контраста."
-        }},
+          "从而":"从而 = «тем самым» вводит результат-следствие в официальном стиле, не подходит для контраста."}},
       {prompt:"这次考试不难,但也___人人都能及格。", options:["未必","一定","本来","难道"], answer:"未必",
-        explain:{
-          "未必":"未必 = «не обязательно, вовсе не факт» — смягчает уверенное утверждение.",
+        explain:{"未必":"未必 = «не обязательно, вовсе не факт» — смягчает уверенное утверждение.",
           "一定":"一定 значит «обязательно, точно» — противоположно по смыслу нужному «не факт».",
           "本来":"本来 значит «изначально», не передаёт значение сомнения в результате.",
-          "难道":"难道 используется в риторическом вопросе, а не в утвердительном предложении с 也."
-        }}
+          "难道":"难道 используется в риторическом вопросе, а не в утвердительном предложении с 也."}}
     ],
     fill: [
-      {prompt:"Чем больше я учу китайский, тем больше он мне нравится.",
-        answer:"我越学越喜欢汉语", alt:["我越学习越喜欢汉语"],
+      {prompt:"Чем больше я учу китайский, тем больше он мне нравится.", answer:"我越学越喜欢汉语", alt:["我越学习越喜欢汉语"],
         explanation:"越A越B = «чем больше/сильнее A, тем больше/сильнее B»."},
-      {prompt:"Китайский становится всё сложнее.",
-        answer:"汉语越来越难", alt:["中文越来越难"],
+      {prompt:"Китайский становится всё сложнее.", answer:"汉语越来越难", alt:["中文越来越难"],
         explanation:"越来越 + прилагательное = «становиться всё более...»."},
-      {prompt:"Я хочу постепенно восстановить свой китайский.",
-        answer:"我想逐渐恢复我的汉语水平", alt:["我想逐渐恢复汉语水平"],
+      {prompt:"Я хочу постепенно восстановить свой китайский.", answer:"我想逐渐恢复我的汉语水平", alt:["我想逐渐恢复汉语水平"],
         explanation:"逐渐 = постепенно; 恢复 = восстанавливать."},
-      {prompt:"Мне нужно увеличить словарный запас.",
-        answer:"我需要增加词汇量", alt:["我需要提高词汇量"],
+      {prompt:"Мне нужно увеличить словарный запас.", answer:"我需要增加词汇量", alt:["我需要提高词汇量"],
         explanation:"增加词汇量 = увеличить словарный запас."},
-      {prompt:"Несмотря на трудности, мы всё равно закончили этот проект вовремя.",
-        answer:"尽管有困难,我们还是按时完成了这个项目",
+      {prompt:"Несмотря на трудности, мы всё равно закончили этот проект вовремя.", answer:"尽管有困难,我们还是按时完成了这个项目",
         alt:["尽管很困难,我们还是按时完成了这个项目","虽然有困难,我们还是按时完成了这个项目"],
         explanation:"尽管...还是... подчёркивает, что результат не изменился несмотря на трудности; 按时 = «вовремя», 完成 = «завершить»."},
-      {prompt:"То, что он опоздал, объясняется пробкой.",
-        answer:"他之所以迟到,是因为堵车", alt:["他之所以迟到,是因为交通堵塞"],
+      {prompt:"То, что он опоздал, объясняется пробкой.", answer:"他之所以迟到,是因为堵车", alt:["他之所以迟到,是因为交通堵塞"],
         explanation:"之所以A,是因为B — объясняет причину уже названного факта A."},
-      {prompt:"Чем сидеть дома, лучше пойти погулять.",
-        answer:"与其在家呆着,不如出去走走", alt:["与其待在家里,不如出去走走"],
+      {prompt:"Чем сидеть дома, лучше пойти погулять.", answer:"与其在家呆着,不如出去走走", alt:["与其待在家里,不如出去走走"],
         explanation:"与其A,不如B = «чем A, лучше B» — сравнение двух вариантов в пользу второго."},
-      {prompt:"Как только он придёт, мы начнём собрание.",
-        answer:"他一到,我们就开始开会", alt:["他一来,我们就开会"],
+      {prompt:"Как только он придёт, мы начнём собрание.", answer:"他一到,我们就开始开会", alt:["他一来,我们就开会"],
         explanation:"一...就... = «как только..., сразу...» — связывает два последовательных события."},
-      {prompt:"Даже если будет трудно, я не сдамся.",
-        answer:"即使很难,我也不会放弃", alt:["即使困难,我也不放弃"],
+      {prompt:"Даже если будет трудно, я не сдамся.", answer:"即使很难,我也不会放弃", alt:["即使困难,我也不放弃"],
         explanation:"即使...也... — уступительная конструкция: результат не меняется, даже если условие неблагоприятно."},
-      {prompt:"Эта задача решена не мной, а моим коллегой.",
-        answer:"这个问题不是我解决的,而是我同事解决的", alt:["这个问题不是我解决的,是我同事解决的"],
+      {prompt:"Эта задача решена не мной, а моим коллегой.", answer:"这个问题不是我解决的,而是我同事解决的", alt:["这个问题不是我解决的,是我同事解决的"],
         explanation:"不是A而是B = «не A, а B» в конструкции 是...的 подчёркивает, кто именно совершил действие."}
+    ]
+  },
+
+  l5: {
+    label: "HSK 5 (повторение) · 🚧 наполняется",
+    order: [
+      { prompt:"Собери предложение: Как бы он ни был занят, он всегда упорно тренируется.",
+        translation:"Как бы он ни был занят, он всегда упорно тренируется.",
+        structure:"无论 + 条件,主语 + 都 + 动词 · 无论...都...",
+        words:["他都坚持锻炼","无论多忙"], answer:["无论多忙","他都坚持锻炼"],
+        lex:{
+          "无论多忙":{pinyin:"wúlùn duō máng",pos:"союз + прилагательное",meaning:"как бы занят ни был",role:"условная часть",hint:"无论 вводит любое возможное условие."},
+          "他都坚持锻炼":{pinyin:"tā dōu jiānchí duànliàn",pos:"местоимение + наречие + глагольное сочетание",meaning:"он всё равно упорно тренируется",role:"результат",hint:"都 обобщает результат независимо от условия."}
+        }},
+      { prompt:"Собери предложение: Эту книгу я купил в книжном магазине.",
+        translation:"Эту книгу я купил в книжном магазине.",
+        structure:"话题 + 是 + 地点 + 动词 + 的 · 是...的",
+        words:["买的","这本书","是我在书店"], answer:["这本书","是我在书店","买的"],
+        lex:{
+          "这本书":{pinyin:"zhè běn shū",pos:"сущ. со счётным словом",meaning:"эта книга",role:"тема",hint:"Объект-тема — в начале."},
+          "是我在书店":{pinyin:"shì wǒ zài shūdiàn",pos:"是 + местоимение + место",meaning:"это я в книжном магазине",role:"начало конструкции 是...的",hint:"是...的 подчёркивает обстоятельства действия."},
+          "买的":{pinyin:"mǎi de",pos:"глагол + 的",meaning:"купил(а)",role:"завершение конструкции",hint:"的 закрывает конструкцию."}
+        }}
+    ],
+    choice: [
+      {prompt:"无论多忙,他___坚持锻炼。", options:["都","才","就","也"], answer:"都",
+        explain:{"都":"无论...都... = «независимо от того..., в любом случае...» — 都 обобщает результат.",
+          "才":"才 связано с поздним/условным результатом, не подходит к обобщению.",
+          "就":"就 показывает быстрый результат в конкретном случае, а не обобщение.",
+          "也":"也 значит «тоже» и не образует конструкцию 无论...都..."}},
+      {prompt:"___在家看电视,不如出去运动。", options:["与其","即使","甚至","反而"], answer:"与其",
+        explain:{"与其":"与其A,不如B = «чем A, лучше B».",
+          "即使":"即使...也... — другая уступительная конструкция.",
+          "甚至":"甚至 усиливает пример, не образует сравнение предпочтений.",
+          "反而":"反而 значит «наоборот»."}},
+      {prompt:"他___成功,是因为他努力。", options:["之所以","因为","由于","既然"], answer:"之所以",
+        explain:{"之所以":"之所以A,是因为B = «то, что A, объясняется тем, что B».",
+          "因为":"因为 само вводит причину, но здесь по конструкции нужно 之所以.",
+          "由于":"由于 тоже вводит причину, но не сочетается с последующим 是因为.",
+          "既然":"既然 используется в конструкции 既然...就..."}},
+      {prompt:"即使很难,我___要试试。", options:["也","都","就","才"], answer:"也",
+        explain:{"也":"即使...也... = «даже если..., всё равно...» — 也 вводит неизменный результат.",
+          "都":"都 обобщает несколько случаев, а не единичную уступку.",
+          "就":"就 показывает быстрый/лёгкий результат, не подходит к уступке.",
+          "才":"才 указывает на необходимое условие (除非...才...), а не уступку."}},
+      {prompt:"这个问题不是我解决的,___是他解决的。", options:["而是","但是","所以","因为"], answer:"而是",
+        explain:{"而是":"不是A,而是B = «не A, а B».",
+          "但是":"但是 вводит противопоставление, а не замену факта.",
+          "所以":"所以 вводит следствие, а не альтернативный факт.",
+          "因为":"因为 вводит причину, а не замену утверждения."}}
+    ],
+    fill: [
+      {prompt:"Как бы он ни был занят, он всегда упорно тренируется.", answer:"无论多忙,他都坚持锻炼", alt:[],
+        explanation:"无论...都... = «независимо от того..., в любом случае...»."},
+      {prompt:"Чем сидеть дома и смотреть телевизор, лучше пойти позаниматься спортом.", answer:"与其在家看电视,不如出去运动", alt:[],
+        explanation:"与其A,不如B = «чем A, лучше B»."},
+      {prompt:"Даже если это трудно, я всё равно попробую.", answer:"即使很难,我也要试试", alt:[],
+        explanation:"即使...也... — уступительная конструкция."}
     ]
   }
 };
 
-let level = "34";
+/* =========================================================
+   Supplementary dictionary of grammar particles used in
+   choice options, for the word-click detail modal.
+   ========================================================= */
+const PARTICLES = {
+  "就":{pinyin:"jiù",pos:"наречие",meaning:"тогда; сразу; именно (усиливает связь условия и следствия)"},
+  "才":{pinyin:"cái",pos:"наречие",meaning:"только тогда; лишь (поздний или условный результат)"},
+  "都":{pinyin:"dōu",pos:"наречие",meaning:"все; уже (обобщение, усиление)"},
+  "还":{pinyin:"hái",pos:"наречие",meaning:"ещё; всё ещё; к тому же"},
+  "过":{pinyin:"guò",pos:"суффикс глагола",meaning:"показатель прошлого опыта"},
+  "了":{pinyin:"le",pos:"частица",meaning:"показатель завершённости / изменения состояния"},
+  "着":{pinyin:"zhe",pos:"суффикс глагола",meaning:"показатель длящегося состояния"},
+  "在":{pinyin:"zài",pos:"предлог/наречие",meaning:"в, на (место); показатель прогрессива"},
+  "更":{pinyin:"gèng",pos:"наречие",meaning:"ещё более (усиление сравнения)"},
+  "很":{pinyin:"hěn",pos:"наречие",meaning:"очень"},
+  "最":{pinyin:"zuì",pos:"наречие",meaning:"самый (превосходная степень)"},
+  "太":{pinyin:"tài",pos:"наречие",meaning:"слишком"},
+  "所以":{pinyin:"suǒyǐ",pos:"союз",meaning:"поэтому (вводит следствие)"},
+  "但是":{pinyin:"dànshì",pos:"союз",meaning:"но, однако"},
+  "因为":{pinyin:"yīnwèi",pos:"союз",meaning:"потому что (вводит причину)"},
+  "而且":{pinyin:"érqiě",pos:"союз",meaning:"к тому же, и (добавление)"},
+  "虽然":{pinyin:"suīrán",pos:"союз",meaning:"хотя (уступка)"},
+  "而是":{pinyin:"érshì",pos:"союз",meaning:"а (вводит правильный вариант вместо отвергнутого)"},
+  "好像":{pinyin:"hǎoxiàng",pos:"глагол/наречие",meaning:"кажется, похоже"},
+  "已经":{pinyin:"yǐjīng",pos:"наречие",meaning:"уже"},
+  "刚才":{pinyin:"gāngcái",pos:"существительное времени",meaning:"только что"},
+  "本来":{pinyin:"běnlái",pos:"наречие",meaning:"изначально, раньше"},
+  "到底":{pinyin:"dàodǐ",pos:"наречие",meaning:"в конце концов (усиливает вопрос)"},
+  "难道":{pinyin:"nándào",pos:"наречие",meaning:"неужели (риторический вопрос)"},
+  "竟然":{pinyin:"jìngrán",pos:"наречие",meaning:"неожиданно, надо же"},
+  "居然":{pinyin:"jūrán",pos:"наречие",meaning:"неожиданно, вопреки ожиданиям"},
+  "差不多":{pinyin:"chàbuduō",pos:"прилагательное/наречие",meaning:"почти одинаковый, примерно"},
+  "从":{pinyin:"cóng",pos:"предлог",meaning:"из, от (источник)"},
+  "离":{pinyin:"lí",pos:"предлог",meaning:"от (расстояние)"},
+  "向":{pinyin:"xiàng",pos:"предлог",meaning:"по направлению к"},
+  "再":{pinyin:"zài",pos:"наречие",meaning:"потом, ещё раз (следующее действие по порядку)"},
+  "又":{pinyin:"yòu",pos:"наречие",meaning:"снова; и...и... (парная конструкция)"},
+  "也":{pinyin:"yě",pos:"наречие",meaning:"тоже"},
+  "有点儿":{pinyin:"yǒudiǎnr",pos:"наречие",meaning:"немного, слегка (обычно с негативным оттенком)"},
+  "一点儿":{pinyin:"yìdiǎnr",pos:"счётное сочетание",meaning:"немного (обычно после прилагательного)"},
+  "得":{pinyin:"de / děi",pos:"частица/модальный глагол",meaning:"частица комплемента степени, ИЛИ 'должен' (děi)"},
+  "地":{pinyin:"de",pos:"частица",meaning:"ставится после наречия перед глаголом"},
+  "的":{pinyin:"de",pos:"частица",meaning:"притяжательная/определительная частица"},
+  "应该":{pinyin:"yīnggāi",pos:"модальный глагол",meaning:"следует, надо"},
+  "可以":{pinyin:"kěyǐ",pos:"модальный глагол",meaning:"можно, разрешается"},
+  "无论":{pinyin:"wúlùn",pos:"союз",meaning:"независимо от того (с 都)"},
+  "不但":{pinyin:"búdàn",pos:"союз",meaning:"не только (с 而且)"},
+  "而":{pinyin:"ér",pos:"союз",meaning:"а, и (связка, часто в 而是/而且)"},
+  "愿意":{pinyin:"yuànyì",pos:"глагол",meaning:"быть готовым, согласным"},
+  "要不然":{pinyin:"yàoburán",pos:"союз",meaning:"иначе, а то"},
+  "不管":{pinyin:"bùguǎn",pos:"союз",meaning:"независимо от того (с 都)"},
+  "连":{pinyin:"lián",pos:"предлog",meaning:"даже (с 都/也)"},
+  "宁可":{pinyin:"nìngkě",pos:"союз",meaning:"лучше уж (с 也不)"},
+  "以及":{pinyin:"yǐjí",pos:"союз",meaning:"а также (соединяет однородные члены)"},
+  "除非":{pinyin:"chúfēi",pos:"союз",meaning:"только если (с 才)"},
+  "尽管":{pinyin:"jǐnguǎn",pos:"союз",meaning:"несмотря на (с 还是)"},
+  "还是":{pinyin:"háishi",pos:"наречие/союз",meaning:"всё равно; или"},
+  "之所以":{pinyin:"zhīsuǒyǐ",pos:"союз",meaning:"то, что... (с 是因为)"},
+  "与其":{pinyin:"yǔqí",pos:"союз",meaning:"чем (с 不如)"},
+  "不如":{pinyin:"bùrú",pos:"глагол",meaning:"уступать; лучше уж"},
+  "一旦":{pinyin:"yídàn",pos:"союз",meaning:"как только (с 就)"},
+  "即使":{pinyin:"jíshǐ",pos:"союз",meaning:"даже если (с 也)"},
+  "甚至":{pinyin:"shènzhì",pos:"наречие",meaning:"даже (усиление примера)"},
+  "更何况":{pinyin:"gèng hékuàng",pos:"союз",meaning:"тем более что"},
+  "反而":{pinyin:"fǎn'ér",pos:"наречие",meaning:"наоборот"},
+  "于是":{pinyin:"yúshì",pos:"союз",meaning:"и тогда, поэтому"},
+  "从而":{pinyin:"cóng'ér",pos:"союз",meaning:"тем самым"},
+  "未必":{pinyin:"wèibì",pos:"наречие",meaning:"не обязательно, не факт"},
+  "一定":{pinyin:"yídìng",pos:"наречие",meaning:"обязательно, точно"},
+  "说不定":{pinyin:"shuōbudìng",pos:"наречие",meaning:"возможно, как знать"},
+  "差远了":{pinyin:"chà yuǎn le",pos:"устойчивое выражение",meaning:"сильно отличаются"},
+  "不一定":{pinyin:"bù yídìng",pos:"наречие",meaning:"не обязательно"},
+  "打算":{pinyin:"dǎsuàn",pos:"глагол",meaning:"планировать, собираться"},
+  "以为":{pinyin:"yǐwéi",pos:"глагол",meaning:"ошибочно полагать"},
+  "觉得":{pinyin:"juéde",pos:"глагол",meaning:"считать, чувствовать"},
+  "懂得":{pinyin:"dǒngde",pos:"глагол",meaning:"понимать, знать как"},
+  "成功":{pinyin:"chénggōng",pos:"глагол/сущ.",meaning:"добиться успеха"},
+  "流利":{pinyin:"liúlì",pos:"прилагательное",meaning:"беглый, свободный (о речи)"},
+  "方便":{pinyin:"fāngbiàn",pos:"прилагательное",meaning:"удобный"},
+  "热闹":{pinyin:"rènao",pos:"прилагательное",meaning:"оживлённый, шумный"},
+  "吃惊":{pinyin:"chījīng",pos:"прилагательное/глагол",meaning:"удивлённый, удивиться"},
+  "坚持":{pinyin:"jiānchí",pos:"глагол",meaning:"упорно продолжать, придерживаться"},
+  "可能":{pinyin:"kěnéng",pos:"наречие/модальное слово",meaning:"возможно"},
+  "忘了":{pinyin:"wàng le",pos:"глагол + 了",meaning:"забыл(а)"},
+  "记得":{pinyin:"jìde",pos:"глагол",meaning:"помнить"},
+  "懂得":{pinyin:"dǒngde",pos:"глагол",meaning:"понимать, знать как"},
+  "顺便":{pinyin:"shùnbiàn",pos:"наречие",meaning:"заодно, по пути"},
+  "突然":{pinyin:"tūrán",pos:"наречие/прилагательное",meaning:"внезапно, вдруг"},
+  "特意":{pinyin:"tèyì",pos:"наречие",meaning:"специально, нарочно (с доброй целью)"},
+  "故意":{pinyin:"gùyì",pos:"наречие",meaning:"нарочно (обычно с плохой целью)"},
+  "千万":{pinyin:"qiānwàn",pos:"наречие",meaning:"обязательно, во что бы то ни стало"},
+  "也许":{pinyin:"yěxǔ",pos:"наречие",meaning:"возможно, может быть"},
+  "大概":{pinyin:"dàgài",pos:"наречие",meaning:"примерно, вероятно"},
+  "随着":{pinyin:"suízhe",pos:"предлог/союз",meaning:"по мере того как, вместе с"},
+  "按照":{pinyin:"ànzhào",pos:"предлог",meaning:"в соответствии с"},
+  "反正":{pinyin:"fǎnzhèng",pos:"наречие",meaning:"в любом случае, так или иначе"},
+  "况且":{pinyin:"kuàngqiě",pos:"союз",meaning:"к тому же"},
+  "何况":{pinyin:"hékuàng",pos:"союз",meaning:"тем более что"},
+  "结果":{pinyin:"jiéguǒ",pos:"союз/существительное",meaning:"в результате; результат"},
+  "不得不":{pinyin:"bùdébù",pos:"устойчивое сочетание",meaning:"вынужден, не может не"},
+  "一直":{pinyin:"yìzhí",pos:"наречие",meaning:"постоянно, всё время"},
+  "总是":{pinyin:"zǒngshì",pos:"наречие",meaning:"всегда"},
+  "总共":{pinyin:"zǒnggòng",pos:"наречие",meaning:"в общей сложности, всего"},
+  "总算":{pinyin:"zǒngsuàn",pos:"наречие",meaning:"наконец-то (после долгого ожидания)"},
+  "总而言之":{pinyin:"zǒng'éryánzhī",pos:"вводное выражение",meaning:"одним словом, в общем"},
+  "终于":{pinyin:"zhōngyú",pos:"наречие",meaning:"наконец (после долгого ожидания/усилий)"},
+  "终究":{pinyin:"zhōngjiū",pos:"наречие",meaning:"в конце концов (книжный вариант)"},
+  "毕竟":{pinyin:"bìjìng",pos:"наречие",meaning:"всё-таки, в конце концов"},
+  "究竟":{pinyin:"jiūjìng",pos:"наречие",meaning:"в конце концов, собственно (усиление вопроса)"},
+  "索性":{pinyin:"suǒxìng",pos:"наречие",meaning:"просто взять и, решительно"},
+  "简直":{pinyin:"jiǎnzhí",pos:"наречие",meaning:"просто, буквально (эмоциональное усиление)"},
+  "几乎":{pinyin:"jīhū",pos:"наречие",meaning:"почти"},
+  "尽量":{pinyin:"jǐnliàng",pos:"наречие",meaning:"по мере возможности, максимально"},
+  "尤其":{pinyin:"yóuqí",pos:"наречие",meaning:"особенно (выделяет пример из группы)"},
+  "格外":{pinyin:"géwài",pos:"наречие",meaning:"особенно, чрезвычайно (книжный вариант)"},
+  "通过":{pinyin:"tōngguò",pos:"предлог/глагол",meaning:"посредством, через; пройти"},
+  "根据":{pinyin:"gēnjù",pos:"предлог",meaning:"согласно, на основании"},
+  "随便":{pinyin:"suíbiàn",pos:"наречие/прилагательное",meaning:"как угодно, на своё усмотрение"},
+  "差点儿":{pinyin:"chàdiǎnr",pos:"наречие",meaning:"чуть не, почти"},
+  "幸好":{pinyin:"xìnghǎo",pos:"наречие",meaning:"к счастью"},
+  "幸亏":{pinyin:"xìngkuī",pos:"наречие",meaning:"к счастью (вводит удачное обстоятельство)"},
+  "一样":{pinyin:"yíyàng",pos:"прилагательное",meaning:"такой же, одинаковый"},
+  "不错":{pinyin:"búcuò",pos:"прилагательное",meaning:"неплохой"},
+  "到":{pinyin:"dào",pos:"результативный комплемент/предлог",meaning:"достичь; до"},
+  "给":{pinyin:"gěi",pos:"предлог/глагол",meaning:"кому; дать"},
+  "把":{pinyin:"bǎ",pos:"предлог (конструкция 把)",meaning:"выносит объект перед глаголом результата"},
+  "出":{pinyin:"chū",pos:"направительный комплемент",meaning:"наружу (движение изнутри)"},
+  "进":{pinyin:"jìn",pos:"направительный комплемент",meaning:"внутрь (движение снаружи)"},
+  "上":{pinyin:"shàng",pos:"направительный комплемент",meaning:"вверх; на"},
+  "回":{pinyin:"huí",pos:"направительный комплемент",meaning:"назад, обратно"},
+  "好":{pinyin:"hǎo",pos:"результативный комплемент",meaning:"хорошо, успешно (до удовлетворительного результата)"},
+  "错":{pinyin:"cuò",pos:"результативный комплемент",meaning:"неправильно, ошибочно"},
+  "懂":{pinyin:"dǒng",pos:"результативный комплемент",meaning:"понять (после восприятия)"},
+  "见":{pinyin:"jiàn",pos:"результативный комплемент",meaning:"увидеть/услышать (восприятие)"},
+  "有":{pinyin:"yǒu",pos:"глагол",meaning:"иметься, быть в наличии"},
+  "是":{pinyin:"shì",pos:"глагол-связка",meaning:"быть, являться"},
+  "被":{pinyin:"bèi",pos:"предлог (пассив)",meaning:"вводит исполнителя действия в пассиве"},
+  "会":{pinyin:"huì",pos:"модальный глагол",meaning:"уметь; вероятно (будущее)"},
+  "能":{pinyin:"néng",pos:"модальный глагол",meaning:"мочь (физическая возможность)"},
+  "破":{pinyin:"pò",pos:"результативный комплемент",meaning:"разбит(а), сломан(а) (для хрупкого)"},
+  "坏":{pinyin:"huài",pos:"результативный комплемент",meaning:"сломан(а), испорчен(а)"},
+  "多":{pinyin:"duō",pos:"наречие/прилагательное",meaning:"много; больше (делай что-то активнее)"},
+  "真":{pinyin:"zhēn",pos:"наречие",meaning:"действительно, по-настоящему"},
+  "快乐":{pinyin:"kuàilè",pos:"прилагательное",meaning:"счастливый, радостный"},
+  "快":{pinyin:"kuài",pos:"прилагательное/наречие",meaning:"быстрый, быстро"},
+  "早":{pinyin:"zǎo",pos:"прилагательное/наречие",meaning:"рано"},
+  "要是":{pinyin:"yàoshi",pos:"союз",meaning:"если"},
+  "没有":{pinyin:"méiyǒu",pos:"отрицание/глагол",meaning:"не иметь; нет; не так... как (в сравнении)"},
+  "不比":{pinyin:"bùbǐ",pos:"отрицание сравнения",meaning:"не превосходит по сравнению"},
+  "跟":{pinyin:"gēn",pos:"предлог",meaning:"с (кем-то);跟...一样 = такой же, как"},
+  "决定":{pinyin:"juédìng",pos:"глагол",meaning:"решить (один раз)"},
+  "希望":{pinyin:"xīwàng",pos:"глагол",meaning:"надеяться"},
+  "一件":{pinyin:"yí jiàn",pos:"числительное + счётное слово",meaning:"одно (дело/предмет)"},
+  "一些":{pinyin:"yìxiē",pos:"числительное + счётное слово",meaning:"несколько, немного"},
+  "一下":{pinyin:"yíxià",pos:"счётное сочетание",meaning:"разок, чуть-чуть (после глагола)"},
+  "知道":{pinyin:"zhīdào",pos:"глагол",meaning:"знать"},
+  "一边":{pinyin:"yìbiān",pos:"наречие",meaning:"одновременно (一边...一边...)"},
+  "或者":{pinyin:"huòzhě",pos:"союз",meaning:"или (выбор альтернатив в утверждении)"},
+  "并且":{pinyin:"bìngqiě",pos:"союз",meaning:"и притом, к тому же"},
+  "由于":{pinyin:"yóuyú",pos:"союз/предлог",meaning:"из-за, вследствие (вводит причину)"},
+  "既然":{pinyin:"jìrán",pos:"союз",meaning:"раз уж, поскольку (с 就)"}
+};
+
+/* =========================================================
+   App state and logic
+   ========================================================= */
+let level = "l3";
 let mode = "order";
 
 let sessionQueue = [];
@@ -942,10 +1583,73 @@ let sessionPos = 0;
 let sessionResults = [];
 let checked = false;
 
-let stats = JSON.parse(localStorage.getItem("cnTrainerStatsV4") || '{"34":{"correct":0,"total":0},"45":{"correct":0,"total":0}}');
+const LEVEL_KEYS = ["l3","l4","l5","l34","l45"];
+
+let stats = JSON.parse(localStorage.getItem("cnTrainerStatsV6") || "null") ||
+  Object.fromEntries(LEVEL_KEYS.map(k=>[k,{correct:0,total:0}]));
+
 let selectedChoice = null;
 
 const $ = id => document.getElementById(id);
+
+/* ---- Build word bank from lex + particles for click-to-detail ---- */
+const WORDBANK = {};
+Object.values(DATA).forEach(levelObj=>{
+  levelObj.order.forEach(item=>{
+    Object.entries(item.lex).forEach(([word,info])=>{
+      if(!WORDBANK[word]) WORDBANK[word] = {pinyin:info.pinyin,pos:info.pos,meaning:info.meaning,usage:info.hint};
+    });
+  });
+});
+Object.entries(PARTICLES).forEach(([w,info])=>{
+  if(!WORDBANK[w]) WORDBANK[w] = info;
+});
+
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+function tokenizeForClick(text){
+  const keys = Object.keys(WORDBANK).sort((a,b)=>b.length-a.length);
+  let i=0; const tokens=[];
+  while(i<text.length){
+    let matched=null;
+    for(const k of keys){
+      if(k.length<=text.length-i && text.substr(i,k.length)===k){ matched=k; break; }
+    }
+    if(matched){ tokens.push(matched); i+=matched.length; }
+    else { tokens.push(text[i]); i+=1; }
+  }
+  return tokens;
+}
+function renderClickableSentence(text){
+  return tokenizeForClick(text).map(tok=>{
+    if(/[一-龥]/.test(tok)){
+      return `<span class="click-word" data-word="${esc(tok)}">${esc(tok)}</span>`;
+    }
+    return esc(tok);
+  }).join("");
+}
+
+function openWordModal(word){
+  const info = WORDBANK[word];
+  $("wmHanzi").textContent = word;
+  $("wmPinyin").textContent = info?.pinyin || "";
+  $("wmPos").innerHTML = info?.pos ? `<b>Часть речи:</b> ${esc(info.pos)}` : "";
+  $("wmMeaning").innerHTML = info?.meaning ? `<b>Перевод:</b> ${esc(info.meaning)}` : "";
+  const usage = info?.usage || (info ? "" : "Этого слова пока нет в нашей базе — посмотри живые примеры по ссылке ниже.");
+  $("wmUsage").innerHTML = usage ? `<b>Употребление:</b> ${esc(usage)}` : "";
+  $("wmDictLink").href = `https://www.mdbg.net/chinese/dictionary?page=worddict&wdrst=0&wdqb=${encodeURIComponent(word)}`;
+  $("wordModalOverlay").classList.add("show");
+}
+$("wordModalClose").onclick = ()=> $("wordModalOverlay").classList.remove("show");
+$("wordModalOverlay").onclick = e=>{ if(e.target.id==="wordModalOverlay") $("wordModalOverlay").classList.remove("show"); };
+document.addEventListener("click", e=>{
+  const w = e.target.closest(".click-word");
+  if(w && checked) openWordModal(w.dataset.word);
+});
 
 function showScreen(name){
   ["homeScreen","quizScreen","summaryScreen"].forEach(id=>{
@@ -954,7 +1658,7 @@ function showScreen(name){
 }
 
 function saveStats(){
-  localStorage.setItem("cnTrainerStatsV4", JSON.stringify(stats));
+  localStorage.setItem("cnTrainerStatsV6", JSON.stringify(stats));
   updateScoreBadge();
   updateLevelStatsLabels();
 }
@@ -963,9 +1667,10 @@ function updateScoreBadge(){
   $("score").textContent = `${s.correct} / ${s.total}`;
 }
 function updateLevelStatsLabels(){
-  ["34","45"].forEach(lv=>{
+  LEVEL_KEYS.forEach(lv=>{
     const s = stats[lv];
-    $("lvStats"+lv).textContent = s.total ? `${s.correct}/${s.total} правильно` : "ещё не начато";
+    const el = $("lvStats-"+lv);
+    if(el) el.textContent = s.total ? `${s.correct}/${s.total} правильно` : "ещё не начато";
   });
 }
 function updateModeCounts(){
@@ -993,10 +1698,10 @@ function startSession(){
 function current(){ return DATA[level][mode][ sessionQueue[sessionPos] ]; }
 
 // ---------------- Home screen wiring ----------------
-$("levelToggle").querySelectorAll(".level-btn").forEach(b=>{
+document.querySelectorAll("#levelToggleReview .level-btn, #levelToggleBridge .level-btn").forEach(b=>{
   b.onclick = ()=>{
     level = b.dataset.level;
-    $("levelToggle").querySelectorAll(".level-btn").forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll("#levelToggleReview .level-btn, #levelToggleBridge .level-btn").forEach(x=>x.classList.remove("active"));
     b.classList.add("active");
     updateModeCounts();
     updateScoreBadge();
@@ -1088,7 +1793,7 @@ function render(){
       b.className = "choice";
       b.textContent = ch;
       b.onclick = ()=>{
-        if(checked) return;
+        if(checked){ openWordModal(ch); return; }
         selectedChoice = ch;
         [...$("choices").children].forEach(x=>x.classList.remove("selected"));
         b.classList.add("selected");
@@ -1111,6 +1816,7 @@ function makeTile(text, id){
   // ---------- Tap/click ----------
   let suppressClick = false;
   el.addEventListener("click", e=>{
+    if(checked){ openWordModal(text); return; }
     if(suppressClick){
       suppressClick = false;
       e.preventDefault();
@@ -1185,6 +1891,7 @@ function makeTile(text, id){
 
   el.addEventListener("pointerdown", e=>{
     if(e.pointerType === "mouse") return;
+    if(checked) return;
 
     touch.active = true;
     touch.pointerId = e.pointerId;
@@ -1278,12 +1985,6 @@ function normalize(s){
   return (s||"").replace(/[，。！？\s]/g,"").toLowerCase();
 }
 
-function esc(s){
-  return String(s ?? "").replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[c]));
-}
-
 function markOrderTiles(ex, ans){
   const tiles = [...$("answerZone").querySelectorAll(".tile")];
   tiles.forEach((tile,i)=>{
@@ -1305,7 +2006,7 @@ function showOrderAnalysis(ex, ans, ok){
   if(ok){
     summary.className = "analysis-summary ok";
     summary.innerHTML = `
-      <div class="sentence-result">${esc(ex.answer.join(""))}</div>
+      <div class="sentence-result">${renderClickableSentence(ex.answer.join(""))}</div>
       <div><b>Перевод:</b> ${esc(ex.translation)}</div>
       <div><b>Схема:</b> ${esc(ex.structure)}</div>
     `;
@@ -1329,7 +2030,7 @@ function showOrderAnalysis(ex, ans, ok){
     card.className = "word-card " + (good ? "good" : "bad");
     card.innerHTML = `
       <div class="word-head">
-        <span class="word-hanzi">${esc(word)}</span>
+        <span class="word-hanzi click-word" data-word="${esc(word)}">${esc(word)}</span>
         <span class="word-pinyin">${esc(info.pinyin || "")}</span>
       </div>
       <div class="word-meta">
@@ -1353,7 +2054,7 @@ function showOrderAnalysis(ex, ans, ok){
       const i = ex.lex[word];
       return `
         <div class="breakdown-row">
-          <div><b style="font-size:20px">${esc(word)}</b></div>
+          <div><b style="font-size:20px" class="click-word" data-word="${esc(word)}">${esc(word)}</b></div>
           <div>${esc(i.pinyin)}</div>
           <div>${esc(i.pos)}</div>
           <div>${esc(i.meaning)}</div>
@@ -1399,7 +2100,7 @@ function showFillAnalysis(ex, ok){
   summary.className = "analysis-summary " + (ok ? "ok" : "bad");
   summary.innerHTML = ok
     ? `<b>Правильно!</b><br>${esc(ex.explanation || "")}`
-    : `<b>Правильный ответ:</b> ${esc(ex.answer)}<br>${esc(ex.explanation || "")}`;
+    : `<b>Правильный ответ:</b> ${renderClickableSentence(ex.answer)}<br>${esc(ex.explanation || "")}`;
   $("wordFeedback").innerHTML = "";
   $("sentenceBreakdown").style.display = "none";
 }
